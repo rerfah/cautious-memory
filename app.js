@@ -211,6 +211,29 @@ function openModal() {
   }
 
   state.reportType = "warning";
+
+// Determine impoundment status
+  const hasImpoundment = state.recentCharges.some(item =>
+    String(item.impoundment).toLowerCase() !== "no"
+  );
+
+  const impoundmentBox = document.getElementById("impoundmentBox");
+  const impoundmentValue = document.getElementById("impoundmentValue");
+
+// Show or hide the UI
+  if (hasImpoundment) {
+    impoundmentBox.classList.remove("hidden");
+    impoundmentValue.textContent = "Yes";
+    impoundmentValue.classList.remove("impoundment-no");
+    impoundmentValue.classList.add("impoundment-yes");
+  } else {
+    impoundmentBox.classList.add("hidden");
+    impoundmentValue.textContent = "No";
+    impoundmentValue.classList.remove("impoundment-yes");
+    impoundmentValue.classList.add("impoundment-no");
+  }
+
+  
   document.querySelectorAll(".report-type").forEach(button => {
     button.classList.toggle("selected", button.dataset.report === state.reportType);
   });
