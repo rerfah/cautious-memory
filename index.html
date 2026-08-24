@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +10,13 @@
 <body>
   <main class="app-shell">
     <section class="topbar">
-      <h1>LEO Penal Code Calculator</h1>
-      <p>Search, preview and build charges.</p>
+      <div class="topbar-main">
+        <h1>LEO Penal Code Calculator</h1>
+        <p>Search, preview and build charges.</p>
+      </div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
     </section>
 
     <section class="workspace">
@@ -82,10 +87,9 @@
     </section>
   </main>
 
-  <!-- Modal -->
+  <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal">
-
       <h2 id="modalTitle">Continue</h2>
 
       <!-- Report Type Selection -->
@@ -95,7 +99,7 @@
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
 
-      <!-- Impoundment Selection (NEW UI) -->
+      <!-- Impoundment Selection -->
       <div id="impoundmentGroup" class="impoundment-group hidden">
         <p class="impoundment-label">Is their vehicle getting impounded?</p>
 
@@ -119,7 +123,19 @@
       </div>
 
       <textarea id="copyBuffer" class="copy-buffer" aria-hidden="true"></textarea>
+    </div>
+  </div>
 
+  <!-- Clear Charges Confirmation Modal -->
+  <div id="confirmBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal" id="confirmModal">
+      <h2 id="confirmTitle">Clear charges</h2>
+      <p class="muted">Are you sure you want to clear all selected charges?</p>
+
+      <div class="modal-actions">
+        <button id="confirmClearBtn" class="copy-btn" type="button">Yes, clear charges</button>
+        <button id="cancelClearBtn" class="close-btn" type="button">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -127,3 +143,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+
