@@ -446,6 +446,46 @@ button {
   color: var(--green);
 }
 
+.impoundment-box {
+  margin: 10px 0 14px;
+}
+
+.impoundment-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #cbd1da;
+}
+
+.impoundment-options {
+  display: flex;
+  gap: 10px;
+}
+
+.impound-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+
+.impound-yes {
+  background: #1a2029;
+  color: var(--red);
+}
+
+.impound-no {
+  background: #1a2029;
+  color: var(--green);
+}
+
+.impound-selected {
+  border-color: var(--accent);
+  background: #243a5c;
+  color: white;
+}
+
 .modal-actions {
   display: grid;
   grid-template-columns: 1fr 130px;
