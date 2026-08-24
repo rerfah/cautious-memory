@@ -66,6 +66,49 @@ function renderCodes() {
     return;
   }
 
+  // Render list
+  els.codeList.innerHTML = filtered.map(item => `
+    <button class="code-item" type="button" data-code="${escapeHtml(item.code)}">
+      <span class="code-reference">
+        <span class="code-number">${escapeHtml(item.code)}</span>
+        ${escapeHtml(item.reference)}
+      </span>
+      <span class="code-classification">${escapeHtml(item.classification)}</span>
+    </button>
+  `).join("");
+
+  // ⭐ Tooltip binding MUST be inside renderCodes()
+  els.codeList.querySelectorAll(".code-item").forEach(button => {
+    const item = findCode(button.dataset.code);
+
+    // Desktop hover
+    button.addEventListener("mouseenter", e => {
+      if (tooltipLock) return;
+      showTooltip(item.description, e.clientX, e.clientY);
+    });
+
+    button.addEventListener("mousemove", e => {
+      if (tooltipLock) return;
+      if (tooltipVisible) showTooltip(item.description, e.clientX, e.clientY);
+    });
+
+    button.addEventListener("mouseleave", () => {
+      if (!tooltipLock) hideTooltip();
+    });
+
+    // Mobile tap
+    button.addEventListener("click", e => {
+      tooltipLock = !tooltipLock;
+
+      if (tooltipLock) {
+        showTooltip(item.description, e.clientX, e.clientY);
+      } else {
+        hideTooltip();
+      }
+    });
+  });
+}
+
   els.codeList.innerHTML = filtered.map(item => `
     <button class="code-item" type="button" data-code="${escapeHtml(item.code)}">
       <span class="code-reference">
@@ -76,10 +119,6 @@ function renderCodes() {
     </button>
   `).join("");
 }
-
-// Tooltip binding for each code-item
-els.codeList.querySelectorAll(".code-item").forEach(button => {
-  const item = findCode(button.dataset.code);
 
   // Desktop hover
   button.addEventListener("mouseenter", e => {
