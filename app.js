@@ -1,7 +1,8 @@
 const state = {
   preview: null,
   recentCharges: [],
-  reportType: "warning"
+  reportType: "warning",
+  impoundmentChoice: "no" // "yes" or "no" for citations
 };
 
 const els = {
@@ -204,59 +205,39 @@ function resetApp() {
   renderSummary();
 }
 
+function updateReportTypeButtons() {
+  document.querySelectorAll(".report-type").forEach(button => {
+    button.classList.toggle("selected", button.dataset.report === state.reportType);
+  });
+}
+
+function updateImpoundmentUI() {
+  const group = document.getElementById("impoundmentGroup");
+  if (!group) return;
+
+  const impoundPossible = state.recentCharges.some(item =>
+    String(item.impoundment).toLowerCase() !== "no"
+  );
+
+  if (state.reportType === "citation" && impoundPossible) {
+    group.classList.remove("hidden");
+  } else {
+    group.classList.add("hidden");
+  }
+
+  document.querySelectorAll(".impound-type").forEach(button => {
+    button.classList.toggle("selected", button.dataset.impound === state.impoundmentChoice);
+  });
+}
+
 function openModal() {
   if (!state.recentCharges.length) {
     alert("Add at least one charge before continuing.");
     return;
   }
 
-  state.reportType = "warning";
-
-  // Determine if impoundment exists in any selected charge
-const impoundPossible = state.recentCharges.some(item =>
-  String(item.impoundment).toLowerCase() !== "no"
-);
-
-// Hide UI for written warnings or arrest reports
-if (state.reportType === "warning" || state.reportType === "arrest") {
-  document.getElementById("impoundmentBox").classList.add("hidden");
-  state.impoundmentChoice = "yes"; // forced for arrest, ignored for warning
-} else {
-  // Show UI only if impoundment is possible
-  const box = document.getElementById("impoundmentBox");
-  if (impoundPossible) {
-    box.classList.remove("hidden");
-  } else {
-    box.classList.add("hidden");
-  }
-}
-
-
-// Determine impoundment status
-  const hasImpoundment = state.recentCharges.some(item =>
-    String(item.impoundment).toLowerCase() !== "no"
-  );
-
-  const impoundmentBox = document.getElementById("impoundmentBox");
-  const impoundmentValue = document.getElementById("impoundmentValue");
-
-// Show or hide the UI
-  if (hasImpoundment) {
-    impoundmentBox.classList.remove("hidden");
-    impoundmentValue.textContent = "Yes";
-    impoundmentValue.classList.remove("impoundment-no");
-    impoundmentValue.classList.add("impoundment-yes");
-  } else {
-    impoundmentBox.classList.add("hidden");
-    impoundmentValue.textContent = "No";
-    impoundmentValue.classList.remove("impoundment-yes");
-    impoundmentValue.classList.add("impoundment-no");
-  }
-
-  
-  document.querySelectorAll(".report-type").forEach(button => {
-    button.classList.toggle("selected", button.dataset.report === state.reportType);
-  });
+  updateReportTypeButtons();
+  updateImpoundmentUI();
 
   els.userId.value = "";
   setInputValid();
@@ -293,30 +274,20 @@ function buildCopyText() {
   lines.push(`**${label.replace(":", "")}:**`);
 
   for (const item of state.recentCharges) {
-  const fine = money(item.fine);
+    const fine = money(item.fine);
 
-  // Written Warning — always strike out impoundment
-  if (state.reportType === "warning") {
-    lines.push(`${item.code} - ~~${fine} + Impoundment~~`);
-    continue;
-  }
-
-  // Arrest Report — always impound
-  if (state.reportType === "arrest") {
-    lines.push(`${item.code} - ${fine} + Impoundment`);
-    continue;
-  }
-
-  // Citation — depends on user choice
-  if (state.reportType === "citation") {
-    if (state.impoundmentChoice === "yes") {
+    if (state.reportType === "warning") {
+      lines.push(`${item.code} - ~~${fine} + Impoundment~~`);
+    } else if (state.reportType === "arrest") {
       lines.push(`${item.code} - ${fine} + Impoundment`);
     } else {
-      lines.push(`${item.code} - ${fine} + ~~Impoundment~~`);
+      if (state.impoundmentChoice === "yes") {
+        lines.push(`${item.code} - ${fine} + Impoundment`);
+      } else {
+        lines.push(`${item.code} - ${fine} + ~~Impoundment~~`);
+      }
     }
   }
-}
-
 
   lines.push("");
   lines.push("**Total:**");
@@ -379,15 +350,21 @@ els.codeList.addEventListener("click", event => {
 document.querySelectorAll(".report-type").forEach(button => {
   button.addEventListener("click", () => {
     state.reportType = button.dataset.report;
-    document.querySelectorAll(".report-type").forEach(other =>
+    updateReportTypeButtons();
+    updateImpoundmentUI();
+  });
+});
+
+document.querySelectorAll(".impound-type").forEach(button => {
+  button.addEventListener("click", () => {
+    state.impoundmentChoice = button.dataset.impound;
+    document.querySelectorAll(".impound-type").forEach(other =>
       other.classList.toggle("selected", other === button)
     );
   });
 });
 
 els.userId.addEventListener("input", () => {
-  // Remove non-numeric characters and then validate. This prevents letters
-  // from remaining in the field while still providing the requested error state.
   const original = els.userId.value;
   const cleaned = original.replace(/\D/g, "");
   if (original !== cleaned) {
@@ -412,19 +389,11 @@ document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !els.modalBackdrop.classList.contains("hidden")) {
     closeModal();
   }
-document.getElementById("impoundYes").addEventListener("click", () => {
-  state.impoundmentChoice = "yes";
-  document.getElementById("impoundYes").classList.add("impound-selected");
-  document.getElementById("impoundNo").classList.remove("impound-selected");
-});
-
-document.getElementById("impoundNo").addEventListener("click", () => {
-  state.impoundmentChoice = "no";
-  document.getElementById("impoundNo").classList.add("impound-selected");
-  document.getElementById("impoundYes").classList.remove("impound-selected");
 });
 
 renderCodes();
 renderPreview();
 renderRecentCharges();
 renderSummary();
+updateReportTypeButtons();
+updateImpoundmentUI();
