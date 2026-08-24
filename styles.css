@@ -662,7 +662,7 @@ html[data-theme="light"] .close-btn {
   }
 }
 
-/* ⭐ TOOLTIP SYSTEM (ADDED) */
+/* ⭐ TOOLTIP SYSTEM (FIXED) */
 .tooltip {
   position: fixed;
   max-width: 320px;
@@ -672,7 +672,7 @@ html[data-theme="light"] .close-btn {
   border-radius: 6px;
   font-size: 0.85rem;
   line-height: 1.3rem;
-  z-index: 9999;
+  z-index: 99999; /* raised */
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
@@ -685,43 +685,13 @@ html[data-theme="light"] .close-btn {
 }
 
 .tooltip.hidden {
-  display: none;
+  visibility: hidden; /* changed */
+  opacity: 0;         /* added */
 }
 
 @media (hover: none) {
   .tooltip {
     pointer-events: auto;
-  }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .codes-panel {
-    min-height: auto;
-  }
-
-  .code-list {
-    max-height: 460px;
-  }
-}
-
-@media (max-width: 560px) {
-  .report-types,
-  .impoundment-types,
-  .modal-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    grid-template-columns: 1fr 100px;
-  }
-
-  .preview-head {
-    align-items: flex-start;
   }
 }
 
