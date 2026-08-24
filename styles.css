@@ -422,6 +422,30 @@ button {
   font-size: 13px;
 }
 
+.impoundment-box {
+  margin: 10px 0 14px;
+}
+
+.impoundment-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #cbd1da;
+}
+
+.impoundment-value {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+/* Colour coding */
+.impoundment-yes {
+  color: var(--red);
+}
+
+.impoundment-no {
+  color: var(--green);
+}
+
 .modal-actions {
   display: grid;
   grid-template-columns: 1fr 130px;
