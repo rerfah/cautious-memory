@@ -212,6 +212,26 @@ function openModal() {
 
   state.reportType = "warning";
 
+  // Determine if impoundment exists in any selected charge
+const impoundPossible = state.recentCharges.some(item =>
+  String(item.impoundment).toLowerCase() !== "no"
+);
+
+// Hide UI for written warnings or arrest reports
+if (state.reportType === "warning" || state.reportType === "arrest") {
+  document.getElementById("impoundmentBox").classList.add("hidden");
+  state.impoundmentChoice = "yes"; // forced for arrest, ignored for warning
+} else {
+  // Show UI only if impoundment is possible
+  const box = document.getElementById("impoundmentBox");
+  if (impoundPossible) {
+    box.classList.remove("hidden");
+  } else {
+    box.classList.add("hidden");
+  }
+}
+
+
 // Determine impoundment status
   const hasImpoundment = state.recentCharges.some(item =>
     String(item.impoundment).toLowerCase() !== "no"
