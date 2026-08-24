@@ -3,27 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEO Penal Code calculator</title>
+  <title>LEO Penal Code Calculator</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <main class="app-shell">
     <section class="topbar">
-      <h1>LEO Penal Code calculator</h1>
+      <h1>LEO Penal Code Calculator</h1>
       <p>Search, preview and build charges.</p>
     </section>
 
     <section class="workspace">
+      <!-- Left Column: Penal Codes -->
       <div class="panel codes-panel">
         <div class="panel-heading">
           <h2>Penal codes</h2>
           <span id="codeCount" class="muted"></span>
         </div>
-        <input id="searchInput" class="search" type="search" placeholder="Search penal codes..." autocomplete="off">
+
+        <input id="searchInput" class="search" type="search"
+               placeholder="Search penal codes..." autocomplete="off">
+
         <div id="codeList" class="code-list" aria-label="Penal codes"></div>
       </div>
 
+      <!-- Right Column -->
       <div class="right-column">
+
+        <!-- Preview Panel -->
         <section class="panel preview-panel">
           <div class="panel-heading">
             <h2>Preview</h2>
@@ -32,6 +40,7 @@
           <article id="previewCard" class="preview-card hidden"></article>
         </section>
 
+        <!-- Recent Charges -->
         <section class="panel recent-panel">
           <div class="panel-heading">
             <h2>Recent charges</h2>
@@ -41,62 +50,76 @@
           </div>
         </section>
 
+        <!-- Summary -->
         <section class="panel summary-panel">
           <div class="panel-heading">
             <h2>Summary</h2>
           </div>
+
           <div id="summaryCharges" class="summary-charges">
             <div class="empty-state">No charges selected.</div>
           </div>
+
           <div class="summary-total">
             <span>Total fine</span>
             <strong id="totalFine">$0.00</strong>
           </div>
+
           <div id="sentencedRow" class="summary-total hidden">
             <span>Sentenced imposed</span>
             <strong id="totalJail">0s</strong>
           </div>
         </section>
 
+        <!-- Actions -->
         <section class="actions">
           <button id="continueBtn" class="continue-btn" type="button">Continue</button>
           <button id="resetBtn" class="reset-btn" type="button">Reset</button>
           <p class="muted tip">ⓘ Hold shift to bypass the preview</p>
         </section>
+
       </div>
     </section>
   </main>
 
+  <!-- Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal">
+
       <h2 id="modalTitle">Continue</h2>
 
+      <!-- Report Type Selection -->
       <div class="report-types" role="radiogroup" aria-label="Report type">
         <button class="report-type" data-report="warning" type="button">Written Warning</button>
         <button class="report-type" data-report="citation" type="button">Citation</button>
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
-      
-<div id="impoundmentBox" class="impoundment-box hidden">
-  <h3 class="impoundment-title">Impoundment</h3>
 
-  <div class="impoundment-options">
-    <button id="impoundYes" class="impound-btn impound-yes">Yes</button>
-    <button id="impoundNo" class="impound-btn impound-no">No</button>
-  </div>
-</div>
-      
+      <!-- Impoundment Selection (NEW UI) -->
+      <div id="impoundmentGroup" class="impoundment-group hidden">
+        <p class="impoundment-label">Is their vehicle getting impounded?</p>
+
+        <div class="impoundment-types" role="radiogroup" aria-label="Impoundment">
+          <button class="impound-type" data-impound="yes" type="button">Yes</button>
+          <button class="impound-type" data-impound="no" type="button">No</button>
+        </div>
+      </div>
+
+      <!-- User ID -->
       <label class="user-id-label" for="userId">User ID</label>
-      <input id="userId" class="user-id-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
+      <input id="userId" class="user-id-input" type="text" inputmode="numeric"
+             pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
 
       <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
 
+      <!-- Modal Actions -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
         <button id="closeBtn" class="close-btn" type="button">Close</button>
       </div>
 
       <textarea id="copyBuffer" class="copy-buffer" aria-hidden="true"></textarea>
+
     </div>
   </div>
 
