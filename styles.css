@@ -102,6 +102,12 @@ button {
   text-align: center;
 }
 
+.actions p.tip {
+  grid-column: 1 / -1;
+  text-align: center;
+  width: 100%;
+}
+
 .codes-panel {
   min-height: 720px;
 }
