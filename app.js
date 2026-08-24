@@ -31,6 +31,11 @@ const els = {
   themeToggle: document.getElementById("themeToggle")
 };
 
+/* Tooltip system */
+const tooltip = document.getElementById("tooltip");
+let tooltipVisible = false;
+let tooltipLock = false; // mobile click mode
+
 const money = value =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -71,6 +76,38 @@ function renderCodes() {
     </button>
   `).join("");
 }
+
+// Tooltip binding for each code-item
+els.codeList.querySelectorAll(".code-item").forEach(button => {
+  const item = findCode(button.dataset.code);
+
+  // Desktop hover
+  button.addEventListener("mouseenter", e => {
+    if (tooltipLock) return;
+    showTooltip(item.description, e.clientX, e.clientY);
+  });
+
+  button.addEventListener("mousemove", e => {
+    if (tooltipLock) return;
+    if (tooltipVisible) showTooltip(item.description, e.clientX, e.clientY);
+  });
+
+  button.addEventListener("mouseleave", () => {
+    if (!tooltipLock) hideTooltip();
+  });
+
+  // Mobile click/tap
+  button.addEventListener("click", e => {
+    tooltipLock = !tooltipLock;
+
+    if (tooltipLock) {
+      showTooltip(item.description, e.clientX, e.clientY);
+    } else {
+      hideTooltip();
+    }
+  });
+});
+
 
 function findCode(code) {
   return PENAL_CODES.find(item => item.code === code);
@@ -409,6 +446,40 @@ function setupKeyboardGroup(selector) {
   });
 }
 
+function showTooltip(text, x, y) {
+  tooltip.textContent = text;
+  tooltip.classList.remove("hidden");
+
+  const padding = 12;
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+
+  let left = x + padding;
+  let top = y + padding;
+
+  if (left + tooltipWidth > window.innerWidth) {
+    left = x - tooltipWidth - padding;
+  }
+  if (top + tooltipHeight > window.innerHeight) {
+    top = y - tooltipHeight - padding;
+  }
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
+
+  tooltip.classList.add("show");
+  tooltipVisible = true;
+}
+
+function hideTooltip() {
+  tooltip.classList.remove("show");
+  tooltipVisible = false;
+
+  setTimeout(() => {
+    if (!tooltipVisible) tooltip.classList.add("hidden");
+  }, 150);
+}
+
 /* Event wiring */
 els.searchInput.addEventListener("input", renderCodes);
 
@@ -434,6 +505,15 @@ document.querySelectorAll(".report-type").forEach(button => {
     updateReportTypeButtons();
     updateImpoundmentUI();
   });
+});
+
+document.addEventListener("click", e => {
+  if (!tooltipLock) return;
+
+  if (!e.target.closest(".code-item")) {
+    tooltipLock = false;
+    hideTooltip();
+  }
 });
 
 document.querySelectorAll(".impound-type").forEach(button => {
