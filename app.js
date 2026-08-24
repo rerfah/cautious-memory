@@ -107,7 +107,7 @@ function renderPreview() {
     </div>
     <div class="preview-row">
       <span class="preview-label">Section</span>
-      <span class="preview-value">${escapeHtml(item.section)}</span>
+      <span class="preview-value">${escapeHtml(item.section.replace(/^\(\d+\)\s*/, ""))}</span>
     </div>
     <div class="preview-actions">
       <button class="go-back" type="button" id="previewBack">Go back</button>
