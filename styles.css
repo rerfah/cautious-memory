@@ -240,6 +240,7 @@ button {
 
 .preview-actions button,
 .report-type,
+.impound-type,
 .modal-actions button,
 .actions button {
   border: 0;
@@ -394,6 +395,35 @@ button {
   color: white;
 }
 
+/* Impoundment row styled like report-type buttons */
+.impoundment-group {
+  margin: 16px 0 8px;
+}
+
+.impoundment-label {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #cbd1da;
+}
+
+.impoundment-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.impound-type {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+}
+
+.impound-type.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
 .user-id-label {
   display: block;
   margin: 19px 0 7px;
@@ -420,70 +450,6 @@ button {
   margin: 8px 0 0;
   color: #ff7777;
   font-size: 13px;
-}
-
-.impoundment-box {
-  margin: 10px 0 14px;
-}
-
-.impoundment-title {
-  margin: 0 0 4px;
-  font-size: 15px;
-  color: #cbd1da;
-}
-
-.impoundment-value {
-  font-size: 14px;
-  font-weight: 650;
-}
-
-/* Colour coding */
-.impoundment-yes {
-  color: var(--red);
-}
-
-.impoundment-no {
-  color: var(--green);
-}
-
-.impoundment-box {
-  margin: 10px 0 14px;
-}
-
-.impoundment-title {
-  margin: 0 0 6px;
-  font-size: 15px;
-  color: #cbd1da;
-}
-
-.impoundment-options {
-  display: flex;
-  gap: 10px;
-}
-
-.impound-btn {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid var(--border);
-}
-
-.impound-yes {
-  background: #1a2029;
-  color: var(--red);
-}
-
-.impound-no {
-  background: #1a2029;
-  color: var(--green);
-}
-
-.impound-selected {
-  border-color: var(--accent);
-  background: #243a5c;
-  color: white;
 }
 
 .modal-actions {
@@ -529,6 +495,7 @@ button {
 
 @media (max-width: 560px) {
   .report-types,
+  .impoundment-types,
   .modal-actions {
     grid-template-columns: 1fr;
   }
