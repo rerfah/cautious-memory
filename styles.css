@@ -97,6 +97,11 @@ button {
   margin-top: 6px;
 }
 
+.actions .tip {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
 .codes-panel {
   min-height: 720px;
 }
