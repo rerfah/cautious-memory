@@ -395,6 +395,16 @@ document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !els.modalBackdrop.classList.contains("hidden")) {
     closeModal();
   }
+document.getElementById("impoundYes").addEventListener("click", () => {
+  state.impoundmentChoice = "yes";
+  document.getElementById("impoundYes").classList.add("impound-selected");
+  document.getElementById("impoundNo").classList.remove("impound-selected");
+});
+
+document.getElementById("impoundNo").addEventListener("click", () => {
+  state.impoundmentChoice = "no";
+  document.getElementById("impoundNo").classList.add("impound-selected");
+  document.getElementById("impoundYes").classList.remove("impound-selected");
 });
 
 renderCodes();
