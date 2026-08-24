@@ -287,16 +287,38 @@ function buildCopyText() {
 
   for (const item of state.recentCharges) {
     const fine = money(item.fine);
+    const hasImpoundment = String(item.impoundment).toLowerCase() !== "no";
 
+    // WRITTEN WARNING
     if (state.reportType === "warning") {
-      lines.push(`${item.code} - ~~${fine} + Impoundment~~`);
-    } else if (state.reportType === "arrest") {
-      lines.push(`${item.code} - ${fine} + Impoundment`);
-    } else {
-      if (state.impoundmentChoice === "yes") {
+      if (hasImpoundment) {
+        lines.push(`${item.code} - ~~${fine} + Impoundment~~`);
+      } else {
+        lines.push(`${item.code} - ~~${fine}~~`);
+      }
+      continue;
+    }
+
+    // ARREST REPORT
+    if (state.reportType === "arrest") {
+      if (hasImpoundment) {
         lines.push(`${item.code} - ${fine} + Impoundment`);
       } else {
-        lines.push(`${item.code} - ${fine} + ~~Impoundment~~`);
+        lines.push(`${item.code} - ${fine}`);
+      }
+      continue;
+    }
+
+    // CITATION
+    if (state.reportType === "citation") {
+      if (hasImpoundment) {
+        if (state.impoundmentChoice === "yes") {
+          lines.push(`${item.code} - ${fine} + Impoundment`);
+        } else {
+          lines.push(`${item.code} - ${fine} + ~~Impoundment~~`);
+        }
+      } else {
+        lines.push(`${item.code} - ${fine}`);
       }
     }
   }
