@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEO Penal Code calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="topbar">
+      <h1>LEO Penal Code calculator</h1>
+      <p>Search, preview and build charges.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel codes-panel">
+        <div class="panel-heading">
+          <h2>Penal codes</h2>
+          <span id="codeCount" class="muted"></span>
+        </div>
+        <input id="searchInput" class="search" type="search" placeholder="Search penal codes..." autocomplete="off">
+        <div id="codeList" class="code-list" aria-label="Penal codes"></div>
+      </div>
+
+      <div class="right-column">
+        <section class="panel preview-panel">
+          <div class="panel-heading">
+            <h2>Preview</h2>
+          </div>
+          <div id="previewEmpty" class="empty-state">Click a penal code to preview it.</div>
+          <article id="previewCard" class="preview-card hidden"></article>
+        </section>
+
+        <section class="panel recent-panel">
+          <div class="panel-heading">
+            <h2>Recent charges</h2>
+          </div>
+          <div id="recentCharges" class="recent-list">
+            <div class="empty-state">No charges selected.</div>
+          </div>
+        </section>
+
+        <section class="panel summary-panel">
+          <div class="panel-heading">
+            <h2>Summary</h2>
+          </div>
+          <div id="summaryCharges" class="summary-charges">
+            <div class="empty-state">No charges selected.</div>
+          </div>
+          <div class="summary-total">
+            <span>Total fine</span>
+            <strong id="totalFine">$0.00</strong>
+          </div>
+          <div id="sentencedRow" class="summary-total hidden">
+            <span>Sentenced imposed</span>
+            <strong id="totalJail">0s</strong>
+          </div>
+        </section>
+
+        <section class="actions">
+          <button id="continueBtn" class="continue-btn" type="button">Continue</button>
+          <button id="resetBtn" class="reset-btn" type="button">Reset</button>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" id="modal">
+      <h2 id="modalTitle">Continue</h2>
+
+      <div class="report-types" role="radiogroup" aria-label="Report type">
+        <button class="report-type" data-report="warning" type="button">Written Warning</button>
+        <button class="report-type" data-report="citation" type="button">Citation</button>
+        <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
+      </div>
+
+      <label class="user-id-label" for="userId">User ID</label>
+      <input id="userId" class="user-id-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
+
+      <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
+
+      <div class="modal-actions">
+        <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
+        <button id="closeBtn" class="close-btn" type="button">Close</button>
+      </div>
+
+      <textarea id="copyBuffer" class="copy-buffer" aria-hidden="true"></textarea>
+    </div>
+  </div>
+
+  <script src="data/penalCodes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
