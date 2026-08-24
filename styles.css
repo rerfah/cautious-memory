@@ -662,6 +662,38 @@ html[data-theme="light"] .close-btn {
   }
 }
 
+/* ⭐ TOOLTIP SYSTEM (ADDED) */
+.tooltip {
+  position: fixed;
+  max-width: 320px;
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.3rem;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tooltip.hidden {
+  display: none;
+}
+
+@media (hover: none) {
+  .tooltip {
+    pointer-events: auto;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .workspace {
@@ -692,3 +724,4 @@ html[data-theme="light"] .close-btn {
     align-items: flex-start;
   }
 }
+
