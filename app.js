@@ -24,7 +24,11 @@ const els = {
   numberError: document.getElementById("numberError"),
   copyBtn: document.getElementById("copyBtn"),
   closeBtn: document.getElementById("closeBtn"),
-  copyBuffer: document.getElementById("copyBuffer")
+  copyBuffer: document.getElementById("copyBuffer"),
+  confirmBackdrop: document.getElementById("confirmBackdrop"),
+  confirmClearBtn: document.getElementById("confirmClearBtn"),
+  cancelClearBtn: document.getElementById("cancelClearBtn"),
+  themeToggle: document.getElementById("themeToggle")
 };
 
 const money = value =>
@@ -249,6 +253,14 @@ function closeModal() {
   els.modalBackdrop.classList.add("hidden");
 }
 
+function openConfirmModal() {
+  els.confirmBackdrop.classList.remove("hidden");
+}
+
+function closeConfirmModal() {
+  els.confirmBackdrop.classList.add("hidden");
+}
+
 function setInputValid() {
   const value = els.userId.value;
   const valid = /^\d*$/.test(value);
@@ -329,6 +341,53 @@ async function copyInformation() {
   closeModal();
 }
 
+/* Theme handling */
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  const icon = document.querySelector(".theme-icon");
+  if (icon) {
+    icon.textContent = theme === "dark" ? "🌙" : "☀️";
+  }
+}
+
+function initTheme() {
+  const stored = localStorage.getItem("theme");
+  let theme = stored;
+
+  if (!theme) {
+    const prefersDark = window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    theme = prefersDark ? "dark" : "light";
+  }
+
+  setTheme(theme);
+}
+
+/* Keyboard navigation for button groups */
+function setupKeyboardGroup(selector) {
+  const buttons = Array.from(document.querySelectorAll(selector));
+  buttons.forEach((button, index) => {
+    button.addEventListener("keydown", event => {
+      const key = event.key;
+      if (key === "ArrowRight" || key === "ArrowDown") {
+        event.preventDefault();
+        const next = buttons[(index + 1) % buttons.length];
+        next.focus();
+        next.click();
+      } else if (key === "ArrowLeft" || key === "ArrowUp") {
+        event.preventDefault();
+        const prev = buttons[(index - 1 + buttons.length) % buttons.length];
+        prev.focus();
+        prev.click();
+      } else if (key === " " || key === "Enter") {
+        event.preventDefault();
+        button.click();
+      }
+    });
+  });
+}
+
+/* Event wiring */
 els.searchInput.addEventListener("input", renderCodes);
 
 els.codeList.addEventListener("click", event => {
@@ -379,21 +438,55 @@ els.userId.addEventListener("input", () => {
 els.continueBtn.addEventListener("click", openModal);
 els.closeBtn.addEventListener("click", closeModal);
 els.copyBtn.addEventListener("click", copyInformation);
-els.resetBtn.addEventListener("click", resetApp);
+
+els.resetBtn.addEventListener("click", () => {
+  if (!state.recentCharges.length) {
+    resetApp();
+  } else {
+    openConfirmModal();
+  }
+});
+
+els.confirmClearBtn.addEventListener("click", () => {
+  resetApp();
+  closeConfirmModal();
+});
+
+els.cancelClearBtn.addEventListener("click", closeConfirmModal);
 
 els.modalBackdrop.addEventListener("click", event => {
   if (event.target === els.modalBackdrop) closeModal();
 });
 
+els.confirmBackdrop.addEventListener("click", event => {
+  if (event.target === els.confirmBackdrop) closeConfirmModal();
+});
+
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && !els.modalBackdrop.classList.contains("hidden")) {
-    closeModal();
+  if (event.key === "Escape") {
+    if (!els.modalBackdrop.classList.contains("hidden")) {
+      closeModal();
+    } else if (!els.confirmBackdrop.classList.contains("hidden")) {
+      closeConfirmModal();
+    }
   }
 });
 
+/* Theme toggle */
+els.themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const next = current === "dark" ? "light" : "dark";
+  setTheme(next);
+  localStorage.setItem("theme", next);
+});
+
+/* Init */
 renderCodes();
 renderPreview();
 renderRecentCharges();
 renderSummary();
 updateReportTypeButtons();
 updateImpoundmentUI();
+initTheme();
+setupKeyboardGroup(".report-type");
+setupKeyboardGroup(".impound-type");
