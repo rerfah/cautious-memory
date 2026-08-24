@@ -293,13 +293,30 @@ function buildCopyText() {
   lines.push(`**${label.replace(":", "")}:**`);
 
   for (const item of state.recentCharges) {
-    const fine = money(item.fine);
-    if (state.reportType === "warning") {
-      lines.push(`${item.code} - ~~${fine}~~`);
+  const fine = money(item.fine);
+
+  // Written Warning — always strike out impoundment
+  if (state.reportType === "warning") {
+    lines.push(`${item.code} - ~~${fine} + Impoundment~~`);
+    continue;
+  }
+
+  // Arrest Report — always impound
+  if (state.reportType === "arrest") {
+    lines.push(`${item.code} - ${fine} + Impoundment`);
+    continue;
+  }
+
+  // Citation — depends on user choice
+  if (state.reportType === "citation") {
+    if (state.impoundmentChoice === "yes") {
+      lines.push(`${item.code} - ${fine} + Impoundment`);
     } else {
-      lines.push(`${item.code} - ${fine}`);
+      lines.push(`${item.code} - ${fine} + ~~Impoundment~~`);
     }
   }
+}
+
 
   lines.push("");
   lines.push("**Total:**");
