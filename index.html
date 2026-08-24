@@ -77,10 +77,14 @@
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
       
-      <div id="impoundmentBox" class="impoundment-box hidden">
-        <h3 class="impoundment-title">Impoundment</h3>
-        <p id="impoundmentValue" class="impoundment-value">No</p>
-      </div>
+<div id="impoundmentBox" class="impoundment-box hidden">
+  <h3 class="impoundment-title">Impoundment</h3>
+
+  <div class="impoundment-options">
+    <button id="impoundYes" class="impound-btn impound-yes">Yes</button>
+    <button id="impoundNo" class="impound-btn impound-no">No</button>
+  </div>
+</div>
       
       <label class="user-id-label" for="userId">User ID</label>
       <input id="userId" class="user-id-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
