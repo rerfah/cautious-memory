@@ -179,7 +179,7 @@ function renderSummary() {
   });
 
   els.summaryCharges.innerHTML = [...counts.values()].map(({ item, count }) => `
-    <div class="summary-charge">(${count})${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
+    <div class="summary-charge">${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
   `).join("");
 
   const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine || 0), 0);
