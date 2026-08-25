@@ -754,6 +754,27 @@ html[data-theme="light"] .tooltip {
   }
 }
 
+/* -------------------------------------------------------
+   WATERMARK (next to theme toggle)
+------------------------------------------------------- */
+.watermark {
+  font-size: 12px;
+  color: var(--muted);
+  align-self: center;
+  margin-left: 10px;
+  opacity: 0.75;
+  user-select: none;
+  pointer-events: none;
+  max-width: 420px;
+  line-height: 1.2;
+}
+
+html[data-theme="light"] .watermark {
+  color: #6b7280;
+  opacity: 0.85;
+}
+
+
 /* ⭐ TOP ALERT TOOLTIP (Animated) */
 .top-alert {
   position: fixed;
