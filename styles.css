@@ -164,7 +164,6 @@ html[data-theme="light"] .panel {
   background: #0d1117;
   border: 1px solid var(--border);
   border-radius: 9px;
-  outline: none;
 }
 
 html[data-theme="light"] .search {
@@ -192,7 +191,6 @@ html[data-theme="light"] .search {
   grid-template-columns: 1fr auto;
   gap: 12px;
   align-items: center;
-  text-align: left;
   cursor: pointer;
   transition: background .15s ease, transform .1s ease;
 }
@@ -588,7 +586,6 @@ html[data-theme="light"] .user-id-label {
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 9px;
-  outline: none;
 }
 
 html[data-theme="light"] .user-id-input {
@@ -661,7 +658,7 @@ html[data-theme="light"] .close-btn {
     opacity: 1;
   }
 }
-/* ⭐ TOOLTIP SYSTEM (FIXED) */
+/* ⭐ TOOLTIP SYSTEM WITH FADE-IN DELAY */
 .tooltip {
   position: fixed;
   max-width: 320px;
@@ -674,13 +671,27 @@ html[data-theme="light"] .close-btn {
   z-index: 99999;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: translateY(6px);
+}
+
+/* Fade-in delay animation */
+@keyframes tooltipFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  60% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tooltip.show {
-  opacity: 1;
-  transform: translateY(0);
+  animation: tooltipFadeIn 0.35s ease-out forwards;
 }
 
 .tooltip.hidden {
