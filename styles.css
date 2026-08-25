@@ -698,3 +698,54 @@ html[data-theme="light"] .tooltip {
     opacity: 0;
     transform: translateY(6px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip.show {
+  animation: tooltipFadeIn 0.35s ease-out forwards;
+}
+
+.tooltip.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media (hover: none) {
+  .tooltip {
+    pointer-events: auto;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .codes-panel {
+    min-height: auto;
+  }
+
+  .code-list {
+    max-height: 460px;
+  }
+}
+
+@media (max-width: 560px) {
+  .report-types,
+  .impoundment-types,
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-template-columns: 1fr 100px;
+  }
+
+  .preview-head {
+    align-items: flex-start;
+  }
+}
