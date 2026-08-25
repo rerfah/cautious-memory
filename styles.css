@@ -661,7 +661,6 @@ html[data-theme="light"] .close-btn {
     opacity: 1;
   }
 }
-
 /* ⭐ TOOLTIP SYSTEM (FIXED) */
 .tooltip {
   position: fixed;
@@ -672,7 +671,7 @@ html[data-theme="light"] .close-btn {
   border-radius: 6px;
   font-size: 0.85rem;
   line-height: 1.3rem;
-  z-index: 99999; /* raised */
+  z-index: 99999;
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
@@ -685,8 +684,8 @@ html[data-theme="light"] .close-btn {
 }
 
 .tooltip.hidden {
-  visibility: hidden; /* changed */
-  opacity: 0;         /* added */
+  visibility: hidden;
+  opacity: 0;
 }
 
 @media (hover: none) {
@@ -695,3 +694,33 @@ html[data-theme="light"] .close-btn {
   }
 }
 
+/* Responsive */
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .codes-panel {
+    min-height: auto;
+  }
+
+  .code-list {
+    max-height: 460px;
+  }
+}
+
+@media (max-width: 560px) {
+  .report-types,
+  .impoundment-types,
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-template-columns: 1fr 100px;
+  }
+
+  .preview-head {
+    align-items: flex-start;
+  }
+}
