@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LEO Penal Code Calculator</title>
   <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Search, preview, and build penal code charges quickly and accurately.">
+  <link rel="icon" href="favicon.ico">
 </head>
 
 <body>
-  <main class="app-shell">
+  <main class="app-shell" role="main">
     <section class="topbar">
       <div class="topbar-main">
         <h1>LEO Penal Code Calculator</h1>
@@ -21,7 +23,7 @@
 
     <section class="workspace">
       <!-- Left Column: Penal Codes -->
-      <div class="panel codes-panel">
+      <div class="panel codes-panel" tabindex="0">
         <div class="panel-heading">
           <h2>Penal codes</h2>
           <span id="codeCount" class="muted"></span>
@@ -37,31 +39,31 @@
       <div class="right-column">
 
         <!-- Preview Panel -->
-        <section class="panel preview-panel">
+        <section class="panel preview-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Preview</h2>
           </div>
           <div id="previewEmpty" class="empty-state">Click a penal code to preview it.</div>
-          <article id="previewCard" class="preview-card hidden"></article>
+          <article id="previewCard" class="preview-card hidden" aria-live="polite"></article>
         </section>
 
         <!-- Recent Charges -->
-        <section class="panel recent-panel">
+        <section class="panel recent-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Recent charges</h2>
           </div>
-          <div id="recentCharges" class="recent-list">
+          <div id="recentCharges" class="recent-list" aria-live="polite">
             <div class="empty-state">No charges selected.</div>
           </div>
         </section>
 
         <!-- Summary -->
-        <section class="panel summary-panel">
+        <section class="panel summary-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Summary</h2>
           </div>
 
-          <div id="summaryCharges" class="summary-charges">
+          <div id="summaryCharges" class="summary-charges" aria-live="polite">
             <div class="empty-state">No charges selected.</div>
           </div>
 
@@ -89,7 +91,7 @@
 
   <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal" id="modal">
+    <div class="modal" id="modal" role="document">
       <h2 id="modalTitle">Continue</h2>
 
       <!-- Report Type Selection -->
@@ -128,7 +130,7 @@
 
   <!-- Clear Charges Confirmation Modal -->
   <div id="confirmBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-    <div class="modal" id="confirmModal">
+    <div class="modal" id="confirmModal" role="document">
       <h2 id="confirmTitle">Clear charges</h2>
       <p class="muted">Are you sure you want to clear all selected charges?</p>
 
@@ -140,10 +142,9 @@
   </div>
 
   <!-- Tooltip UI -->
-  <div id="tooltip" class="tooltip hidden"></div>
+  <div id="tooltip" class="tooltip hidden" role="tooltip"></div>
 
   <script src="data/penalCodes.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
-
