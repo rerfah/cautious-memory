@@ -146,7 +146,7 @@ function renderCodes() {
 
       hoverTimer = setTimeout(() => {
         showTooltip(item.description, x, y);
-      }, 1000);
+      }, 500);
     });
 
     button.addEventListener("mousemove", e => {
@@ -160,7 +160,7 @@ function renderCodes() {
         clearTimeout(hoverTimer);
         hoverTimer = setTimeout(() => {
           showTooltip(item.description, x, y);
-        }, 1000);
+        }, 500);
       }
     });
 
