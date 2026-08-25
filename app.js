@@ -38,7 +38,7 @@ const els = {
 };
 
 /* -------------------------------------------------------
-   TOOLTIP SYSTEM
+   TOOLTIP SYSTEM (with 2s delay)
 ------------------------------------------------------- */
 const tooltip = document.getElementById("tooltip");
 let tooltipVisible = false;
@@ -95,7 +95,7 @@ const escapeHtml = value =>
 const findCode = code => PENAL_CODES.find(item => item.code === code);
 
 /* -------------------------------------------------------
-   RENDER: CODE LIST
+   RENDER: CODE LIST (with delayed tooltip binding)
 ------------------------------------------------------- */
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
@@ -122,29 +122,60 @@ function renderCodes() {
     </button>
   `).join("");
 
-  // Tooltip binding
+  // ⭐ Tooltip binding with 2-second delay
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
 
+    let hoverTimer = null;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Start 2-second hover timer
     button.addEventListener("mouseenter", e => {
-      if (!tooltipLock) showTooltip(item.description, e.clientX, e.clientY);
+      if (tooltipLock) return;
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      hoverTimer = setTimeout(() => {
+        showTooltip(item.description, lastX, lastY);
+      }, 2000); // 2 seconds
     });
 
+    // Reset timer if mouse moves
     button.addEventListener("mousemove", e => {
-      if (!tooltipLock && tooltipVisible) {
-        showTooltip(item.description, e.clientX, e.clientY);
+      if (tooltipLock) return;
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      if (tooltipVisible) {
+        showTooltip(item.description, lastX, lastY);
+      } else {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          showTooltip(item.description, lastX, lastY);
+        }, 2000);
       }
     });
 
+    // Cancel timer + hide tooltip
     button.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimer);
+      hoverTimer = null;
+
       if (!tooltipLock) hideTooltip();
     });
 
+    // Mobile tap (instant)
     button.addEventListener("click", e => {
       tooltipLock = !tooltipLock;
-      tooltipLock
-        ? showTooltip(item.description, e.clientX, e.clientY)
-        : hideTooltip();
+
+      if (tooltipLock) {
+        showTooltip(item.description, e.clientX, e.clientY);
+      } else {
+        hideTooltip();
+      }
     });
   });
 }
@@ -252,8 +283,9 @@ function renderRecentCharges() {
     btn.onclick = () => removeCharge(Number(btn.dataset.index));
   });
 }
+
 /* -------------------------------------------------------
-   SUMMARY (continued)
+   SUMMARY
 ------------------------------------------------------- */
 function renderSummary() {
   if (!state.recentCharges.length) {
