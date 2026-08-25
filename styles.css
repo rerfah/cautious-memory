@@ -207,7 +207,6 @@ html[data-theme="light"] .code-item {
   transform: scale(.998);
 }
 
-/* Restore original left-aligned text */
 .code-reference,
 .code-classification {
   text-align: left !important;
@@ -678,14 +677,10 @@ html[data-theme="light"] .close-btn {
   pointer-events: none;
   opacity: 0;
   transform: translateY(6px);
-
-  /* Glow */
   box-shadow:
     0 0 18px rgba(59, 130, 246, 0.45),
     0 0 6px rgba(59, 130, 246, 0.35),
     0 4px 12px rgba(0, 0, 0, 0.45);
-
-  /* Positioning fix */
   will-change: transform, opacity;
 }
 
@@ -712,7 +707,6 @@ html[data-theme="light"] .tooltip {
   }
 }
 
-/* Prevent animation from overriding JS positioning */
 .tooltip.show {
   animation: tooltipFadeIn 0.35s ease-out forwards;
   transform: translateY(0) !important;
@@ -758,4 +752,58 @@ html[data-theme="light"] .tooltip {
   .preview-head {
     align-items: flex-start;
   }
+}
+
+/* ⭐ TOP ALERT TOOLTIP (Animated) */
+.top-alert {
+  position: fixed;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1f27;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 2px solid var(--red);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 999999;
+  opacity: 0;
+  transition:
+    top 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease-out;
+}
+
+html[data-theme="light"] .top-alert {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.top-alert.show {
+  top: 18px;
+  opacity: 1;
+}
+
+.alert-text {
+  flex: 1;
+}
+
+.alert-close {
+  background: transparent;
+  border: 0;
+  color: var(--red);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 6px;
+  line-height: 1;
+}
+
+.alert-close:hover {
+  color: #ff6b6b;
 }
