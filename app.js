@@ -34,7 +34,11 @@ const els = {
   confirmBackdrop: document.getElementById("confirmBackdrop"),
   confirmClearBtn: document.getElementById("confirmClearBtn"),
   cancelClearBtn: document.getElementById("cancelClearBtn"),
-  themeToggle: document.getElementById("themeToggle")
+  themeToggle: document.getElementById("themeToggle"),
+
+  /* NEW: Top alert tooltip */
+  topAlert: document.getElementById("topAlert"),
+  topAlertClose: document.querySelector(".alert-close")
 };
 
 /* -------------------------------------------------------
@@ -84,6 +88,29 @@ function hideTooltip() {
 }
 
 /* -------------------------------------------------------
+   TOP ALERT TOOLTIP (NEW)
+------------------------------------------------------- */
+function showTopAlert() {
+  els.topAlert.classList.remove("hidden");
+
+  requestAnimationFrame(() => {
+    els.topAlert.classList.add("show");
+  });
+
+  setTimeout(() => hideTopAlert(), 3000);
+}
+
+function hideTopAlert() {
+  els.topAlert.classList.remove("show");
+
+  setTimeout(() => {
+    els.topAlert.classList.add("hidden");
+  }, 400);
+}
+
+els.topAlertClose.onclick = hideTopAlert;
+
+/* -------------------------------------------------------
    HELPERS
 ------------------------------------------------------- */
 const money = value =>
@@ -104,7 +131,7 @@ const escapeHtml = value =>
 const findCode = code => PENAL_CODES.find(item => item.code === code);
 
 /* -------------------------------------------------------
-   RENDER: CODE LIST (with magnetic tooltip + hover-only)
+   RENDER: CODE LIST
 ------------------------------------------------------- */
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
@@ -131,7 +158,6 @@ function renderCodes() {
     </button>
   `).join("");
 
-  // Magnetic tooltip hover-only binding
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
 
@@ -349,11 +375,11 @@ function updateImpoundmentUI() {
 }
 
 /* -------------------------------------------------------
-   MODAL
+   MODAL (UPDATED)
 ------------------------------------------------------- */
 function openModal() {
   if (!state.recentCharges.length) {
-    alert("Add at least one charge before continuing.");
+    showTopAlert();   // NEW: replaces alert()
     return;
   }
 
@@ -489,7 +515,6 @@ function initTheme() {
   setTheme(theme);
 }
 
-/* Theme toggle wiring (this was missing) */
 if (els.themeToggle) {
   els.themeToggle.onclick = () => {
     const current = document.documentElement.getAttribute("data-theme") || "dark";
