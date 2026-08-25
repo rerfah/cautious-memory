@@ -78,7 +78,7 @@ button {
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 2200px;
+  gap: 500px;
   white-space: nowrap;
   flex-wrap: nowrap;
 }
