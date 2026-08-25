@@ -658,7 +658,8 @@ html[data-theme="light"] .close-btn {
     opacity: 1;
   }
 }
-/* ⭐ TOOLTIP SYSTEM WITH FADE-IN DELAY */
+
+/* ⭐ TOOLTIP SYSTEM WITH FADE-IN DELAY + GLOW */
 .tooltip {
   position: fixed;
   max-width: 320px;
@@ -672,6 +673,19 @@ html[data-theme="light"] .close-btn {
   pointer-events: none;
   opacity: 0;
   transform: translateY(6px);
+
+  /* Glow */
+  box-shadow:
+    0 0 18px rgba(59, 130, 246, 0.45),
+    0 0 6px rgba(59, 130, 246, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="light"] .tooltip {
+  box-shadow:
+    0 0 14px rgba(37, 99, 235, 0.35),
+    0 0 4px rgba(37, 99, 235, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.18);
 }
 
 /* Fade-in delay animation */
@@ -684,54 +698,3 @@ html[data-theme="light"] .close-btn {
     opacity: 0;
     transform: translateY(6px);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.tooltip.show {
-  animation: tooltipFadeIn 0.35s ease-out forwards;
-}
-
-.tooltip.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
-@media (hover: none) {
-  .tooltip {
-    pointer-events: auto;
-  }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .codes-panel {
-    min-height: auto;
-  }
-
-  .code-list {
-    max-height: 460px;
-  }
-}
-
-@media (max-width: 560px) {
-  .report-types,
-  .impoundment-types,
-  .modal-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    grid-template-columns: 1fr 100px;
-  }
-
-  .preview-head {
-    align-items: flex-start;
-  }
-}
