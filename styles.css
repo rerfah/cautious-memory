@@ -317,7 +317,7 @@ html[data-theme="light"] .preview-row {
   margin-top: 14px;
 }
 
-/* Buttons */
+/* Buttons — FULL PREMIUM GRADIENT GLOW SYSTEM */
 .preview-actions button,
 .report-type,
 .impound-type,
@@ -328,9 +328,12 @@ html[data-theme="light"] .preview-row {
   padding: 12px 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: background .15s ease, box-shadow .15s ease, transform .1s ease;
+  transition: background .15s ease, box-shadow .25s ease, transform .25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Focus ring */
 .preview-actions button:focus-visible,
 .report-type:focus-visible,
 .impound-type:focus-visible,
@@ -341,107 +344,140 @@ html[data-theme="light"] .preview-row {
   outline-offset: 2px;
 }
 
+/* -------------------------------------------------------
+   ⭐ UNIVERSAL BUTTON GLOW ENGINE
+   - Smooth fade-in
+   - Expands outward
+   - Gradient glow
+   - Colour-matched per button
+------------------------------------------------------- */
+
+/* Outward glow animation */
+@keyframes buttonGlowExpand {
+  0% {
+    box-shadow: 0 0 0px rgba(0,0,0,0);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow:
+      0 0 18px var(--glow-outer),
+      0 0 8px var(--glow-inner);
+    transform: translateY(-2px);
+  }
+}
+
+/* Default glow (accent) */
+.preview-actions button,
+.report-type,
+.impound-type,
+.modal-actions button,
+.actions button {
+  --glow-inner: rgba(59,130,246,0.45);
+  --glow-outer: rgba(59,130,246,0.25);
+}
+
+/* Gradient sheen overlay */
+.preview-actions button:hover::after,
+.report-type:hover::after,
+.impound-type:hover::after,
+.modal-actions button:hover::after,
+.actions button:hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0)
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Smooth glow activation */
+.preview-actions button:hover,
+.report-type:hover,
+.impound-type:hover,
+.modal-actions button:hover,
+.actions button:hover {
+  animation: buttonGlowExpand 0.35s ease-out forwards;
+}
+
+/* -------------------------------------------------------
+   ⭐ MATCH GLOW TO BUTTON COLOUR
+------------------------------------------------------- */
+
+/* Green buttons */
+.add-charge,
+.continue-btn {
+  --glow-inner: rgba(34,197,94,0.45);
+  --glow-outer: rgba(34,197,94,0.25);
+}
+
+/* Red buttons */
+.go-back,
+.remove-charge {
+  --glow-inner: rgba(239,68,68,0.45);
+  --glow-outer: rgba(239,68,68,0.25);
+}
+
+/* Accent buttons */
+.copy-btn,
+.report-type,
+.impound-type {
+  --glow-inner: rgba(59,130,246,0.45);
+  --glow-outer: rgba(59,130,246,0.25);
+}
+
+/* Reset button (soft grey glow) */
+.reset-btn {
+  --glow-inner: rgba(160,160,160,0.45);
+  --glow-outer: rgba(160,160,160,0.25);
+}
+
+/* Close button (light grey glow) */
+.close-btn {
+  --glow-inner: rgba(200,200,200,0.45);
+  --glow-outer: rgba(200,200,200,0.25);
+}
+
+/* Light theme glow adjustments */
+html[data-theme="light"] .add-charge,
+html[data-theme="light"] .continue-btn {
+  --glow-inner: rgba(22,163,74,0.45);
+  --glow-outer: rgba(22,163,74,0.25);
+}
+
+html[data-theme="light"] .go-back,
+html[data-theme="light"] .remove-charge {
+  --glow-inner: rgba(220,38,38,0.45);
+  --glow-outer: rgba(220,38,38,0.25);
+}
+
+html[data-theme="light"] .copy-btn,
+html[data-theme="light"] .report-type,
+html[data-theme="light"] .impound-type {
+  --glow-inner: rgba(37,99,235,0.45);
+  --glow-outer: rgba(37,99,235,0.25);
+}
+
+html[data-theme="light"] .reset-btn {
+  --glow-inner: rgba(140,140,140,0.45);
+  --glow-outer: rgba(140,140,140,0.25);
+}
+
+html[data-theme="light"] .close-btn {
+  --glow-inner: rgba(160,160,160,0.45);
+  --glow-outer: rgba(160,160,160,0.25);
+}
+
+/* Button backgrounds */
 .go-back {
   background: var(--red);
 }
 
 .add-charge {
   background: var(--green);
-}
-
-.empty-state {
-  color: var(--muted);
-  padding: 20px 18px;
-  text-align: center;
-}
-
-/* Recent charges */
-.recent-list {
-  padding: 0 12px;
-}
-
-.recent-item {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
-  align-items: center;
-  background: #0e1218;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 11px 12px;
-  margin-bottom: 8px;
-}
-
-html[data-theme="light"] .recent-item {
-  background: #ffffff;
-}
-
-.recent-main {
-  min-width: 0;
-}
-
-.recent-title {
-  font-weight: 650;
-}
-
-.recent-subtitle {
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.remove-charge {
-  width: 29px;
-  height: 29px;
-  padding: 0 !important;
-  border: 1px solid #3a404a !important;
-  border-radius: 7px !important;
-  background: #1a1f27;
-  color: #b8bec8;
-  cursor: pointer;
-}
-
-html[data-theme="light"] .remove-charge {
-  background: #f9fafb;
-  border-color: #d1d5db !important;
-}
-
-.remove-charge:hover {
-  color: white;
-  border-color: #666e7a !important;
-}
-
-/* Summary */
-.summary-charges {
-  padding: 0 18px 10px;
-}
-
-.summary-charge {
-  padding: 5px 0;
-  font-size: 14px;
-}
-
-.summary-total {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 18px;
-  border-top: 1px solid var(--border);
-}
-
-html[data-theme="light"] .summary-total {
-  border-top-color: #e5e7eb;
-}
-
-.summary-total strong {
-  font-variant-numeric: tabular-nums;
-}
-
-/* Actions */
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 130px;
-  gap: 12px;
 }
 
 .continue-btn {
@@ -458,162 +494,6 @@ html[data-theme="light"] .summary-total {
 html[data-theme="light"] .reset-btn {
   background: #f9fafb;
   color: #111827;
-}
-
-/* Utility */
-.hidden {
-  display: none !important;
-}
-
-/* Modal */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: center;
-  padding: 22px;
-  background: rgba(0,0,0,.63);
-  backdrop-filter: blur(10px);
-  animation: backdropFadeIn .2s ease-out;
-}
-
-.modal {
-  width: min(680px, 100%);
-  padding: 24px;
-  background: #11151c;
-  border: 1px solid #303744;
-  border-radius: 16px;
-  box-shadow: 0 28px 90px rgba(0,0,0,.55);
-  animation: modalFadeIn .2s ease-out;
-}
-
-html[data-theme="light"] .modal {
-  background: #ffffff;
-  border-color: #d1d5db;
-  box-shadow: 0 24px 70px rgba(15,23,42,.18);
-}
-
-.modal h2 {
-  margin: 0 0 18px;
-}
-
-/* Report types */
-.report-types {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-}
-
-.report-type {
-  background: #1a2029;
-  border: 1px solid #303744;
-  color: #cbd1da;
-}
-
-html[data-theme="light"] .report-type {
-  background: #f9fafb;
-  border-color: #d1d5db;
-  color: #111827;
-}
-
-.report-type.selected {
-  background: #243a5c;
-  border-color: var(--accent);
-  color: white;
-  box-shadow: 0 0 0 1px rgba(59,130,246,.6);
-}
-
-html[data-theme="light"] .report-type.selected {
-  background: #2563eb;
-}
-
-/* Impoundment row */
-.impoundment-group {
-  margin: 16px 0 8px;
-}
-
-.impoundment-label {
-  margin: 0 0 8px;
-  font-size: 14px;
-  color: #cbd1da;
-}
-
-html[data-theme="light"] .impoundment-label {
-  color: #374151;
-}
-
-.impoundment-types {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 9px;
-}
-
-.impound-type {
-  background: #1a2029;
-  border: 1px solid #303744;
-  color: #cbd1da;
-}
-
-html[data-theme="light"] .impound-type {
-  background: #f9fafb;
-  border-color: #d1d5db;
-  color: #111827;
-}
-
-.impound-type.selected {
-  background: #243a5c;
-  border-color: var(--accent);
-  color: white;
-  box-shadow: 0 0 0 1px rgba(59,130,246,.6);
-}
-
-html[data-theme="light"] .impound-type.selected {
-  background: #2563eb;
-}
-
-/* User ID */
-.user-id-label {
-  display: block;
-  margin: 19px 0 7px;
-  color: #cbd1da;
-  font-size: 14px;
-}
-
-html[data-theme="light"] .user-id-label {
-  color: #374151;
-}
-
-.user-id-input {
-  width: 100%;
-  padding: 12px 13px;
-  background: #0b0f14;
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-}
-
-html[data-theme="light"] .user-id-input {
-  background: #ffffff;
-}
-
-.user-id-input.invalid {
-  border-color: var(--red);
-  box-shadow: 0 0 0 2px rgba(239,68,68,.13);
-}
-
-.number-error {
-  margin: 8px 0 0;
-  color: #ff7777;
-  font-size: 13px;
-}
-
-/* Modal actions */
-.modal-actions {
-  display: grid;
-  grid-template-columns: 1fr 130px;
-  gap: 10px;
-  margin-top: 20px;
 }
 
 .copy-btn {
@@ -633,35 +513,11 @@ html[data-theme="light"] .close-btn {
   border-color: #d1d5db !important;
 }
 
-/* Copy buffer */
-.copy-buffer {
-  position: fixed;
-  left: -10000px;
-  top: -10000px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-
-/* Animations */
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes backdropFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* Empty state */
+.empty-state {
+  color: var(--muted);
+  padding: 20px 18px;
+  text-align: center;
 }
 
 /* ⭐ TOOLTIP SYSTEM WITH FADE-IN DELAY + GLOW */
@@ -685,7 +541,7 @@ html[data-theme="light"] .close-btn {
     0 0 6px rgba(59, 130, 246, 0.35),
     0 4px 12px rgba(0, 0, 0, 0.45);
 
-  /* Positioning fix */
+  /* Magnetic positioning optimisation */
   will-change: transform, opacity;
 }
 
@@ -712,7 +568,7 @@ html[data-theme="light"] .tooltip {
   }
 }
 
-/* Prevent animation from overriding JS positioning */
+/* Prevent animation from overriding JS magnetic positioning */
 .tooltip.show {
   animation: tooltipFadeIn 0.35s ease-out forwards;
   transform: translateY(0) !important;
