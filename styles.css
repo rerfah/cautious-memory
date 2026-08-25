@@ -74,11 +74,13 @@ button {
   color: var(--muted);
 }
 
-/* ⭐ Topbar right wrapper */
+/* ⭐ Topbar right wrapper — ALWAYS one line */
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
 }
 
 /* Theme toggle */
@@ -789,17 +791,7 @@ html[data-theme="light"] .tooltip {
     align-items: flex-start;
   }
 
-  .topbar-right {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .watermark {
-    font-size: 11px;
-    max-width: 100%;
-    line-height: 1.3;
-  }
+  /* Note: topbar-right stays one-line due to nowrap settings above */
 }
 
 /* ⭐ TOP ALERT TOOLTIP (Animated) */
