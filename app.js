@@ -38,28 +38,37 @@ const els = {
 };
 
 /* -------------------------------------------------------
-   TOOLTIP SYSTEM (with 2s delay)
+   MAGNETIC TOOLTIP FOLLOW SYSTEM
 ------------------------------------------------------- */
 const tooltip = document.getElementById("tooltip");
 let tooltipVisible = false;
-let tooltipLock = false;
 
+let targetX = 0;
+let targetY = 0;
+let currentX = 0;
+let currentY = 0;
+
+function animateTooltip() {
+  currentX += (targetX - currentX) * 0.25;
+  currentY += (targetY - currentY) * 0.25;
+
+  tooltip.style.left = `${currentX}px`;
+  tooltip.style.top = `${currentY}px`;
+
+  requestAnimationFrame(animateTooltip);
+}
+
+animateTooltip();
+
+/* -------------------------------------------------------
+   TOOLTIP SHOW / HIDE
+------------------------------------------------------- */
 function showTooltip(text, x, y) {
   tooltip.textContent = text;
   tooltip.classList.remove("hidden");
 
-  const pad = 12;
-  const w = tooltip.offsetWidth;
-  const h = tooltip.offsetHeight;
-
-  let left = x + pad;
-  let top = y + pad;
-
-  if (left + w > window.innerWidth) left = x - w - pad;
-  if (top + h > window.innerHeight) top = y - h - pad;
-
-  tooltip.style.left = `${left}px`;
-  tooltip.style.top = `${top}px`;
+  targetX = x;
+  targetY = y;
 
   tooltip.classList.add("show");
   tooltipVisible = true;
@@ -95,7 +104,7 @@ const escapeHtml = value =>
 const findCode = code => PENAL_CODES.find(item => item.code === code);
 
 /* -------------------------------------------------------
-   RENDER: CODE LIST (with delayed tooltip binding)
+   RENDER: CODE LIST (with magnetic tooltip + hover-only)
 ------------------------------------------------------- */
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
@@ -122,60 +131,43 @@ function renderCodes() {
     </button>
   `).join("");
 
-  // ⭐ Tooltip binding with 2-second delay
+  // ⭐ Magnetic tooltip hover-only binding
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
 
     let hoverTimer = null;
-    let lastX = 0;
-    let lastY = 0;
 
-    // Start 2-second hover timer
     button.addEventListener("mouseenter", e => {
-      if (tooltipLock) return;
+      const x = e.clientX + 12;
+      const y = e.clientY + 12;
 
-      lastX = e.clientX;
-      lastY = e.clientY;
+      targetX = x;
+      targetY = y;
 
       hoverTimer = setTimeout(() => {
-        showTooltip(item.description, lastX, lastY);
-      }, 2000); // 2 seconds
+        showTooltip(item.description, x, y);
+      }, 2000);
     });
 
-    // Reset timer if mouse moves
     button.addEventListener("mousemove", e => {
-      if (tooltipLock) return;
+      const x = e.clientX + 12;
+      const y = e.clientY + 12;
 
-      lastX = e.clientX;
-      lastY = e.clientY;
+      targetX = x;
+      targetY = y;
 
-      if (tooltipVisible) {
-        showTooltip(item.description, lastX, lastY);
-      } else {
+      if (!tooltipVisible) {
         clearTimeout(hoverTimer);
         hoverTimer = setTimeout(() => {
-          showTooltip(item.description, lastX, lastY);
+          showTooltip(item.description, x, y);
         }, 2000);
       }
     });
 
-    // Cancel timer + hide tooltip
     button.addEventListener("mouseleave", () => {
       clearTimeout(hoverTimer);
       hoverTimer = null;
-
-      if (!tooltipLock) hideTooltip();
-    });
-
-    // Mobile tap (instant)
-    button.addEventListener("click", e => {
-      tooltipLock = !tooltipLock;
-
-      if (tooltipLock) {
-        showTooltip(item.description, e.clientX, e.clientY);
-      } else {
-        hideTooltip();
-      }
+      hideTooltip();
     });
   });
 }
@@ -556,13 +548,6 @@ document.querySelectorAll(".report-type").forEach(btn => {
     updateReportTypeButtons();
     updateImpoundmentUI();
   };
-});
-
-document.addEventListener("click", e => {
-  if (tooltipLock && !e.target.closest(".code-item")) {
-    tooltipLock = false;
-    hideTooltip();
-  }
 });
 
 document.querySelectorAll(".impound-type").forEach(btn => {
