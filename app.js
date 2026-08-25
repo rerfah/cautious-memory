@@ -131,7 +131,7 @@ function renderCodes() {
     </button>
   `).join("");
 
-  // ⭐ Magnetic tooltip hover-only binding
+  // Magnetic tooltip hover-only binding
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
 
@@ -487,6 +487,16 @@ function initTheme() {
   const stored = localStorage.getItem("theme");
   const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   setTheme(theme);
+}
+
+/* Theme toggle wiring (this was missing) */
+if (els.themeToggle) {
+  els.themeToggle.onclick = () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    setTheme(next);
+    localStorage.setItem("theme", next);
+  };
 }
 
 /* -------------------------------------------------------
