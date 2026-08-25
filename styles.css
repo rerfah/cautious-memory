@@ -121,11 +121,6 @@ button {
 }
 
 /* ⭐ Tiny shield icon */
-.watermark::before {
-  content: "🛡️";
-  font-size: 13px;
-  opacity: 0.85;
-}
 
 html[data-theme="light"] .watermark {
   color: #6b7280;
