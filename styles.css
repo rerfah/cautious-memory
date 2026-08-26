@@ -237,7 +237,7 @@ html[data-theme="light"] .search {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 12px;
-  align-items: center;
+  align-items: left;
   cursor: pointer;
   transition: background .15s ease, transform .1s ease;
 }
@@ -917,7 +917,7 @@ html[data-theme="light"] .dept-option.selected {
 .login-actions {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
