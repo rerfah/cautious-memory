@@ -699,9 +699,12 @@ document.querySelectorAll(".impound-type").forEach(btn => {
 });
 
 els.userId.addEventListener("input", () => {
-  const cleaned = els.userId.value.replace(/\D/g, "");
-  els.userId.value = cleaned;
-  setInputValid();
+  const value = els.userId.value;
+
+  const valid = /^\d*$/.test(value);
+
+  els.userId.classList.toggle("invalid", !valid);
+  els.numberError.classList.toggle("hidden", valid);
 });
 
 els.continueBtn.onclick = openModal;
