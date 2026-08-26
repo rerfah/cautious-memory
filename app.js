@@ -63,15 +63,6 @@ const els = {
 };
 
 /* -------------------------------------------------------
-   LOAD SAVED THEME ON STARTUP
-------------------------------------------------------- */
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  document.documentElement.setAttribute("data-theme", savedTheme);
-}
-
-
-/* -------------------------------------------------------
    LOGIN LOGIC (UPDATED)
 ------------------------------------------------------- */
 function initLogin() {
@@ -152,6 +143,8 @@ let currentX = 0;
 let currentY = 0;
 
 function animateTooltip() {
+  if (!tooltip) return;
+
   currentX += (targetX - currentX) * 0.25;
   currentY += (targetY - currentY) * 0.25;
 
@@ -161,12 +154,16 @@ function animateTooltip() {
   requestAnimationFrame(animateTooltip);
 }
 
-animateTooltip();
+if (tooltip) {
+  animateTooltip();
+}
 
 /* -------------------------------------------------------
    TOOLTIP SHOW / HIDE
 ------------------------------------------------------- */
 function showTooltip(text, x, y) {
+  if (!tooltip) return;
+
   tooltip.textContent = text;
   tooltip.classList.remove("hidden");
 
@@ -178,6 +175,8 @@ function showTooltip(text, x, y) {
 }
 
 function hideTooltip() {
+  if (!tooltip) return;
+
   tooltip.classList.remove("show");
   tooltipVisible = false;
 
@@ -208,6 +207,7 @@ function hideTopAlert() {
 }
 
 els.topAlertClose.onclick = hideTopAlert;
+
 /* -------------------------------------------------------
    HELPERS
 ------------------------------------------------------- */
@@ -317,6 +317,8 @@ function renderPreview() {
   els.previewEmpty.classList.add("hidden");
   els.previewCard.classList.remove("hidden");
 
+  const safeSection = String(item.section ?? "").replace(/^\(\d+\)\s*/, "");
+
   els.previewCard.innerHTML = `
     <div class="preview-head">
       <div class="preview-code">${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
@@ -330,17 +332,17 @@ function renderPreview() {
 
     <div class="preview-row">
       <span class="preview-label">Jail time</span>
-      <span class="preview-value">${escapeHtml(item.jailTime)}s</span>
+      <span class="preview-value">${Number(item.jailTime) || 0}s</span>
     </div>
 
     <div class="preview-row">
       <span class="preview-label">Impoundment</span>
-      <span class="preview-value">${escapeHtml(item.impoundment)}</span>
+      <span class="preview-value">${escapeHtml(String(item.impoundment ?? ""))}</span>
     </div>
 
     <div class="preview-row">
       <span class="preview-label">Section</span>
-      <span class="preview-value">${escapeHtml(item.section.replace(/^\(\d+\)\s*/, ""))}</span>
+      <span class="preview-value">${escapeHtml(safeSection)}</span>
     </div>
 
     <div class="preview-actions">
@@ -389,7 +391,7 @@ function renderRecentCharges() {
           ${escapeHtml(item.code)} - ${escapeHtml(item.reference)}
           <span class="code-classification"> · ${escapeHtml(item.classification)}</span>
         </div>
-        <div class="recent-subtitle">${money(item.fine)} · ${escapeHtml(item.jailTime)}s jail</div>
+        <div class="recent-subtitle">${money(item.fine)} · ${Number(item.jailTime) || 0}s jail</div>
       </div>
       <button class="remove-charge" data-index="${index}">×</button>
     </div>
@@ -420,10 +422,11 @@ function renderSummary() {
     <div class="summary-charge">${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
   `).join("");
 
-  const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine), 0);
+  const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine || 0), 0);
+
   const totalJail = state.recentCharges
     .filter(item => item.warrantsArrest)
-    .reduce((sum, item) => sum + Number(item.jailTime), 0);
+    .reduce((sum, item) => sum + Number(item.jailTime || 0), 0);
 
   els.totalFine.textContent = money(totalFine);
 
@@ -457,8 +460,9 @@ function updateReportTypeButtons() {
 
 function updateImpoundmentUI() {
   const group = document.getElementById("impoundmentGroup");
+
   const impoundPossible = state.recentCharges.some(item =>
-    String(item.impoundment).toLowerCase() !== "no"
+    String(item.impoundment || "").toLowerCase() !== "no"
   );
 
   if (state.reportType === "citation" && impoundPossible) {
@@ -519,7 +523,7 @@ function setInputValid() {
 function buildCopyText() {
   const userId = els.userId.value.trim();
 
-  const header = `${officerName} | ${officerRank} ${officerBadge}`;
+  const header = `${officerName} | ${officerRank} ${officerBadge || ""}`.trim();
   const lines = [
     header,
     `<@${userId}>`,
@@ -535,7 +539,7 @@ function buildCopyText() {
 
   for (const item of state.recentCharges) {
     const fine = money(item.fine);
-    const imp = String(item.impoundment).toLowerCase() !== "no";
+    const imp = String(item.impoundment || "").toLowerCase() !== "no";
 
     if (state.reportType === "warning") {
       lines.push(`${item.code} - ~~${fine}${imp ? " + Impoundment" : ""}~~`);
@@ -560,23 +564,33 @@ function buildCopyText() {
     }
   }
 
+  return lines.join("\n");
+}
+
   lines.push("");
   lines.push("**Total:**");
 
-  const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine), 0);
+  const totalFine = state.recentCharges.reduce(
+    (sum, item) => sum + Number(item.fine || 0),
+    0
+  );
 
   const impoundInTotal =
     state.reportType !== "warning" &&
     state.impoundmentChoice === "yes" &&
-    state.recentCharges.some(item => String(item.impoundment).toLowerCase() !== "no");
+    state.recentCharges.some(
+      item => String(item.impoundment || "").toLowerCase() !== "no"
+    );
 
   if (state.reportType === "arrest") {
     const totalJail = state.recentCharges
       .filter(item => item.warrantsArrest)
-            .reduce((sum, item) => sum + Number(item.jailTime), 0);
+      .reduce((sum, item) => sum + Number(item.jailTime || 0), 0);
 
     lines.push(
-      `${totalJail}s of Jailtime & ${money(totalFine)}${impoundInTotal ? " + Impoundment" : ""}`
+      `${totalJail}s of Jailtime & ${money(totalFine)}${
+        impoundInTotal ? " + Impoundment" : ""
+      }`
     );
   } else {
     const base = state.reportType === "warning" ? "$0.00" : money(totalFine);
@@ -609,31 +623,10 @@ async function copyInformation() {
 }
 
 /* -------------------------------------------------------
-   THEME
+   THEME (OLD SYSTEM REMOVED — NEW SYSTEM BELOW)
 ------------------------------------------------------- */
-function setTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  const icon = document.querySelector(".theme-icon");
-  if (icon) icon.textContent = theme === "dark" ? "🌙" : "☀️";
-}
-
-function initTheme() {
-  const stored = localStorage.getItem("theme");
-  const theme =
-    stored ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-
-  setTheme(theme);
-}
-
-if (els.themeToggle) {
-  els.themeToggle.onclick = () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-  };
-}
+// ❗ Removed setTheme(), initTheme(), and old onclick handler
+// They conflicted with your new smooth-transition theme system.
 
 /* -------------------------------------------------------
    KEYBOARD NAVIGATION
@@ -705,7 +698,6 @@ document.querySelectorAll(".impound-type").forEach(btn => {
 
 els.userId.addEventListener("input", () => {
   const value = els.userId.value;
-
   const valid = /^\d*$/.test(value);
 
   els.userId.classList.toggle("invalid", !valid);
@@ -713,7 +705,12 @@ els.userId.addEventListener("input", () => {
 });
 
 els.continueBtn.onclick = openModal;
-els.closeBtn.onclick = closeModal;
+
+/* closeBtn exists for the REPORT MODAL, not login */
+if (els.closeBtn) {
+  els.closeBtn.onclick = closeModal;
+}
+
 els.copyBtn.onclick = copyInformation;
 
 els.resetBtn.onclick = () => {
@@ -746,35 +743,32 @@ document.addEventListener("keydown", e => {
 });
 
 /* -------------------------------------------------------
-   THEME TOGGLE (NEW)
+   THEME TOGGLE (NEW — FINAL)
 ------------------------------------------------------- */
 
- // Enable smooth transition
-  document.documentElement.classList.add("theme-transition");
+// Enable smooth transition
+document.documentElement.classList.add("theme-transition");
 
-// Load saved theme on startup
+// Load saved theme
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
   document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
-// Theme toggle click
+// Toggle theme
 els.themeToggle.addEventListener("click", () => {
+  document.documentElement.classList.add("theme-transition");
+
   const current = document.documentElement.getAttribute("data-theme") || "dark";
   const next = current === "light" ? "dark" : "light";
 
-  // Apply new theme
   document.documentElement.setAttribute("data-theme", next);
-
-  // Save theme
   localStorage.setItem("theme", next);
 
-  // Remove transition class after animation completes
   setTimeout(() => {
     document.documentElement.classList.remove("theme-transition");
   }, 400);
 });
-
 
 /* -------------------------------------------------------
    INIT
@@ -785,7 +779,6 @@ renderRecentCharges();
 renderSummary();
 updateReportTypeButtons();
 updateImpoundmentUI();
-initTheme();
 setupKeyboardGroup(".report-type");
 setupKeyboardGroup(".impound-type");
 initLogin();
