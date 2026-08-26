@@ -11,6 +11,32 @@
 
 <body>
 
+  <!-- Login Screen -->
+  <div id="loginBackdrop" class="login-backdrop">
+    <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Login</h2>
+
+      <label class="login-label" for="loginUsername">Username:</label>
+      <input id="loginUsername" class="login-input" type="text" autocomplete="off"
+             placeholder="Enter your username">
+
+      <label class="login-label" for="loginRank">Rank:</label>
+      <input id="loginRank" class="login-input" type="text" autocomplete="off"
+             placeholder="Enter your rank">
+
+      <div class="login-dept-group" role="radiogroup" aria-label="Department">
+        <button class="dept-option" data-dept="WSP" type="button">WSP</button>
+        <button class="dept-option" data-dept="OCSO" type="button">OCSO</button>
+        <button class="dept-option" data-dept="NPS" type="button">NPS</button>
+      </div>
+
+      <div class="login-actions">
+        <button id="loginContinue" class="login-continue" type="button">Continue</button>
+        <button id="loginClose" class="login-close" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Top Alert Tooltip -->
   <div id="topAlert" class="top-alert hidden" role="alert">
     <span class="alert-text">Add at least one charge before continuing.</span>
