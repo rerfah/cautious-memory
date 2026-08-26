@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <body>
 
   <!-- Login Screen -->
-  <div id="loginBackdrop" class="login-backdrop">
+  <div id="loginBackdrop" class="login-backdrop hidden">
     <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
       <h2 id="loginTitle">Login</h2>
 
@@ -25,18 +25,18 @@
              placeholder="Enter your rank">
 
       <div class="login-dept-group" role="radiogroup" aria-label="Department">
-        <button class="dept-option" data-dept="WSP" type="button">WSP</button>
-        <button class="dept-option" data-dept="OCSO" type="button">OCSO</button>
-        <button class="dept-option" data-dept="NPS" type="button">NPS</button>
+        <button class="dept-option" data-dept="WSP" type="button" autocomplete="off">WSP</button>
+        <button class="dept-option" data-dept="OCSO" type="button" autocomplete="off">OCSO</button>
+        <button class="dept-option" data-dept="NPS" type="button" autocomplete="off">NPS</button>
       </div>
 
-      <!-- ⭐ Remember Login Toggle -->
+      <!-- Remember Login Toggle -->
       <label class="remember-row">
         <input id="rememberLogin" type="checkbox">
         Remember my login info
       </label>
 
-      <!-- ⭐ UPDATED: Continue button now full width -->
+      <!-- Continue button (full width) -->
       <div class="login-actions">
         <button id="loginContinue" class="login-continue" type="button">Continue</button>
       </div>
@@ -56,7 +56,7 @@
         <p>Find, preview and gather charges with ease!</p>
       </div>
 
-      <!-- ⭐ Corrected topbar-right layout -->
+      <!-- Corrected topbar-right layout -->
       <div class="topbar-right">
         <span class="watermark">
           © 2026 Created by @rerfah, all rights reserved. For use within Official Greenville Roleplay. Not to be distributed without explicit approval. By no means endorsed by any party.
@@ -168,7 +168,7 @@
       <!-- Modal Actions -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
-        <button id="closeBtn" class="close-btn" type="button">Close</button>
+        <button id="modalCloseBtn" class="close-btn" type="button">Close</button>
       </div>
 
       <textarea id="copyBuffer" class="copy-buffer" aria-hidden="true"></textarea>
