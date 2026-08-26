@@ -59,12 +59,11 @@ const els = {
   loginUsername: document.getElementById("loginUsername"),
   loginRank: document.getElementById("loginRank"),
   loginContinue: document.getElementById("loginContinue"),
-  loginClose: document.getElementById("loginClose"),
   deptOptions: document.querySelectorAll(".dept-option")
 };
 
 /* -------------------------------------------------------
-   LOGIN LOGIC (NEW + REMEMBER INFO)
+   LOGIN LOGIC (UPDATED)
 ------------------------------------------------------- */
 function initLogin() {
   const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
@@ -74,12 +73,9 @@ function initLogin() {
     els.loginBackdrop.classList.add("show");
   });
 
-  if (saved.username) {
-    els.loginUsername.value = saved.username;
-  }
-  if (saved.rank) {
-    els.loginRank.value = saved.rank;
-  }
+  if (saved.username) els.loginUsername.value = saved.username;
+  if (saved.rank) els.loginRank.value = saved.rank;
+
   if (saved.dept) {
     officerDept = saved.dept;
     officerBadge = deptBadges[officerDept];
@@ -89,9 +85,7 @@ function initLogin() {
   }
 
   const rememberCheckbox = document.getElementById("rememberLogin");
-  if (rememberCheckbox && saved.remember) {
-    rememberCheckbox.checked = true;
-  }
+  if (rememberCheckbox && saved.remember) rememberCheckbox.checked = true;
 
   els.deptOptions.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -102,6 +96,7 @@ function initLogin() {
     });
   });
 
+  /* ⭐ CLOSE BUTTON REMOVED — ONLY CONTINUE REMAINS */
   els.loginContinue.addEventListener("click", () => {
     officerName = els.loginUsername.value.trim();
     officerRank = els.loginRank.value.trim();
@@ -110,6 +105,13 @@ function initLogin() {
       alert("Please fill out all fields.");
       return;
     }
+
+    /* ⭐ AUTO-CAPITALISE RANK */
+    officerRank = officerRank
+      .toLowerCase()
+      .split(" ")
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
 
     const remember = rememberCheckbox ? rememberCheckbox.checked : false;
 
@@ -124,11 +126,6 @@ function initLogin() {
       localStorage.removeItem("loginInfo");
     }
 
-    els.loginBackdrop.style.display = "none";
-    els.loginBackdrop.classList.remove("show");
-  });
-
-  els.loginClose.addEventListener("click", () => {
     els.loginBackdrop.style.display = "none";
     els.loginBackdrop.classList.remove("show");
   });
@@ -181,7 +178,7 @@ function hideTooltip() {
 }
 
 /* -------------------------------------------------------
-   TOP ALERT TOOLTIP (NEW)
+   TOP ALERT TOOLTIP
 ------------------------------------------------------- */
 function showTopAlert() {
   els.topAlert.classList.remove("hidden");
@@ -202,7 +199,6 @@ function hideTopAlert() {
 }
 
 els.topAlertClose.onclick = hideTopAlert;
-
 /* -------------------------------------------------------
    HELPERS
 ------------------------------------------------------- */
@@ -568,7 +564,7 @@ function buildCopyText() {
   if (state.reportType === "arrest") {
     const totalJail = state.recentCharges
       .filter(item => item.warrantsArrest)
-      .reduce((sum, item) => sum + Number(item.jailTime), 0);
+            .reduce((sum, item) => sum + Number(item.jailTime), 0);
 
     lines.push(
       `${totalJail}s of Jailtime & ${money(totalFine)}${impoundInTotal ? " + Impoundment" : ""}`
