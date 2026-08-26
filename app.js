@@ -64,10 +64,34 @@ const els = {
 };
 
 /* -------------------------------------------------------
-   LOGIN LOGIC (NEW)
+   LOGIN LOGIC (NEW + REMEMBER INFO)
 ------------------------------------------------------- */
 function initLogin() {
+  const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
+
   els.loginBackdrop.style.display = "grid";
+  requestAnimationFrame(() => {
+    els.loginBackdrop.classList.add("show");
+  });
+
+  if (saved.username) {
+    els.loginUsername.value = saved.username;
+  }
+  if (saved.rank) {
+    els.loginRank.value = saved.rank;
+  }
+  if (saved.dept) {
+    officerDept = saved.dept;
+    officerBadge = deptBadges[officerDept];
+    els.deptOptions.forEach(btn => {
+      btn.classList.toggle("selected", btn.dataset.dept === saved.dept);
+    });
+  }
+
+  const rememberCheckbox = document.getElementById("rememberLogin");
+  if (rememberCheckbox && saved.remember) {
+    rememberCheckbox.checked = true;
+  }
 
   els.deptOptions.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -87,11 +111,26 @@ function initLogin() {
       return;
     }
 
+    const remember = rememberCheckbox ? rememberCheckbox.checked : false;
+
+    if (remember) {
+      localStorage.setItem("loginInfo", JSON.stringify({
+        username: officerName,
+        rank: officerRank,
+        dept: officerDept,
+        remember: true
+      }));
+    } else {
+      localStorage.removeItem("loginInfo");
+    }
+
     els.loginBackdrop.style.display = "none";
+    els.loginBackdrop.classList.remove("show");
   });
 
   els.loginClose.addEventListener("click", () => {
     els.loginBackdrop.style.display = "none";
+    els.loginBackdrop.classList.remove("show");
   });
 }
 
@@ -521,7 +560,6 @@ function buildCopyText() {
 
   const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine), 0);
 
-  /* ⭐ NEW: Add impoundment to total if applicable */
   const impoundInTotal =
     state.reportType !== "warning" &&
     state.impoundmentChoice === "yes" &&
