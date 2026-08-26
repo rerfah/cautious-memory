@@ -521,14 +521,23 @@ function buildCopyText() {
 
   const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine), 0);
 
+  /* ⭐ NEW: Add impoundment to total if applicable */
+  const impoundInTotal =
+    state.reportType !== "warning" &&
+    state.impoundmentChoice === "yes" &&
+    state.recentCharges.some(item => String(item.impoundment).toLowerCase() !== "no");
+
   if (state.reportType === "arrest") {
     const totalJail = state.recentCharges
       .filter(item => item.warrantsArrest)
       .reduce((sum, item) => sum + Number(item.jailTime), 0);
 
-    lines.push(`${totalJail}s of Jailtime & ${money(totalFine)}`);
+    lines.push(
+      `${totalJail}s of Jailtime & ${money(totalFine)}${impoundInTotal ? " + Impoundment" : ""}`
+    );
   } else {
-    lines.push(state.reportType === "warning" ? "$0.00" : money(totalFine));
+    const base = state.reportType === "warning" ? "$0.00" : money(totalFine);
+    lines.push(`${base}${impoundInTotal ? " + Impoundment" : ""}`);
   }
 
   return lines.join("\n");
@@ -567,7 +576,10 @@ function setTheme(theme) {
 
 function initTheme() {
   const stored = localStorage.getItem("theme");
-  const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const theme =
+    stored ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
   setTheme(theme);
 }
 
