@@ -9,6 +9,20 @@ const state = {
 };
 
 /* -------------------------------------------------------
+   LOGIN STATE (NEW)
+------------------------------------------------------- */
+let officerName = "";
+let officerRank = "";
+let officerDept = "";
+let officerBadge = "";
+
+const deptBadges = {
+  "OCSO": "<:ocso:1531706128428306452>",
+  "WSP": "<:wsp:1531706012531425401>",
+  "NPS": "<:nps:1531706208002769067>"
+};
+
+/* -------------------------------------------------------
    ELEMENTS
 ------------------------------------------------------- */
 const els = {
@@ -38,8 +52,48 @@ const els = {
 
   /* NEW: Top alert tooltip */
   topAlert: document.getElementById("topAlert"),
-  topAlertClose: document.querySelector(".alert-close")
+  topAlertClose: document.querySelector(".alert-close"),
+
+  /* NEW: Login elements */
+  loginBackdrop: document.getElementById("loginBackdrop"),
+  loginUsername: document.getElementById("loginUsername"),
+  loginRank: document.getElementById("loginRank"),
+  loginContinue: document.getElementById("loginContinue"),
+  loginClose: document.getElementById("loginClose"),
+  deptOptions: document.querySelectorAll(".dept-option")
 };
+
+/* -------------------------------------------------------
+   LOGIN LOGIC (NEW)
+------------------------------------------------------- */
+function initLogin() {
+  els.loginBackdrop.style.display = "grid";
+
+  els.deptOptions.forEach(btn => {
+    btn.addEventListener("click", () => {
+      els.deptOptions.forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      officerDept = btn.dataset.dept;
+      officerBadge = deptBadges[officerDept];
+    });
+  });
+
+  els.loginContinue.addEventListener("click", () => {
+    officerName = els.loginUsername.value.trim();
+    officerRank = els.loginRank.value.trim();
+
+    if (!officerName || !officerRank || !officerDept) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    els.loginBackdrop.style.display = "none";
+  });
+
+  els.loginClose.addEventListener("click", () => {
+    els.loginBackdrop.style.display = "none";
+  });
+}
 
 /* -------------------------------------------------------
    MAGNETIC TOOLTIP FOLLOW SYSTEM
@@ -379,7 +433,7 @@ function updateImpoundmentUI() {
 ------------------------------------------------------- */
 function openModal() {
   if (!state.recentCharges.length) {
-    showTopAlert();   // NEW: replaces alert()
+    showTopAlert();
     return;
   }
 
@@ -416,12 +470,14 @@ function setInputValid() {
 }
 
 /* -------------------------------------------------------
-   COPY REPORT
+   COPY REPORT (UPDATED)
 ------------------------------------------------------- */
 function buildCopyText() {
   const userId = els.userId.value.trim();
+
+  const header = `${officerName} | ${officerRank} ${officerBadge}`;
   const lines = [
-    "rerfah | Sergeant <:ocso:1531706128428306452>",
+    header,
     `<@${userId}>`,
     ""
   ];
@@ -643,3 +699,4 @@ updateImpoundmentUI();
 initTheme();
 setupKeyboardGroup(".report-type");
 setupKeyboardGroup(".impound-type");
+initLogin();
