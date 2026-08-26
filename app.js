@@ -63,6 +63,15 @@ const els = {
 };
 
 /* -------------------------------------------------------
+   LOAD SAVED THEME ON STARTUP
+------------------------------------------------------- */
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
+
+
+/* -------------------------------------------------------
    LOGIN LOGIC (UPDATED)
 ------------------------------------------------------- */
 function initLogin() {
@@ -740,6 +749,9 @@ document.addEventListener("keydown", e => {
    THEME TOGGLE (NEW)
 ------------------------------------------------------- */
 
+ // Enable smooth transition
+  document.documentElement.classList.add("theme-transition");
+
 // Load saved theme on startup
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
@@ -750,9 +762,6 @@ if (savedTheme) {
 els.themeToggle.addEventListener("click", () => {
   const current = document.documentElement.getAttribute("data-theme") || "dark";
   const next = current === "light" ? "dark" : "light";
-
-  // Enable smooth transition
-  document.documentElement.classList.add("theme-transition");
 
   // Apply new theme
   document.documentElement.setAttribute("data-theme", next);
