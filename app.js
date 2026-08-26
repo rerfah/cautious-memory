@@ -737,6 +737,37 @@ document.addEventListener("keydown", e => {
 });
 
 /* -------------------------------------------------------
+   THEME TOGGLE (NEW)
+------------------------------------------------------- */
+
+// Load saved theme on startup
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
+
+// Theme toggle click
+els.themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const next = current === "light" ? "dark" : "light";
+
+  // Enable smooth transition
+  document.documentElement.classList.add("theme-transition");
+
+  // Apply new theme
+  document.documentElement.setAttribute("data-theme", next);
+
+  // Save theme
+  localStorage.setItem("theme", next);
+
+  // Remove transition class after animation completes
+  setTimeout(() => {
+    document.documentElement.classList.remove("theme-transition");
+  }, 400);
+});
+
+
+/* -------------------------------------------------------
    INIT
 ------------------------------------------------------- */
 renderCodes();
