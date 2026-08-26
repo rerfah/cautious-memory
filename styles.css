@@ -783,8 +783,6 @@ html[data-theme="light"] .tooltip {
   .preview-head {
     align-items: flex-start;
   }
-
-  /* Note: topbar-right stays one-line due to nowrap settings above */
 }
 
 /* ⭐ TOP ALERT TOOLTIP (Animated) */
@@ -850,6 +848,16 @@ html[data-theme="light"] .top-alert {
   place-items: center;
   backdrop-filter: blur(14px);
   background: rgba(0, 0, 0, 0.55);
+
+  /* ⭐ Fade-in animation */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.login-backdrop.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* LOGIN MODAL */
@@ -860,6 +868,13 @@ html[data-theme="light"] .top-alert {
   border-radius: 16px;
   padding: 26px 24px 24px;
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+
+  /* Smooth theme transition */
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    color 0.35s ease;
 }
 
 html[data-theme="light"] .login-modal {
@@ -935,6 +950,22 @@ html[data-theme="light"] .dept-option {
 html[data-theme="light"] .dept-option.selected {
   background: #2563eb;
   color: #ffffff;
+}
+
+/* ⭐ REMEMBER LOGIN ROW */
+.remember-row {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remember-row input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
 /* LOGIN ACTION BUTTONS */
