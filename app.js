@@ -17,9 +17,9 @@ let officerDept = "";
 let officerBadge = "";
 
 const deptBadges = {
-  "OCSO": "<:ocso:1531706128428306452>",
-  "WSP": "<:wsp:1531706012531425401>",
-  "NPS": "<:nps:1531706208002769067>"
+  OCSO: "<:ocso:1531706128428306452>",
+  WSP: "<:wsp:1531706012531425401>",
+  NPS: "<:nps:1531706208002769067>"
 };
 
 /* -------------------------------------------------------
@@ -43,7 +43,7 @@ const els = {
   userId: document.getElementById("userId"),
   numberError: document.getElementById("numberError"),
   copyBtn: document.getElementById("copyBtn"),
-  closeBtn: document.getElementById("closeBtn"),
+  modalCloseBtn: document.getElementById("modalCloseBtn"),
   copyBuffer: document.getElementById("copyBuffer"),
   confirmBackdrop: document.getElementById("confirmBackdrop"),
   confirmClearBtn: document.getElementById("confirmClearBtn"),
@@ -68,7 +68,8 @@ const els = {
 function initLogin() {
   const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
 
-  els.loginBackdrop.style.display = "grid";
+  // Show login backdrop (remove hidden, let CSS handle layout)
+  els.loginBackdrop.classList.remove("hidden");
   requestAnimationFrame(() => {
     els.loginBackdrop.classList.add("show");
   });
@@ -96,7 +97,6 @@ function initLogin() {
     });
   });
 
-  /* ⭐ CLOSE BUTTON REMOVED — ONLY CONTINUE REMAINS */
   els.loginContinue.addEventListener("click", () => {
     officerName = els.loginUsername.value.trim();
     officerRank = els.loginRank.value.trim();
@@ -106,7 +106,6 @@ function initLogin() {
       return;
     }
 
-    /* ⭐ AUTO-CAPITALISE RANK */
     officerRank = officerRank
       .toLowerCase()
       .split(" ")
@@ -116,18 +115,23 @@ function initLogin() {
     const remember = rememberCheckbox ? rememberCheckbox.checked : false;
 
     if (remember) {
-      localStorage.setItem("loginInfo", JSON.stringify({
-        username: officerName,
-        rank: officerRank,
-        dept: officerDept,
-        remember: true
-      }));
+      localStorage.setItem(
+        "loginInfo",
+        JSON.stringify({
+          username: officerName,
+          rank: officerRank,
+          dept: officerDept,
+          remember: true
+        })
+      );
     } else {
       localStorage.removeItem("loginInfo");
     }
 
-    els.loginBackdrop.style.display = "none";
     els.loginBackdrop.classList.remove("show");
+    setTimeout(() => {
+      els.loginBackdrop.classList.add("hidden");
+    }, 200);
   });
 }
 
@@ -206,7 +210,9 @@ function hideTopAlert() {
   }, 400);
 }
 
-els.topAlertClose.onclick = hideTopAlert;
+if (els.topAlertClose) {
+  els.topAlertClose.onclick = hideTopAlert;
+}
 
 /* -------------------------------------------------------
    HELPERS
@@ -235,29 +241,40 @@ function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
 
   const filtered = PENAL_CODES.filter(item =>
-    [item.code, item.reference, item.classification, item.section]
-      .some(v => String(v ?? "").toLowerCase().includes(query))
+    [item.code, item.reference, item.classification, item.section].some(v =>
+      String(v ?? "").toLowerCase().includes(query)
+    )
   );
 
   els.codeCount.textContent = `${filtered.length} / ${PENAL_CODES.length}`;
 
   if (!filtered.length) {
-    els.codeList.innerHTML = `<div class="empty-state">No penal codes found.</div>`;
+    els.codeList.innerHTML =
+      '<div class="empty-state">No penal codes found.</div>';
     return;
   }
 
-  els.codeList.innerHTML = filtered.map(item => `
-    <button class="code-item" type="button" data-code="${escapeHtml(item.code)}">
+  els.codeList.innerHTML = filtered
+    .map(
+      item => `
+    <button class="code-item" type="button" data-code="${escapeHtml(
+      item.code
+    )}">
       <span class="code-reference">
         <span class="code-number">${escapeHtml(item.code)}</span>
         ${escapeHtml(item.reference)}
       </span>
-      <span class="code-classification">${escapeHtml(item.classification)}</span>
+      <span class="code-classification">${escapeHtml(
+        item.classification
+      )}</span>
     </button>
-  `).join("");
+  `
+    )
+    .join("");
 
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
+    if (!item) return;
 
     let hoverTimer = null;
 
@@ -321,8 +338,12 @@ function renderPreview() {
 
   els.previewCard.innerHTML = `
     <div class="preview-head">
-      <div class="preview-code">${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
-      <div class="preview-classification">${escapeHtml(item.classification)}</div>
+      <div class="preview-code">${escapeHtml(item.code)} - ${escapeHtml(
+    item.reference
+  )}</div>
+      <div class="preview-classification">${escapeHtml(
+        item.classification
+      )}</div>
     </div>
 
     <div class="preview-row">
@@ -337,7 +358,9 @@ function renderPreview() {
 
     <div class="preview-row">
       <span class="preview-label">Impoundment</span>
-      <span class="preview-value">${escapeHtml(String(item.impoundment ?? ""))}</span>
+      <span class="preview-value">${escapeHtml(
+        String(item.impoundment ?? "")
+      )}</span>
     </div>
 
     <div class="preview-row">
@@ -380,22 +403,31 @@ function removeCharge(index) {
 
 function renderRecentCharges() {
   if (!state.recentCharges.length) {
-    els.recentCharges.innerHTML = `<div class="empty-state">No charges selected.</div>`;
+    els.recentCharges.innerHTML =
+      '<div class="empty-state">No charges selected.</div>';
     return;
   }
 
-  els.recentCharges.innerHTML = state.recentCharges.map((item, index) => `
+  els.recentCharges.innerHTML = state.recentCharges
+    .map(
+      (item, index) => `
     <div class="recent-item">
       <div class="recent-main">
         <div class="recent-title">
           ${escapeHtml(item.code)} - ${escapeHtml(item.reference)}
-          <span class="code-classification"> · ${escapeHtml(item.classification)}</span>
+          <span class="code-classification"> · ${escapeHtml(
+            item.classification
+          )}</span>
         </div>
-        <div class="recent-subtitle">${money(item.fine)} · ${Number(item.jailTime) || 0}s jail</div>
+        <div class="recent-subtitle">${money(item.fine)} · ${
+        Number(item.jailTime) || 0
+      }s jail</div>
       </div>
       <button class="remove-charge" data-index="${index}">×</button>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 
   els.recentCharges.querySelectorAll(".remove-charge").forEach(btn => {
     btn.onclick = () => removeCharge(Number(btn.dataset.index));
@@ -407,7 +439,8 @@ function renderRecentCharges() {
 ------------------------------------------------------- */
 function renderSummary() {
   if (!state.recentCharges.length) {
-    els.summaryCharges.innerHTML = `<div class="empty-state">No charges selected.</div>`;
+    els.summaryCharges.innerHTML =
+      '<div class="empty-state">No charges selected.</div>';
     els.totalFine.textContent = "$0.00";
     els.sentencedRow.classList.add("hidden");
     return;
@@ -418,11 +451,19 @@ function renderSummary() {
     if (!unique.has(item.code)) unique.set(item.code, item);
   });
 
-  els.summaryCharges.innerHTML = [...unique.values()].map(item => `
-    <div class="summary-charge">${escapeHtml(item.code)} - ${escapeHtml(item.reference)}</div>
-  `).join("");
+  els.summaryCharges.innerHTML = [...unique.values()]
+    .map(
+      item =>
+        `<div class="summary-charge">${escapeHtml(item.code)} - ${escapeHtml(
+          item.reference
+        )}</div>`
+    )
+    .join("");
 
-  const totalFine = state.recentCharges.reduce((sum, item) => sum + Number(item.fine || 0), 0);
+  const totalFine = state.recentCharges.reduce(
+    (sum, item) => sum + Number(item.fine || 0),
+    0
+  );
 
   const totalJail = state.recentCharges
     .filter(item => item.warrantsArrest)
@@ -461,8 +502,8 @@ function updateReportTypeButtons() {
 function updateImpoundmentUI() {
   const group = document.getElementById("impoundmentGroup");
 
-  const impoundPossible = state.recentCharges.some(item =>
-    String(item.impoundment || "").toLowerCase() !== "no"
+  const impoundPossible = state.recentCharges.some(
+    item => String(item.impoundment || "").toLowerCase() !== "no"
   );
 
   if (state.reportType === "citation" && impoundPossible) {
@@ -472,7 +513,10 @@ function updateImpoundmentUI() {
   }
 
   document.querySelectorAll(".impound-type").forEach(btn => {
-    btn.classList.toggle("selected", btn.dataset.impound === state.impoundmentChoice);
+    btn.classList.toggle(
+      "selected",
+      btn.dataset.impound === state.impoundmentChoice
+    );
   });
 }
 
@@ -524,22 +568,21 @@ function buildCopyText() {
   const userId = els.userId.value.trim();
 
   const header = `${officerName} | ${officerRank} ${officerBadge || ""}`.trim();
-  const lines = [
-    header,
-    `<@${userId}>`,
-    ""
-  ];
+  const lines = [header, `<@${userId}>`, ""];
 
   const label =
-    state.reportType === "warning" ? "Written Warning" :
-    state.reportType === "citation" ? "Citation" :
-    "Arrest report";
+    state.reportType === "warning"
+      ? "Written Warning"
+      : state.reportType === "citation"
+      ? "Citation"
+      : "Arrest report";
 
   lines.push(`**${label}:**`);
 
   for (const item of state.recentCharges) {
     const fine = money(item.fine);
-    const imp = String(item.impoundment || "").toLowerCase() !== "no";
+    const imp =
+      String(item.impoundment || "").toLowerCase() !== "no";
 
     if (state.reportType === "warning") {
       lines.push(`${item.code} - ~~${fine}${imp ? " + Impoundment" : ""}~~`);
@@ -555,7 +598,9 @@ function buildCopyText() {
       if (imp) {
         lines.push(
           `${item.code} - ${fine} + ${
-            state.impoundmentChoice === "yes" ? "Impoundment" : "~~Impoundment~~"
+            state.impoundmentChoice === "yes"
+              ? "Impoundment"
+              : "~~Impoundment~~"
           }`
         );
       } else {
@@ -563,9 +608,6 @@ function buildCopyText() {
       }
     }
   }
-
-  return lines.join("\n");
-}
 
   lines.push("");
   lines.push("**Total:**");
@@ -623,12 +665,6 @@ async function copyInformation() {
 }
 
 /* -------------------------------------------------------
-   THEME (OLD SYSTEM REMOVED — NEW SYSTEM BELOW)
-------------------------------------------------------- */
-// ❗ Removed setTheme(), initTheme(), and old onclick handler
-// They conflicted with your new smooth-transition theme system.
-
-/* -------------------------------------------------------
    KEYBOARD NAVIGATION
 ------------------------------------------------------- */
 function setupKeyboardGroup(selector) {
@@ -647,7 +683,8 @@ function setupKeyboardGroup(selector) {
 
       if (key === "ArrowLeft" || key === "ArrowUp") {
         e.preventDefault();
-        const prev = buttons[(index - 1 + buttons.length) % buttons.length];
+        const prev =
+          buttons[(index - 1 + buttons.length) % buttons.length];
         prev.focus();
         prev.click();
       }
@@ -706,9 +743,8 @@ els.userId.addEventListener("input", () => {
 
 els.continueBtn.onclick = openModal;
 
-/* closeBtn exists for the REPORT MODAL, not login */
-if (els.closeBtn) {
-  els.closeBtn.onclick = closeModal;
+if (els.modalCloseBtn) {
+  els.modalCloseBtn.onclick = closeModal;
 }
 
 els.copyBtn.onclick = copyInformation;
@@ -745,30 +781,29 @@ document.addEventListener("keydown", e => {
 /* -------------------------------------------------------
    THEME TOGGLE (NEW — FINAL)
 ------------------------------------------------------- */
-
-// Enable smooth transition
 document.documentElement.classList.add("theme-transition");
 
-// Load saved theme
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
   document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
-// Toggle theme
-els.themeToggle.addEventListener("click", () => {
-  document.documentElement.classList.add("theme-transition");
+if (els.themeToggle) {
+  els.themeToggle.addEventListener("click", () => {
+    document.documentElement.classList.add("theme-transition");
 
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
-  const next = current === "light" ? "dark" : "light";
+    const current =
+      document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "light" ? "dark" : "light";
 
-  document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
 
-  setTimeout(() => {
-    document.documentElement.classList.remove("theme-transition");
-  }, 400);
-});
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transition");
+    }, 400);
+  });
+}
 
 /* -------------------------------------------------------
    INIT
