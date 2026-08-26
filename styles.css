@@ -120,8 +120,6 @@ button {
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-/* ⭐ Tiny shield icon */
-
 html[data-theme="light"] .watermark {
   color: #6b7280;
   opacity: 0.85;
@@ -841,4 +839,157 @@ html[data-theme="light"] .top-alert {
 
 .alert-close:hover {
   color: #ff6b6b;
+}
+
+/* LOGIN SCREEN BACKDROP */
+.login-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* LOGIN MODAL */
+.login-modal {
+  width: min(420px, 90%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 24px 24px;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+}
+
+html[data-theme="light"] .login-modal {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+}
+
+.login-modal h2 {
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+/* LOGIN LABELS + INPUTS */
+.login-label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.login-input {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+}
+
+html[data-theme="light"] .login-input {
+  background: #f9fafb;
+}
+
+/* DEPARTMENT OPTIONS */
+.login-dept-group {
+  margin: 18px 0 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.dept-option {
+  padding: 11px 10px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.dept-option:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.dept-option.selected {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+}
+
+html[data-theme="light"] .dept-option {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .dept-option.selected {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* LOGIN ACTION BUTTONS */
+.login-actions {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.login-continue,
+.login-close {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.login-continue {
+  background: var(--green);
+  color: #04130a;
+}
+
+.login-close {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+html[data-theme="light"] .login-close {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.login-continue:hover,
+.login-close:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* SMALL SCREEN LOGIN LAYOUT */
+@media (max-width: 480px) {
+  .login-modal {
+    width: calc(100% - 40px);
+    padding: 22px 18px 18px;
+  }
+
+  .login-dept-group {
+    grid-template-columns: 1fr;
+  }
+
+  .login-actions {
+    grid-template-columns: 1fr 1fr;
+  }
 }
