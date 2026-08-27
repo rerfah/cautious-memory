@@ -1034,14 +1034,9 @@ body::before {
   will-change: transform;
 }
 
+/* Make topbar text, tips, and watermark theme-aware */
 .topbar-main p,
 .tip,
 .watermark {
-  color: var(--muted);
-}
-
-html[data-theme="light"] .topbar-main p,
-html[data-theme="light"] .tip,
-html[data-theme="light"] .watermark {
-  color: #374151; /* softer dark grey */
+  color: var(--text);
 }
