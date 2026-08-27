@@ -541,6 +541,24 @@ function buildCopyText() {
   const header = `${officerName} | ${officerRank} ${officerBadge || ""}`.trim();
   const lines = [header, `<@${userId}>`, ""];
 
+  // ⭐ STEP 6 — Other LEOs involved
+  if (state.otherLeoInvolved === "yes") {
+    lines.push("**Other LEOs involved:**");
+
+    const names = state.otherLeoNames.split(",").map(v => v.trim());
+    const ranks = state.otherLeoRanks.split(",").map(v => v.trim());
+    const depts = state.otherLeoDepts.split(",").map(v => v.trim());
+
+    for (let i = 0; i < names.length; i++) {
+      const n = names[i] || "";
+      const r = ranks[i] || "";
+      const d = depts[i] || "";
+      lines.push(`${n} | ${r} (${d})`);
+    }
+
+    lines.push(""); // spacing before the report label
+  }
+
   const label =
     state.reportType === "warning"
       ? "Written Warning"
@@ -620,6 +638,18 @@ async function copyInformation() {
     return;
   }
 
+  // ⭐ STEP 5 — Capture extra LEO fields
+  state.otherLeoNames = document.getElementById("otherLeoNames").value.trim();
+  state.otherLeoRanks = document.getElementById("otherLeoRanks").value.trim();
+  state.otherLeoDepts = document.getElementById("otherLeoDepts").value.trim();
+
+  // ⭐ STEP 5 — Auto-capitalise ranks (title case)
+  state.otherLeoRanks = state.otherLeoRanks
+    .split(",")
+    .map(r => r.trim().toLowerCase().replace(/\b\w/g, c => c.toUpperCase()))
+    .join(", ");
+
+  // Build final text AFTER capturing extra LEO info
   const text = buildCopyText();
 
   try {
@@ -700,6 +730,49 @@ document.querySelectorAll(".impound-type").forEach(btn => {
   btn.onclick = () => {
     state.impoundmentChoice = btn.dataset.impound;
     updateImpoundmentUI();
+  };
+});
+
+// REPORT TYPE BUTTONS
+document.querySelectorAll(".report-type").forEach(btn => {
+  btn.onclick = () => {
+    state.reportType = btn.dataset.report;
+
+    document.querySelectorAll(".report-type").forEach(b =>
+      b.classList.toggle("selected", b === btn)
+    );
+
+    // Show impoundment only for arrest reports
+    document.getElementById("impoundmentGroup")
+      .classList.toggle("hidden", state.reportType !== "arrest");
+  };
+});
+
+// IMPOUNDMENT BUTTONS
+document.querySelectorAll(".impound-type").forEach(btn => {
+  btn.onclick = () => {
+    state.impoundmentChoice = btn.dataset.impound;
+
+    document.querySelectorAll(".impound-type").forEach(b =>
+      b.classList.toggle("selected", b === btn)
+    );
+  };
+});
+
+
+// ⭐ STEP 4 — OTHER LEO INVOLVEMENT BUTTONS
+document.querySelectorAll(".other-leo-type").forEach(btn => {
+  btn.onclick = () => {
+    state.otherLeoInvolved = btn.dataset.otherleo;
+
+    // Toggle selected class
+    document.querySelectorAll(".other-leo-type").forEach(b =>
+      b.classList.toggle("selected", b === btn)
+    );
+
+    // Show/hide extra fields
+    const fields = document.getElementById("otherLeoFields");
+    fields.classList.toggle("hidden", state.otherLeoInvolved === "no");
   };
 });
 
