@@ -11,6 +11,13 @@ const state = {
   otherLeoDepts: ""
 };
 
+// ⭐ STEP 1 — Department → Emoji mapping
+const deptEmoji = {
+  "WSP": "<:wsp:1531706012531425401>",
+  "OCSO": "<:ocso:1531706128428306452>",
+  "NPS": "<:nps:1531706208002769067>"
+};
+
 let officerName = "";
 let officerRank = "";
 let officerDept = "";
