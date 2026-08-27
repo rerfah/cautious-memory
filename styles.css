@@ -36,7 +36,8 @@ html[data-theme="light"] {
 .theme-transition body,
 .theme-transition .panel,
 .theme-transition .modal,
-.theme-transition .login-modal {
+.theme-transition .login-modal,
+.theme-transition .topbar-main p {
   transition:
     background-color 0.35s ease,
     color 0.35s ease,
