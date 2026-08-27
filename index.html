@@ -19,6 +19,9 @@
       <label class="login-label" for="loginUsername">Username:</label>
       <input id="loginUsername" class="login-input" type="text" autocomplete="off"
              placeholder="Enter your username">
+      <p id="loginUsernameError" class="number-error hidden">
+        ⓘ Invalid input: Usernames can only be between 3 and 20 characters.
+      </p>
 
       <label class="login-label" for="loginRank">Rank:</label>
       <input id="loginRank" class="login-input" type="text" autocomplete="off"
@@ -43,7 +46,7 @@
     </div>
   </div>
 
-  <!-- Top Alert Tooltip -->
+    <!-- Top Alert Tooltip -->
   <div id="topAlert" class="top-alert hidden" role="alert">
     <span class="alert-text">Add at least one charge before continuing.</span>
     <button class="alert-close" aria-label="Close alert">×</button>
@@ -56,7 +59,6 @@
         <p>Find, preview and gather charges with ease!</p>
       </div>
 
-      <!-- Corrected topbar-right layout -->
       <div class="topbar-right">
         <span class="watermark">
           © 2026 Created by @rerfah, all rights reserved. For use within Official Greenville Roleplay. Not to be distributed without explicit approval. By no means endorsed by any party.
@@ -69,7 +71,6 @@
     </section>
 
     <section class="workspace">
-      <!-- Left Column: Penal Codes -->
       <div class="panel codes-panel" tabindex="0">
         <div class="panel-heading">
           <h2>Penal codes</h2>
@@ -82,10 +83,8 @@
         <div id="codeList" class="code-list" aria-label="Penal codes"></div>
       </div>
 
-      <!-- Right Column -->
       <div class="right-column">
 
-        <!-- Preview Panel -->
         <section class="panel preview-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Preview</h2>
@@ -94,7 +93,6 @@
           <article id="previewCard" class="preview-card hidden" aria-live="polite"></article>
         </section>
 
-        <!-- Recent Charges -->
         <section class="panel recent-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Recent charges</h2>
@@ -104,7 +102,6 @@
           </div>
         </section>
 
-        <!-- Summary -->
         <section class="panel summary-panel" tabindex="0">
           <div class="panel-heading">
             <h2>Summary</h2>
@@ -125,7 +122,6 @@
           </div>
         </section>
 
-        <!-- Actions -->
         <section class="actions">
           <button id="continueBtn" class="continue-btn" type="button">Continue</button>
           <button id="resetBtn" class="reset-btn" type="button">Reset</button>
@@ -136,19 +132,17 @@
     </section>
   </main>
 
-  <!-- Main Modal -->
+    <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal" role="document">
       <h2 id="modalTitle">Continue</h2>
 
-      <!-- Report Type Selection -->
       <div class="report-types" role="radiogroup" aria-label="Report type">
         <button class="report-type" data-report="warning" type="button">Written Warning</button>
         <button class="report-type" data-report="citation" type="button">Citation</button>
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
 
-      <!-- Impoundment Selection -->
       <div id="impoundmentGroup" class="impoundment-group hidden">
         <p class="impoundment-label">Is their vehicle getting impounded?</p>
 
@@ -158,14 +152,12 @@
         </div>
       </div>
 
-      <!-- User ID -->
       <label class="user-id-label" for="userId">User ID</label>
       <input id="userId" class="user-id-input" type="text" inputmode="numeric"
              pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
 
       <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
 
-            <!-- Other LEO Involvement -->
       <div class="other-leo-group">
         <h3 class="other-leo-title">Were any other LEO involved?</h3>
 
@@ -179,8 +171,11 @@
           <small class="other-leo-tip">Use commas to separate usernames if more than one other person was/is involved.</small>
           <input id="otherLeoNames" class="other-leo-input" type="text" autocomplete="off"
                  placeholder="Username1, Username2">
+          <p id="otherLeoNameError" class="number-error hidden">
+            ⓘ Invalid input: Usernames can only be between 3 and 20 characters.
+          </p>
 
-          <label class="other-leo-label">What is their current rank for the department they are online as?.</label>
+          <label class="other-leo-label">What is their current rank for the department they are online as?</label>
           <small class="other-leo-tip">Use commas to separate ranks if more than one other person was/is involved.</small>
           <input id="otherLeoRanks" class="other-leo-input" type="text" autocomplete="off"
                  placeholder="Sergeant, Corporal">
@@ -189,10 +184,12 @@
           <small class="other-leo-tip">Use commas to separate the departments if more than one other person was/is involved.</small>
           <input id="otherLeoDepts" class="other-leo-input" type="text" autocomplete="off"
                  placeholder="OCSO, WSP">
+          <p id="otherLeoDeptError" class="number-error hidden">
+            ⓘ Invalid input: Department does not exist.
+          </p>
         </div>
       </div>
 
-      <!-- Modal Actions -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
         <button id="modalCloseBtn" class="close-btn" type="button">Close</button>
@@ -215,7 +212,7 @@
     </div>
   </div>
 
-  <!-- Tooltip UI -->
+    <!-- Tooltip UI -->
   <div id="tooltip" class="tooltip hidden" role="tooltip"></div>
 
   <script src="data/penalCodes.js"></script>
