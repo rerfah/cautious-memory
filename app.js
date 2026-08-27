@@ -1,6 +1,3 @@
-/* -------------------------------------------------------
-   STATE
-------------------------------------------------------- */
 const state = {
   preview: null,
   recentCharges: [],
@@ -8,9 +5,6 @@ const state = {
   impoundmentChoice: "no"
 };
 
-/* -------------------------------------------------------
-   LOGIN STATE (NEW)
-------------------------------------------------------- */
 let officerName = "";
 let officerRank = "";
 let officerDept = "";
@@ -22,9 +16,6 @@ const deptBadges = {
   NPS: "<:nps:1531706208002769067>"
 };
 
-/* -------------------------------------------------------
-   ELEMENTS
-------------------------------------------------------- */
 const els = {
   codeList: document.getElementById("codeList"),
   codeCount: document.getElementById("codeCount"),
@@ -49,12 +40,8 @@ const els = {
   confirmClearBtn: document.getElementById("confirmClearBtn"),
   cancelClearBtn: document.getElementById("cancelClearBtn"),
   themeToggle: document.getElementById("themeToggle"),
-
-  /* NEW: Top alert tooltip */
   topAlert: document.getElementById("topAlert"),
   topAlertClose: document.querySelector(".alert-close"),
-
-  /* NEW: Login elements */
   loginBackdrop: document.getElementById("loginBackdrop"),
   loginUsername: document.getElementById("loginUsername"),
   loginRank: document.getElementById("loginRank"),
@@ -62,10 +49,9 @@ const els = {
   deptOptions: document.querySelectorAll(".dept-option")
 };
 
-/* -------------------------------------------------------
-   LOGIN LOGIC (UPDATED)
-------------------------------------------------------- */
 function initLogin() {
+  if (!els.loginBackdrop) return;
+
   const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
 
   els.loginBackdrop.classList.remove("hidden");
@@ -100,10 +86,7 @@ function initLogin() {
     officerName = els.loginUsername.value.trim();
     officerRank = els.loginRank.value.trim();
 
-    if (!officerName || !officerRank || !officerDept) {
-      alert("Please fill out all fields.");
-      return;
-    }
+    if (!officerName || !officerRank || !officerDept) return;
 
     officerRank = officerRank
       .toLowerCase()
@@ -134,12 +117,8 @@ function initLogin() {
   });
 }
 
-/* -------------------------------------------------------
-   MAGNETIC TOOLTIP FOLLOW SYSTEM
-------------------------------------------------------- */
 const tooltip = document.getElementById("tooltip");
 let tooltipVisible = false;
-
 let targetX = 0;
 let targetY = 0;
 let currentX = 0;
@@ -159,9 +138,6 @@ function animateTooltip() {
 
 if (tooltip) animateTooltip();
 
-/* -------------------------------------------------------
-   TOOLTIP SHOW / HIDE
-------------------------------------------------------- */
 function showTooltip(text, x, y) {
   if (!tooltip) return;
 
@@ -186,10 +162,9 @@ function hideTooltip() {
   }, 150);
 }
 
-/* -------------------------------------------------------
-   TOP ALERT TOOLTIP
-------------------------------------------------------- */
 function showTopAlert() {
+  if (!els.topAlert) return;
+
   els.topAlert.classList.remove("hidden");
 
   requestAnimationFrame(() => {
@@ -200,6 +175,8 @@ function showTopAlert() {
 }
 
 function hideTopAlert() {
+  if (!els.topAlert) return;
+
   els.topAlert.classList.remove("show");
 
   setTimeout(() => {
@@ -209,9 +186,6 @@ function hideTopAlert() {
 
 if (els.topAlertClose) els.topAlertClose.onclick = hideTopAlert;
 
-/* -------------------------------------------------------
-   HELPERS
-------------------------------------------------------- */
 const money = value =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -228,10 +202,6 @@ const escapeHtml = value =>
     .replaceAll("'", "&#039;");
 
 const findCode = code => PENAL_CODES.find(item => item.code === code);
-
-/* -------------------------------------------------------
-   RENDER: CODE LIST
-------------------------------------------------------- */
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
 
@@ -267,7 +237,6 @@ function renderCodes() {
     )
     .join("");
 
-  // ⭐ Restore tooltip hover behaviour
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
     if (!item) return;
@@ -309,9 +278,6 @@ function renderCodes() {
   });
 }
 
-/* -------------------------------------------------------
-   RENDER: PREVIEW (FIXED)
-------------------------------------------------------- */
 function renderPreview() {
   if (!state.preview) {
     els.previewEmpty.classList.remove("hidden");
@@ -384,9 +350,6 @@ function renderPreview() {
   }
 }
 
-/* -------------------------------------------------------
-   CHARGES
-------------------------------------------------------- */
 function addCharge(item) {
   state.recentCharges.push(item);
   renderRecentCharges();
@@ -432,9 +395,6 @@ function renderRecentCharges() {
   });
 }
 
-/* -------------------------------------------------------
-   SUMMARY
-------------------------------------------------------- */
 function renderSummary() {
   if (!state.recentCharges.length) {
     els.summaryCharges.innerHTML =
@@ -477,9 +437,6 @@ function renderSummary() {
   }
 }
 
-/* -------------------------------------------------------
-   RESET
-------------------------------------------------------- */
 function resetApp() {
   state.preview = null;
   state.recentCharges = [];
@@ -488,9 +445,6 @@ function resetApp() {
   renderSummary();
 }
 
-/* -------------------------------------------------------
-   REPORT TYPE + IMPOUNDMENT
-------------------------------------------------------- */
 function updateReportTypeButtons() {
   document.querySelectorAll(".report-type").forEach(btn => {
     btn.classList.toggle("selected", btn.dataset.report === state.reportType);
@@ -499,6 +453,7 @@ function updateReportTypeButtons() {
 
 function updateImpoundmentUI() {
   const group = document.getElementById("impoundmentGroup");
+  if (!group) return;
 
   const impoundPossible = state.recentCharges.some(
     item => String(item.impoundment || "").toLowerCase() !== "no"
@@ -518,9 +473,6 @@ function updateImpoundmentUI() {
   });
 }
 
-/* -------------------------------------------------------
-   MODAL (UPDATED)
-------------------------------------------------------- */
 function openModal() {
   if (!state.recentCharges.length) {
     showTopAlert();
@@ -533,25 +485,24 @@ function openModal() {
   els.userId.value = "";
   setInputValid();
 
-  els.modalBackdrop.classList.remove("hidden");
-  setTimeout(() => els.userId.focus(), 0);
+  if (els.modalBackdrop) {
+    els.modalBackdrop.classList.remove("hidden");
+    setTimeout(() => els.userId.focus(), 0);
+  }
 }
 
 function closeModal() {
-  els.modalBackdrop.classList.add("hidden");
+  if (els.modalBackdrop) els.modalBackdrop.classList.add("hidden");
 }
 
 function openConfirmModal() {
-  els.confirmBackdrop.classList.remove("hidden");
+  if (els.confirmBackdrop) els.confirmBackdrop.classList.remove("hidden");
 }
 
 function closeConfirmModal() {
-  els.confirmBackdrop.classList.add("hidden");
+  if (els.confirmBackdrop) els.confirmBackdrop.classList.add("hidden");
 }
 
-/* -------------------------------------------------------
-   INPUT VALIDATION
-------------------------------------------------------- */
 function setInputValid() {
   const valid = /^\d*$/.test(els.userId.value);
   els.userId.classList.toggle("invalid", !valid);
@@ -559,9 +510,6 @@ function setInputValid() {
   return valid;
 }
 
-/* -------------------------------------------------------
-   COPY REPORT (UPDATED)
-------------------------------------------------------- */
 function buildCopyText() {
   const userId = els.userId.value.trim();
 
@@ -579,8 +527,7 @@ function buildCopyText() {
 
   for (const item of state.recentCharges) {
     const fine = money(item.fine);
-    const imp =
-      String(item.impoundment || "").toLowerCase() !== "no";
+    const imp = String(item.impoundment || "").toLowerCase() !== "no";
 
     if (state.reportType === "warning") {
       lines.push(`${item.code} - ~~${fine}${imp ? " + Impoundment" : ""}~~`);
@@ -592,19 +539,19 @@ function buildCopyText() {
       continue;
     }
 
-   if (state.reportType === "citation") {
-  if (imp) {
-    lines.push(
-      `${item.code} - ${fine} + ${
-        state.impoundmentChoice === "yes"
-          ? "Impoundment"
-          : "~~Impoundment~~"
-      }`
-    );
-  } else {
-    lines.push(`${item.code} - ${fine}`);
-  }
-}
+    if (state.reportType === "citation") {
+      if (imp) {
+        lines.push(
+          `${item.code} - ${fine} + ${
+            state.impoundmentChoice === "yes"
+              ? "Impoundment"
+              : "~~Impoundment~~"
+          }`
+        );
+      } else {
+        lines.push(`${item.code} - ${fine}`);
+      }
+    }
   }
 
   lines.push("");
@@ -662,9 +609,6 @@ async function copyInformation() {
   closeModal();
 }
 
-/* -------------------------------------------------------
-   KEYBOARD NAVIGATION
-------------------------------------------------------- */
 function setupKeyboardGroup(selector) {
   const buttons = [...document.querySelectorAll(selector)];
 
@@ -695,9 +639,6 @@ function setupKeyboardGroup(selector) {
   });
 }
 
-/* -------------------------------------------------------
-   EVENT WIRING
-------------------------------------------------------- */
 els.searchInput.addEventListener("input", renderCodes);
 
 els.codeList.addEventListener("click", e => {
@@ -758,27 +699,31 @@ els.confirmClearBtn.onclick = () => {
 
 els.cancelClearBtn.onclick = closeConfirmModal;
 
-els.modalBackdrop.onclick = e => {
-  if (e.target === els.modalBackdrop) closeModal();
-};
+if (els.modalBackdrop) {
+  els.modalBackdrop.onclick = e => {
+    if (e.target === els.modalBackdrop) closeModal();
+  };
+}
 
-els.confirmBackdrop.onclick = e => {
-  if (e.target === els.confirmBackdrop) closeConfirmModal();
-};
+if (els.confirmBackdrop) {
+  els.confirmBackdrop.onclick = e => {
+    if (e.target === els.confirmBackdrop) closeConfirmModal();
+  };
+}
 
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
-    if (!els.modalBackdrop.classList.contains("hidden")) {
+    if (els.modalBackdrop && !els.modalBackdrop.classList.contains("hidden")) {
       closeModal();
-    } else if (!els.confirmBackdrop.classList.contains("hidden")) {
+    } else if (
+      els.confirmBackdrop &&
+      !els.confirmBackdrop.classList.contains("hidden")
+    ) {
       closeConfirmModal();
     }
   }
 });
 
-/* -------------------------------------------------------
-   THEME TOGGLE (NEW — FINAL)
-------------------------------------------------------- */
 document.documentElement.classList.add("theme-transition");
 
 const savedTheme = localStorage.getItem("theme");
@@ -803,9 +748,6 @@ if (els.themeToggle) {
   });
 }
 
-/* -------------------------------------------------------
-   INIT
-------------------------------------------------------- */
 renderCodes();
 renderPreview();
 renderRecentCharges();
