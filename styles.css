@@ -1174,3 +1174,6 @@ html[data-theme="light"] .watermark {
   color: var(--text) !important;
 }
 
+.invalid {
+  border-color: #ff4d4d !important;
+}
