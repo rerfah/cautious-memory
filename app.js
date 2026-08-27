@@ -2,7 +2,13 @@ const state = {
   preview: null,
   recentCharges: [],
   reportType: "warning",
-  impoundmentChoice: "no"
+  impoundmentChoice: "no",
+
+  // NEW: Other LEO involvement
+  otherLeoInvolved: "no",
+  otherLeoNames: "",
+  otherLeoRanks: "",
+  otherLeoDepts: ""
 };
 
 let officerName = "";
