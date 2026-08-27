@@ -1014,30 +1014,49 @@ html[data-theme="light"] .login-close {
   visibility: visible;
 }
 
-/* GLOBAL BACKGROUND IMAGE WITH PARALLAX + ZOOM OUT */
+/* DAY IMAGE (base layer) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 100% no-repeat;
-  z-index: -1;
+  background-image: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%; /* zoom level */
+  z-index: -2;
 
   filter: blur(8px) brightness(0.75);
-  opacity: 1;
-  transition: opacity 0.4s ease;
-
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
 }
 
-/* ⭐ DARK THEME BACKGROUND IMAGE (night version) */
-html[data-theme="dark"] body::before {
-  background: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp") center center / 100% no-repeat;
+/* NIGHT IMAGE (fade layer) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  z-index: -1;
+
+  filter: blur(8px) brightness(0.75);
+  transform: translateY(calc(var(--scroll) * -0.08));
+  will-change: transform;
+
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
-/* ⭐ LIGHT THEME BACKGROUND IMAGE (day version) */
-html[data-theme="light"] body::before {
-  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 100% no-repeat;
+/* NIGHT MODE → fade night image in */
+html[data-theme="dark"] body::after {
+  opacity: 1;
+}
+
+/* LIGHT MODE → fade night image out */
+html[data-theme="light"] body::after {
+  opacity: 0;
 }
 
 /* Make topbar text, tips, and watermark theme-aware */
