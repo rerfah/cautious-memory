@@ -1014,24 +1014,30 @@ html[data-theme="light"] .login-close {
   visibility: visible;
 }
 
-/* GLOBAL BACKGROUND IMAGE WITH PARALLAX */
+/* GLOBAL BACKGROUND IMAGE WITH PARALLAX + ZOOM OUT */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 115% no-repeat;
+  background: url("images/gvrp-background.png") center center / 130% no-repeat;
   z-index: -1;
 
-  /* Blur + dim for readability */
   filter: blur(8px) brightness(0.75);
-
-  /* Smooth fade-in */
   opacity: 1;
   transition: opacity 0.4s ease;
 
-  /* Parallax movement */
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
+}
+
+/* ⭐ DARK THEME BACKGROUND IMAGE (night version) */
+html[data-theme="dark"] body::before {
+  background: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp") center center / 130% no-repeat;
+}
+
+/* ⭐ LIGHT THEME BACKGROUND IMAGE (day version) */
+html[data-theme="light"] body::before {
+  background: url("images/gvrp-background.png") center center / 130% no-repeat;
 }
 
 /* Make topbar text, tips, and watermark theme-aware */
