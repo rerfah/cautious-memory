@@ -229,7 +229,7 @@ html[data-theme="light"] .search {
 }
 
 .code-list {
-  max-height: 400px;
+  max-height: 500px;
   overflow: auto;
   padding: 0 10px 12px;
 }
