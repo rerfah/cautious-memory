@@ -1070,11 +1070,21 @@ html[data-theme="light"] body::after {
 /* Make topbar text, tips, and watermark theme-aware */
 .topbar-main p,
 
-/* Keep tip text white always */
+/* Keep tip text white always NEW ADDITION BTW*/
 .tip {
   color: #ffffff !important;
 }
 
 .watermark {
   color: var(--text);
+}
+
+/* Subtitle matches title */
+.topbar-main p {
+  color: var(--text) !important;
+}
+
+/* Watermark matches title in light theme */
+html[data-theme="light"] .watermark {
+  color: var(--text) !important;
 }
