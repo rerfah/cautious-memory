@@ -164,8 +164,13 @@ function hideTooltip() {
   }, 150);
 }
 
-function showTopAlert() {
+function showTopAlert(message = "You have added this charge already.") {
   if (!els.topAlert) return;
+
+  const textEl = els.topAlert.querySelector(".alert-text");
+  if (textEl && message) {
+    textEl.textContent = message;
+  }
 
   els.topAlert.classList.remove("hidden");
 
@@ -360,9 +365,8 @@ function openPreview(item) {
 }
 
 function addCharge(item) {
-  // Prevent duplicates
   if (state.recentCharges.some(c => c.code === item.code)) {
-    showTopAlert(); // <— THIS is the optional enhancement
+    showTopAlert("You have added this charge already.");
     return;
   }
 
