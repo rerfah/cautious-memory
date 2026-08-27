@@ -144,10 +144,12 @@ function showTooltip(text, x, y) {
   tooltip.textContent = text;
   tooltip.classList.remove("hidden");
 
+  requestAnimationFrame(() => {
+    tooltip.classList.add("show");
+  });
+
   targetX = x;
   targetY = y;
-
-  tooltip.classList.add("show");
   tooltipVisible = true;
 }
 
