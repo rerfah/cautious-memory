@@ -653,6 +653,80 @@ html[data-theme="light"] .user-id-input {
   background: #ffffff;
 }
 
+/* OTHER LEO INVOLVEMENT */
+.other-leo-group {
+  margin-top: 22px;
+}
+
+.other-leo-title {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.other-leo-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.other-leo-type {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.other-leo-type.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .other-leo-type {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .other-leo-type.selected {
+  background: #2563eb;
+  color: white;
+}
+
+.other-leo-label {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.other-leo-tip {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.other-leo-input {
+  width: 100%;
+  padding: 12px 13px;
+  background: #0b0f14;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  margin-bottom: 12px;
+}
+
+html[data-theme="light"] .other-leo-input {
+  background: rgba(255,255,255,0.85);
+}
+
 .user-id-input.invalid {
   border-color: var(--red);
   box-shadow: 0 0 0 2px rgba(239,68,68,.13);
