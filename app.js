@@ -168,7 +168,7 @@ function showTopAlert(message = "You have added this charge already.") {
   if (!els.topAlert) return;
 
   const textEl = els.topAlert.querySelector(".alert-text");
-  if (textEl && message) {
+  if (textEl) {
     textEl.textContent = message;
   }
 
@@ -494,9 +494,9 @@ function updateImpoundmentUI() {
 
 function openModal() {
   if (!state.recentCharges.length) {
-    showTopAlert();
-    return;
-  }
+  showTopAlert("You have to add a charge first.");
+  return;
+}
 
   updateReportTypeButtons();
   updateImpoundmentUI();
