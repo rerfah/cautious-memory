@@ -1033,3 +1033,10 @@ body::before {
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
 }
+
+/* Improve text readability over background */
+.topbar-main p,
+.tip,
+.watermark {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55);
+}
