@@ -665,6 +665,24 @@ if (state.otherLeoInvolved === "yes") {
   }
 }
 
+// ⭐ Validate department (must be OCSO, WSP, or NPS)
+const rawDepts = document.getElementById("otherLeoDepts").value.trim();
+if (state.otherLeoInvolved === "yes") {
+  const deptList = rawDepts.split(",").map(d => d.trim().toUpperCase());
+
+  const validDepts = ["OCSO", "WSP", "NPS"];
+  const invalidDept = deptList.some(d => !validDepts.includes(d));
+
+  if (invalidDept) {
+    document.getElementById("otherLeoDepts").classList.add("invalid");
+    document.getElementById("otherLeoDeptError").classList.remove("hidden");
+    return; // prevent continuing
+  } else {
+    document.getElementById("otherLeoDepts").classList.remove("invalid");
+    document.getElementById("otherLeoDeptError").classList.add("hidden");
+  }
+}
+  
   // ⭐ STEP 5 — Capture extra LEO fields
   state.otherLeoNames = document.getElementById("otherLeoNames").value.trim();
   state.otherLeoRanks = document.getElementById("otherLeoRanks").value.trim();
