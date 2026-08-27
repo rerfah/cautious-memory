@@ -750,6 +750,11 @@ if (els.themeToggle) {
   });
 }
 
+document.addEventListener("scroll", () => {
+  document.documentElement.style.setProperty("--scroll", window.scrollY);
+});
+
+
 renderCodes();
 renderPreview();
 renderRecentCharges();
