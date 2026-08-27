@@ -1033,3 +1033,15 @@ body::before {
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
 }
+
+.topbar-main p,
+.tip,
+.watermark {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .topbar-main p,
+html[data-theme="light"] .tip,
+html[data-theme="light"] .watermark {
+  color: #374151; /* softer dark grey */
+}
