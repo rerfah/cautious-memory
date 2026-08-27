@@ -971,13 +971,12 @@ html[data-theme="light"] .login-close {
   }
 }
 
-/* TOOLTIP — restored glow + fade */
 .tooltip {
   position: fixed;
   top: 0;
   left: 0;
   padding: 10px 14px;
-  background: rgba(18, 22, 29, 0.95);
+  background: rgba(18, 22, 29, 0.55);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -986,34 +985,29 @@ html[data-theme="light"] .login-close {
   z-index: 999999;
   pointer-events: none;
 
-  /* Fade + slide animation */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   opacity: 0;
   transform: translateY(6px);
   transition:
     opacity 0.25s ease-out,
     transform 0.25s ease-out;
 
-  /* ⭐ Your original glow restored */
   box-shadow:
     0 0 18px rgba(59,130,246,0.45),
     0 0 6px rgba(59,130,246,0.35),
     0 4px 12px rgba(0,0,0,0.45);
+
+  will-change: opacity, transform, left, top;
 }
 
-html[data-theme="light"] .tooltip {
-  background: #ffffff;
-  color: #111827;
-  border-color: #d1d5db;
-}
-
-/* Hidden state — NO display:none */
 .tooltip.hidden {
   opacity: 0;
   transform: translateY(6px);
   visibility: hidden;
 }
 
-/* Visible state */
 .tooltip.show {
   opacity: 1;
   transform: translateY(0);
