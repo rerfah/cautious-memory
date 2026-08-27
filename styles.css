@@ -1015,6 +1015,13 @@ html[data-theme="light"] .login-close {
   visibility: visible;
 }
 
+/* Pure white tooltip in light theme */
+html[data-theme="light"] .tooltip {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d1d5db !important;
+}
+
 /* DAY IMAGE (base layer) */
 body::before {
   content: "";
