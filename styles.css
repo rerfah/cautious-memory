@@ -145,6 +145,11 @@ html[data-theme="light"] .watermark {
   align-items: start;
 }
 
+/* Fit entire app into one screen height */
+.workspace {
+  height: calc(100vh - 120px); /* subtract topbar height */
+}
+
 @media (max-width: 1100px) {
   .workspace {
     grid-template-columns: 1fr;
@@ -202,6 +207,13 @@ html[data-theme="light"] .panel {
 /* Codes panel */
 .codes-panel {
   min-height: 600px;
+}
+
+/* Make codes panel flex so the list scrolls internally */
+.codes-panel {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .search {
@@ -1089,3 +1101,4 @@ html[data-theme="light"] body::after {
 html[data-theme="light"] .watermark {
   color: var(--text) !important;
 }
+
