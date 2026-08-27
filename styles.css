@@ -130,9 +130,10 @@ button {
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 
+/* Darker watermark in light theme */
 html[data-theme="light"] .watermark {
-  color: #6b7280;
-  opacity: 0.85;
+  color: #4b5563 !important; /* dark grey */
+  opacity: 0.9;
 }
 
 /* Layout */
@@ -1061,7 +1062,12 @@ html[data-theme="light"] body::after {
 
 /* Make topbar text, tips, and watermark theme-aware */
 .topbar-main p,
-.tip,
+
+/* Keep tip text white always */
+.tip {
+  color: #ffffff !important;
+}
+
 .watermark {
   color: var(--text);
 }
