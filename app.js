@@ -389,7 +389,7 @@ function renderRecentCharges() {
             item.classification
           )}</span>
         </div>
-        <div class="recent-subtitle">${money(item.fine)} · ${
+        <div class="recent-subtitle">${money(item.fine)} · ${Number(item.jailTime) || 0}s of jailtime</div>
         Number(item.jailTime) || 0
       }s jail</div>
       </div>
