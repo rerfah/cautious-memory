@@ -116,7 +116,7 @@ const PENAL_CODES = [
 },
 {
   code: "(1)10",
-  reference: "Kidnapping (Banned RP)",
+  reference: "Kidnapping",
   classification: "Felony",
   fine: 0,
   jailTime: 210,
