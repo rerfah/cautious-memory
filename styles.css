@@ -166,7 +166,7 @@ html[data-theme="light"] .watermark {
 }
 
 html[data-theme="light"] .panel {
-  background: var(--panel);
+  background: rgba(255, 255, 255, 0.85); /* translucent */
   box-shadow: 0 12px 30px rgba(15,23,42,.12);
 }
 
@@ -297,7 +297,7 @@ html[data-theme="light"] .code-classification {
 }
 
 html[data-theme="light"] .preview-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .preview-head {
@@ -417,7 +417,7 @@ html[data-theme="light"] .preview-row {
 }
 
 html[data-theme="light"] .recent-item {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .recent-title {
@@ -535,7 +535,7 @@ html[data-theme="light"] .reset-btn {
 }
 
 html[data-theme="light"] .modal {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
   box-shadow: 0 24px 70px rgba(15,23,42,.18);
 }
@@ -826,7 +826,7 @@ html[data-theme="light"] .top-alert {
 }
 
 html[data-theme="light"] .login-modal {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
   box-shadow: 0 24px 70px rgba(15,23,42,0.18);
 }
@@ -1018,7 +1018,7 @@ html[data-theme="light"] .login-close {
 
 /* Pure white tooltip in light theme */
 html[data-theme="light"] .tooltip {
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   color: #111827 !important;
   border-color: #d1d5db !important;
 }
