@@ -68,7 +68,6 @@ const els = {
 function initLogin() {
   const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
 
-  // Show login backdrop (remove hidden, let CSS handle layout)
   els.loginBackdrop.classList.remove("hidden");
   requestAnimationFrame(() => {
     els.loginBackdrop.classList.add("show");
@@ -158,9 +157,7 @@ function animateTooltip() {
   requestAnimationFrame(animateTooltip);
 }
 
-if (tooltip) {
-  animateTooltip();
-}
+if (tooltip) animateTooltip();
 
 /* -------------------------------------------------------
    TOOLTIP SHOW / HIDE
@@ -210,9 +207,7 @@ function hideTopAlert() {
   }, 400);
 }
 
-if (els.topAlertClose) {
-  els.topAlertClose.onclick = hideTopAlert;
-}
+if (els.topAlertClose) els.topAlertClose.onclick = hideTopAlert;
 
 /* -------------------------------------------------------
    HELPERS
@@ -315,13 +310,8 @@ function renderCodes() {
 }
 
 /* -------------------------------------------------------
-   RENDER: PREVIEW
+   RENDER: PREVIEW (FIXED)
 ------------------------------------------------------- */
-function openPreview(item) {
-  state.preview = item;
-  renderPreview();
-}
-
 function renderPreview() {
   if (!state.preview) {
     els.previewEmpty.classList.remove("hidden");
@@ -375,16 +365,23 @@ function renderPreview() {
     </div>
   `;
 
-  document.getElementById("previewBack").onclick = () => {
-    state.preview = null;
-    renderPreview();
-  };
+  const backBtn = document.getElementById("previewBack");
+  const addBtn = document.getElementById("previewAdd");
 
-  document.getElementById("previewAdd").onclick = () => {
-    addCharge(item);
-    state.preview = null;
-    renderPreview();
-  };
+  if (backBtn) {
+    backBtn.onclick = () => {
+      state.preview = null;
+      renderPreview();
+    };
+  }
+
+  if (addBtn) {
+    addBtn.onclick = () => {
+      addCharge(item);
+      state.preview = null;
+      renderPreview();
+    };
+  }
 }
 
 /* -------------------------------------------------------
@@ -595,19 +592,19 @@ function buildCopyText() {
       continue;
     }
 
-    if (state.reportType === "citation") {
-      if (imp) {
-        lines.push(
-          `${item.code} - ${fine} + ${
-            state.impoundmentChoice === "yes"
-              ? "Impoundment"
-              : "~~Impoundment~~"
-          }`
-        );
-      } else {
-        lines.push(`${item.code} - ${fine}`);
-      }
-    }
+   if (state.reportType === "citation") {
+  if (imp) {
+    lines.push(
+      `${item.code} - ${fine} + ${
+        state.impoundmentChoice === "yes"
+          ? "Impoundment"
+          : "~~Impoundment~~"
+      }`
+    );
+  } else {
+    lines.push(`${item.code} - ${fine}`);
+  }
+}
   }
 
   lines.push("");
