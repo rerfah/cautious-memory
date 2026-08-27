@@ -648,6 +648,23 @@ async function copyInformation() {
     return;
   }
 
+  // ⭐ Validate other LEO usernames (3–20 chars each)
+const rawNames = document.getElementById("otherLeoNames").value.trim();
+if (state.otherLeoInvolved === "yes") {
+  const nameList = rawNames.split(",").map(n => n.trim());
+
+  const invalid = nameList.some(n => n.length < 3 || n.length > 20);
+
+  if (invalid) {
+    document.getElementById("otherLeoNames").classList.add("invalid");
+    document.getElementById("otherLeoNameError").classList.remove("hidden");
+    return; // prevent continuing
+  } else {
+    document.getElementById("otherLeoNames").classList.remove("invalid");
+    document.getElementById("otherLeoNameError").classList.add("hidden");
+  }
+}
+
   // ⭐ STEP 5 — Capture extra LEO fields
   state.otherLeoNames = document.getElementById("otherLeoNames").value.trim();
   state.otherLeoRanks = document.getElementById("otherLeoRanks").value.trim();
