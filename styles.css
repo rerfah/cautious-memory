@@ -971,7 +971,7 @@ html[data-theme="light"] .login-close {
   }
 }
 
-/* TOOLTIP */
+/* TOOLTIP — restored glow + fade */
 .tooltip {
   position: fixed;
   top: 0;
@@ -985,11 +985,19 @@ html[data-theme="light"] .login-close {
   max-width: 260px;
   z-index: 999999;
   pointer-events: none;
+
+  /* Fade + slide animation */
   opacity: 0;
-  transform: translateY(-4px);
+  transform: translateY(6px);
   transition:
-    opacity 0.15s ease-out,
-    transform 0.15s ease-out;
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+
+  /* ⭐ Your original glow restored */
+  box-shadow:
+    0 0 18px rgba(59,130,246,0.45),
+    0 0 6px rgba(59,130,246,0.35),
+    0 4px 12px rgba(0,0,0,0.45);
 }
 
 html[data-theme="light"] .tooltip {
@@ -998,15 +1006,16 @@ html[data-theme="light"] .tooltip {
   border-color: #d1d5db;
 }
 
-/* Hidden state */
+/* Hidden state — NO display:none */
 .tooltip.hidden {
   opacity: 0;
-  display: none !important;
+  transform: translateY(6px);
+  visibility: hidden;
 }
 
 /* Visible state */
 .tooltip.show {
-  display: block;
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
 }
