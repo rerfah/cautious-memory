@@ -970,3 +970,43 @@ html[data-theme="light"] .login-close {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* TOOLTIP */
+.tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 14px;
+  background: rgba(18, 22, 29, 0.95);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 260px;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
+}
+
+html[data-theme="light"] .tooltip {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+/* Hidden state */
+.tooltip.hidden {
+  opacity: 0;
+  display: none !important;
+}
+
+/* Visible state */
+.tooltip.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
