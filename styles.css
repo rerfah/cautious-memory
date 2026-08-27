@@ -1013,3 +1013,23 @@ html[data-theme="light"] .login-close {
   transform: translateY(0);
   visibility: visible;
 }
+
+/* GLOBAL BACKGROUND IMAGE WITH PARALLAX */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / cover no-repeat;
+  z-index: -1;
+
+  /* Blur + dim for readability */
+  filter: blur(8px) brightness(0.85);
+
+  /* Smooth fade-in */
+  opacity: 1;
+  transition: opacity 0.4s ease;
+
+  /* Parallax movement */
+  transform: translateY(calc(var(--scroll) * -0.08));
+  will-change: transform;
+}
