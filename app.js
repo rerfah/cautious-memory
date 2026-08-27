@@ -68,11 +68,13 @@ function initLogin() {
 
   const saved = JSON.parse(localStorage.getItem("loginInfo") || "{}");
 
+  // Show login modal
   els.loginBackdrop.classList.remove("hidden");
   requestAnimationFrame(() => {
     els.loginBackdrop.classList.add("show");
   });
 
+  // Restore saved login info
   if (saved.username) els.loginUsername.value = saved.username;
   if (saved.rank) els.loginRank.value = saved.rank;
 
@@ -87,6 +89,7 @@ function initLogin() {
   const rememberCheckbox = document.getElementById("rememberLogin");
   if (rememberCheckbox && saved.remember) rememberCheckbox.checked = true;
 
+  // Department selection buttons
   els.deptOptions.forEach(btn => {
     btn.addEventListener("click", () => {
       els.deptOptions.forEach(b => b.classList.remove("selected"));
@@ -96,12 +99,29 @@ function initLogin() {
     });
   });
 
+  // Continue button logic
   els.loginContinue.addEventListener("click", () => {
-    officerName = els.loginUsername.value.trim();
+
+    // ⭐ VALIDATION: Login username must be 3–20 characters
+    const loginName = els.loginUsername.value.trim();
+
+    if (loginName.length < 3 || loginName.length > 20) {
+      els.loginUsername.classList.add("invalid");
+      document.getElementById("loginUsernameError").classList.remove("hidden");
+      return; // prevent continuing
+    } else {
+      els.loginUsername.classList.remove("invalid");
+      document.getElementById("loginUsernameError").classList.add("hidden");
+    }
+
+    // Continue with existing logic
+    officerName = loginName;
     officerRank = els.loginRank.value.trim();
 
+    // Prevent continuing if rank or department missing
     if (!officerName || !officerRank || !officerDept) return;
 
+    // Auto-capitalise rank
     officerRank = officerRank
       .toLowerCase()
       .split(" ")
@@ -110,6 +130,7 @@ function initLogin() {
 
     const remember = rememberCheckbox ? rememberCheckbox.checked : false;
 
+    // Save login info if "Remember" is checked
     if (remember) {
       localStorage.setItem(
         "loginInfo",
@@ -124,6 +145,7 @@ function initLogin() {
       localStorage.removeItem("loginInfo");
     }
 
+    // Close login modal
     els.loginBackdrop.classList.remove("show");
     setTimeout(() => {
       els.loginBackdrop.classList.add("hidden");
