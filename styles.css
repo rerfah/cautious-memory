@@ -1019,7 +1019,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / cover no-repeat;
+  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 115% no-repeat;
   z-index: -1;
 
   /* Blur + dim for readability */
