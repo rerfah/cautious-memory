@@ -1030,7 +1030,7 @@ body::before {
   background-image: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 90%; /* zoom level */
+  background-size: 100%; /* zoom level */
   z-index: -2;
 
   filter: blur(8px) brightness(0.75);
@@ -1046,7 +1046,7 @@ body::after {
   background-image: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 90%;
+  background-size: 100%;
   z-index: -1;
 
   filter: blur(8px) brightness(0.75);
