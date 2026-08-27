@@ -539,12 +539,10 @@ function buildCopyText() {
   const userId = els.userId.value.trim();
 
   const header = `${officerName} | ${officerRank} ${officerBadge || ""}`.trim();
-  const lines = [header, `<@${userId}>`, ""];
+  const lines = [header];
 
-  // ⭐ STEP 6 — Other LEOs involved
+  // ⭐ Insert extra LEOs directly under the main officer
   if (state.otherLeoInvolved === "yes") {
-    lines.push("**Other LEOs involved:**");
-
     const names = state.otherLeoNames.split(",").map(v => v.trim());
     const ranks = state.otherLeoRanks.split(",").map(v => v.trim());
     const depts = state.otherLeoDepts.split(",").map(v => v.trim());
@@ -553,11 +551,16 @@ function buildCopyText() {
       const n = names[i] || "";
       const r = ranks[i] || "";
       const d = depts[i] || "";
-      lines.push(`${n} | ${r} (${d})`);
-    }
 
-    lines.push(""); // spacing before the report label
+      const emoji = deptEmoji[d.toUpperCase()] || "";
+
+      lines.push(`${n} | ${r} ${emoji}`);
+    }
   }
+
+  // Add the user ID line after officers
+  lines.push(`<@${userId}>`);
+  lines.push("");
 
   const label =
     state.reportType === "warning"
