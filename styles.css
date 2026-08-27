@@ -1019,7 +1019,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("images/gvrp-background.png") center center / 130% no-repeat;
+  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 100% no-repeat;
   z-index: -1;
 
   filter: blur(8px) brightness(0.75);
@@ -1032,12 +1032,12 @@ body::before {
 
 /* ⭐ DARK THEME BACKGROUND IMAGE (night version) */
 html[data-theme="dark"] body::before {
-  background: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp") center center / 130% no-repeat;
+  background: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp") center center / 100% no-repeat;
 }
 
 /* ⭐ LIGHT THEME BACKGROUND IMAGE (day version) */
 html[data-theme="light"] body::before {
-  background: url("images/gvrp-background.png") center center / 130% no-repeat;
+  background: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp") center center / 100% no-repeat;
 }
 
 /* Make topbar text, tips, and watermark theme-aware */
