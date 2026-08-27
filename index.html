@@ -165,6 +165,33 @@
 
       <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
 
+            <!-- Other LEO Involvement -->
+      <div class="other-leo-group">
+        <h3 class="other-leo-title">Were any other LEO involved?</h3>
+
+        <div class="other-leo-types">
+          <button class="other-leo-type" data-otherleo="yes" type="button">Yes</button>
+          <button class="other-leo-type selected" data-otherleo="no" type="button">No</button>
+        </div>
+
+        <div id="otherLeoFields" class="hidden">
+          <label class="other-leo-label">Put the usernames of anyone else involved.</label>
+          <small class="other-leo-tip">Use commas to separate usernames if more than one other person is involved.</small>
+          <input id="otherLeoNames" class="other-leo-input" type="text" autocomplete="off"
+                 placeholder="Username1, Username2">
+
+          <label class="other-leo-label">Put their rank for the department they are currently working for.</label>
+          <small class="other-leo-tip">Use commas to separate ranks if more than one other person is involved.</small>
+          <input id="otherLeoRanks" class="other-leo-input" type="text" autocomplete="off"
+                 placeholder="Sergeant, Corporal">
+
+          <label class="other-leo-label">Put the current department they are on.</label>
+          <small class="other-leo-tip">Use commas to separate the departments if more than one other person is involved.</small>
+          <input id="otherLeoDepts" class="other-leo-input" type="text" autocomplete="off"
+                 placeholder="OCSO, WSP">
+        </div>
+      </div>
+
       <!-- Modal Actions -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
