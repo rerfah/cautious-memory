@@ -232,6 +232,12 @@ html[data-theme="light"] .search {
   max-height: 500px;
   overflow: auto;
   padding: 0 10px 12px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.code-list::-webkit-scrollbar {
+  display: none;
 }
 
 .code-item {
