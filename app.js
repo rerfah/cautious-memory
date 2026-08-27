@@ -272,6 +272,7 @@ function renderCodes() {
     )
     .join("");
 
+  // ⭐ Restore tooltip hover behaviour
   els.codeList.querySelectorAll(".code-item").forEach(button => {
     const item = findCode(button.dataset.code);
     if (!item) return;
