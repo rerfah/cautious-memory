@@ -46,7 +46,8 @@ const els = {
   loginUsername: document.getElementById("loginUsername"),
   loginRank: document.getElementById("loginRank"),
   loginContinue: document.getElementById("loginContinue"),
-  deptOptions: document.querySelectorAll(".dept-option")
+  deptOptions: document.querySelectorAll(".dept-option"),
+  tooltip: document.getElementById("tooltip")
 };
 
 function initLogin() {
@@ -117,7 +118,6 @@ function initLogin() {
   });
 }
 
-const tooltip = document.getElementById("tooltip");
 let tooltipVisible = false;
 let targetX = 0;
 let targetY = 0;
@@ -125,27 +125,27 @@ let currentX = 0;
 let currentY = 0;
 
 function animateTooltip() {
-  if (!tooltip) return;
+  if (!els.tooltip) return;
 
   currentX += (targetX - currentX) * 0.25;
   currentY += (targetY - currentY) * 0.25;
 
-  tooltip.style.left = `${currentX}px`;
-  tooltip.style.top = `${currentY}px`;
+  els.tooltip.style.left = `${currentX}px`;
+  els.tooltip.style.top = `${currentY}px`;
 
   requestAnimationFrame(animateTooltip);
 }
 
-if (tooltip) animateTooltip();
+if (els.tooltip) animateTooltip();
 
 function showTooltip(text, x, y) {
-  if (!tooltip) return;
+  if (!els.tooltip) return;
 
-  tooltip.textContent = text;
-  tooltip.classList.remove("hidden");
+  els.tooltip.textContent = text;
+  els.tooltip.classList.remove("hidden");
 
   requestAnimationFrame(() => {
-    tooltip.classList.add("show");
+    els.tooltip.classList.add("show");
   });
 
   targetX = x;
@@ -154,13 +154,13 @@ function showTooltip(text, x, y) {
 }
 
 function hideTooltip() {
-  if (!tooltip) return;
+  if (!els.tooltip) return;
 
-  tooltip.classList.remove("show");
+  els.tooltip.classList.remove("show");
   tooltipVisible = false;
 
   setTimeout(() => {
-    if (!tooltipVisible) tooltip.classList.add("hidden");
+    if (!tooltipVisible) els.tooltip.classList.add("hidden");
   }, 150);
 }
 
@@ -204,6 +204,7 @@ const escapeHtml = value =>
     .replaceAll("'", "&#039;");
 
 const findCode = code => PENAL_CODES.find(item => item.code === code);
+
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
 
@@ -350,6 +351,12 @@ function renderPreview() {
       renderPreview();
     };
   }
+}
+
+// ⭐ Missing before: define openPreview so click handler works
+function openPreview(item) {
+  state.preview = item;
+  renderPreview();
 }
 
 function addCharge(item) {
@@ -641,23 +648,29 @@ function setupKeyboardGroup(selector) {
   });
 }
 
-els.searchInput.addEventListener("input", renderCodes);
+/* --- EVENT WIRING --- */
 
-els.codeList.addEventListener("click", e => {
-  const btn = e.target.closest(".code-item");
-  if (!btn) return;
+if (els.searchInput) {
+  els.searchInput.addEventListener("input", renderCodes);
+}
 
-  const item = findCode(btn.dataset.code);
-  if (!item) return;
+if (els.codeList) {
+  els.codeList.addEventListener("click", e => {
+    const btn = e.target.closest(".code-item");
+    if (!btn) return;
 
-  if (e.shiftKey) {
-    addCharge(item);
-    state.preview = null;
-    renderPreview();
-  } else {
-    openPreview(item);
-  }
-});
+    const item = findCode(btn.dataset.code);
+    if (!item) return;
+
+    if (e.shiftKey) {
+      addCharge(item);
+      state.preview = null;
+      renderPreview();
+    } else {
+      openPreview(item);
+    }
+  });
+}
 
 document.querySelectorAll(".report-type").forEach(btn => {
   btn.onclick = () => {
@@ -674,32 +687,44 @@ document.querySelectorAll(".impound-type").forEach(btn => {
   };
 });
 
-els.userId.addEventListener("input", () => {
-  const value = els.userId.value;
-  const valid = /^\d*$/.test(value);
+if (els.userId) {
+  els.userId.addEventListener("input", () => {
+    const value = els.userId.value;
+    const valid = /^\d*$/.test(value);
 
-  els.userId.classList.toggle("invalid", !valid);
-  els.numberError.classList.toggle("hidden", valid);
-});
+    els.userId.classList.toggle("invalid", !valid);
+    els.numberError.classList.toggle("hidden", valid);
+  });
+}
 
-els.continueBtn.onclick = openModal;
+if (els.continueBtn) {
+  els.continueBtn.onclick = openModal;
+}
 
 if (els.modalCloseBtn) {
   els.modalCloseBtn.onclick = closeModal;
 }
 
-els.copyBtn.onclick = copyInformation;
+if (els.copyBtn) {
+  els.copyBtn.onclick = copyInformation;
+}
 
-els.resetBtn.onclick = () => {
-  state.recentCharges.length ? openConfirmModal() : resetApp();
-};
+if (els.resetBtn) {
+  els.resetBtn.onclick = () => {
+    state.recentCharges.length ? openConfirmModal() : resetApp();
+  };
+}
 
-els.confirmClearBtn.onclick = () => {
-  resetApp();
-  closeConfirmModal();
-};
+if (els.confirmClearBtn) {
+  els.confirmClearBtn.onclick = () => {
+    resetApp();
+    closeConfirmModal();
+  };
+}
 
-els.cancelClearBtn.onclick = closeConfirmModal;
+if (els.cancelClearBtn) {
+  els.cancelClearBtn.onclick = closeConfirmModal;
+}
 
 if (els.modalBackdrop) {
   els.modalBackdrop.onclick = e => {
@@ -725,6 +750,8 @@ document.addEventListener("keydown", e => {
     }
   }
 });
+
+/* --- THEME + PARALLAX --- */
 
 document.documentElement.classList.add("theme-transition");
 
@@ -754,6 +781,7 @@ document.addEventListener("scroll", () => {
   document.documentElement.style.setProperty("--scroll", window.scrollY);
 });
 
+/* --- INITIAL RENDER --- */
 
 renderCodes();
 renderPreview();
