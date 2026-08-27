@@ -201,7 +201,7 @@ html[data-theme="light"] .panel {
 
 /* Codes panel */
 .codes-panel {
-  min-height: 720px;
+  min-height: 480px;
 }
 
 .search {
@@ -225,7 +225,7 @@ html[data-theme="light"] .search {
 }
 
 .code-list {
-  max-height: 650px;
+  max-height: 400px;
   overflow: auto;
   padding: 0 10px 12px;
 }
