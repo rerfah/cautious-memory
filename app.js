@@ -360,6 +360,12 @@ function openPreview(item) {
 }
 
 function addCharge(item) {
+  // Prevent duplicates
+  if (state.recentCharges.some(c => c.code === item.code)) {
+    showTopAlert(); // <— THIS is the optional enhancement
+    return;
+  }
+
   state.recentCharges.push(item);
   renderRecentCharges();
   renderSummary();
