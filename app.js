@@ -601,7 +601,7 @@ function buildCopyText() {
   lines.push(`**${label}:**`);
 
   for (const item of state.recentCharges) {
-    const fine = money(item.fine);
+    const fine = moneyNoCents(item.fine);
     const imp = String(item.impoundment || "").toLowerCase() !== "no";
 
     if (state.reportType === "warning") {
@@ -729,6 +729,10 @@ if (state.otherLeoInvolved === "yes") {
   }
 
   closeModal();
+}
+
+function moneyNoCents(value) {
+  return `$${Number(value).toLocaleString()}`;
 }
 
 function setupKeyboardGroup(selector) {
