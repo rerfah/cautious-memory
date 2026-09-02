@@ -610,9 +610,23 @@ function buildCopyText() {
     }
 
     if (state.reportType === "arrest") {
-      lines.push(`${item.code} - ${fine}${imp ? " + Impoundment" : ""}`);
-      continue;
-    }
+  const jail = Number(item.jailTime || 0);
+
+  // Build jailtime text
+  const jailText = jail > 0 ? ` + ${jail}s of jailtime` : "";
+
+  // Build impoundment text
+  const impText = imp ? " + Impoundment" : "";
+
+  // If fine is zero, hide the $0
+  if (Number(item.fine) === 0) {
+    lines.push(`${item.code}${jailText}${impText}`);
+  } else {
+    lines.push(`${item.code} - ${fine}${jailText}${impText}`);
+  }
+
+  continue;
+}
 
     if (state.reportType === "citation") {
       if (imp) {
