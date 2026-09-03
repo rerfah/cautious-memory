@@ -756,6 +756,7 @@ state.otherLeoDepts = document.getElementById("otherLeoDepts").value.trim();
 
   // Build final text AFTER capturing extra LEO info
   const text = buildCopyText();
+  await logReport();
 
   try {
     await navigator.clipboard.writeText(text);
