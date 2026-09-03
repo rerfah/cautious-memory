@@ -64,6 +64,7 @@
     document.getElementById("adminLogin").onclick = async () => {
       const pwd = document.getElementById("adminPassword").value.trim();
       if (pwd !== "0000") return; // simple check; replace with hash compare later
+      document.getElementById("filters").style.display = "block";
 
       const res = await fetch(`${supabaseUrl}/rest/v1/reports?select=*`, {
         headers: {
