@@ -22,6 +22,35 @@
     <p>Enter admin password to view logs.</p>
     <input id="adminPassword" type="password" placeholder="Password">
     <button id="adminLogin">Unlock</button>
+    <div id="filters" style="margin-top:24px; display:none;">
+  <h2>Filters</h2>
+
+  <label>Officer name:</label>
+  <input id="filterName" type="text" placeholder="Search name">
+
+  <label>Department:</label>
+  <select id="filterDept">
+    <option value="">All</option>
+    <option value="WSP">WSP</option>
+    <option value="OCSO">OCSO</option>
+    <option value="NPS">NPS</option>
+  </select>
+
+  <label>Rank:</label>
+  <input id="filterRank" type="text" placeholder="Search rank">
+
+  <label>Badge:</label>
+  <input id="filterBadge" type="text" placeholder="Search badge">
+
+  <label>From date:</label>
+  <input id="filterFrom" type="date">
+
+  <label>To date:</label>
+  <input id="filterTo" type="date">
+
+  <button id="applyFilters">Apply filters</button>
+  <button id="clearFilters">Clear</button>
+</div>
 
     <div id="logsContainer" style="margin-top:24px;"></div>
   </div>
