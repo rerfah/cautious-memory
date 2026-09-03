@@ -136,6 +136,26 @@
     return true;
   });
 }
+
+    document.getElementById("applyFilters").onclick = () => {
+  const filtered = applyFiltersTo(window._logs);
+  renderLogs(filtered);
+};
+
+document.getElementById("clearFilters").onclick = () => {
+  document.getElementById("filterName").value = "";
+  document.getElementById("filterDept").value = "";
+  document.getElementById("filterRank").value = "";
+  document.getElementById("filterBadge").value = "";
+  document.getElementById("filterFrom").value = "";
+  document.getElementById("filterTo").value = "";
+
+  renderLogs(window._logs);
+};
+
+    window._logs = data;
+renderLogs(data);
+
   </script>
 </body>
 </html>
