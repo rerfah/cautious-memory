@@ -513,10 +513,12 @@ function updateImpoundmentUI() {
   if (!group) return;
 
   const impoundPossible = state.recentCharges.some(
-    item => String(item.impoundment || "").toLowerCase() !== "no"
+    item =>
+      item.impoundment === "yes" ||
+      item.impoundment === "officer discretion"
   );
 
-  if (state.reportType === "citation" && impoundPossible) {
+  if (state.reportType === "arrest" && impoundPossible) {
     group.classList.remove("hidden");
   } else {
     group.classList.add("hidden");
