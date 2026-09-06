@@ -632,6 +632,9 @@ function openModal() {
   els.userId.value = "";
   setInputValid();
 
+  // Prevent background page from scrolling
+  document.body.style.overflow = "hidden";
+
   /* ⭐ Open modal */
 
   if (els.modalBackdrop) {
@@ -642,10 +645,12 @@ function openModal() {
 
 function closeModal() {
   if (els.modalBackdrop) els.modalBackdrop.classList.add("hidden");
+  document.body.style.overflow = "";
 }
 
 function openConfirmModal() {
   if (els.confirmBackdrop) els.confirmBackdrop.classList.remove("hidden");
+  document.body.style.overflow = "";
 }
 
 function closeConfirmModal() {
