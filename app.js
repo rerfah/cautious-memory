@@ -595,6 +595,7 @@ function openModal() {
 
       row.innerHTML = `
         <p class="optional-question">${c.code} - ${c.reference}</p>
+        <p class="optional-description">${c.description}</p>
         <div class="optional-types" role="radiogroup">
           <button class="optional-fine-type" data-code="${c.code}" data-choice="yes">Yes</button>
           <button class="optional-fine-type" data-code="${c.code}" data-choice="no">No</button>
