@@ -589,6 +589,15 @@ html[data-theme="light"] .reset-btn {
     color 0.35s ease;
 }
 
+/* Prevent login modal layout rules from affecting main modal */
+.modal {
+  display: block;
+  flex-direction: initial;
+  gap: initial;
+  width: min(680px, 100%);
+  padding: 24px;
+}
+
 html[data-theme="light"] .login-modal {
   background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
