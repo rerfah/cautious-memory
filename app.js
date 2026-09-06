@@ -179,7 +179,8 @@ if (els.tooltip) animateTooltip();
 function showTooltip(text, x, y) {
   if (!els.tooltip) return;
 
-  els.tooltip.textContent = text;
+  els.tooltip.innerHTML = `<span class="tooltip-icon" aria-hidden="true">✕</span><span class="tooltip-text"></span>`;
+  els.tooltip.querySelector(".tooltip-text").textContent = text;
   els.tooltip.classList.remove("hidden");
 
   requestAnimationFrame(() => {
@@ -247,6 +248,13 @@ const escapeHtml = value =>
     .replaceAll("'", "&#039;");
 
 const findCode = code => PENAL_CODES.find(item => item.code === code);
+
+// Data file uses "Yes" / "No" / "Officer Discretion" (capitalized) —
+// normalize so comparisons don't silently fail on casing.
+const canBeImpounded = item =>
+  ["yes", "officer discretion"].includes(
+    String(item?.impoundment ?? "").trim().toLowerCase()
+  );
 
 function renderCodes() {
   const query = els.searchInput.value.trim().toLowerCase();
@@ -512,14 +520,11 @@ function updateImpoundmentUI() {
   const group = document.getElementById("impoundmentGroup");
   if (!group) return;
 
-  const impoundPossible = state.recentCharges.some(
-    item =>
-      item.impoundment === "yes" ||
-      item.impoundment === "officer discretion"
-  );
+  const impoundPossible = state.recentCharges.some(canBeImpounded);
 
   const shouldShow =
-    state.reportType === "arrest" && impoundPossible;
+    (state.reportType === "arrest" || state.reportType === "citation") &&
+    impoundPossible;
 
   group.classList.toggle("hidden", !shouldShow);
 
@@ -545,11 +550,8 @@ function openModal() {
 
   // Step 1 — Should impoundment UI appear?
   const showImpoundUI =
-    state.reportType === "arrest" &&
-    state.recentCharges.some(c =>
-      c.impoundment === "yes" ||
-      c.impoundment === "officer discretion"
-    );
+    (state.reportType === "arrest" || state.reportType === "citation") &&
+    state.recentCharges.some(canBeImpounded);
 
   // Step 2 — Should optional fine UI appear?
   const showOptionalFineUI =
@@ -711,7 +713,7 @@ function buildCopyText() {
 
    if (state.reportType === "arrest") {
   const jail = Number(item.jailTime || 0);
-  const imp = item.impoundment === "yes" || item.impoundment === "officer discretion";
+  const imp = canBeImpounded(item);
 
   // Optional fine
   let fineText = "";
@@ -790,7 +792,7 @@ function buildCopyText() {
 
     // Impound
     if (
-      (item.impoundment === "yes" || item.impoundment === "officer discretion") &&
+      canBeImpounded(item) &&
       state.impoundmentChoice === "yes"
     ) {
       impoundInTotal = true;
