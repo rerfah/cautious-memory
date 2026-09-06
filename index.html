@@ -132,17 +132,26 @@
     </section>
   </main>
 
-  <!-- Main Modal -->
+  <!-- ⭐ MAIN MODAL (REORDERED) -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal" role="document">
       <h2 id="modalTitle">Continue</h2>
 
+      <!-- ⭐ REPORT TYPE -->
       <div class="report-types" role="radiogroup" aria-label="Report type">
         <button class="report-type" data-report="warning" type="button">Written Warning</button>
         <button class="report-type" data-report="citation" type="button">Citation</button>
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
 
+      <!-- ⭐ USER ID (moved up) -->
+      <label class="user-id-label" for="userId">User ID</label>
+      <input id="userId" class="user-id-input" type="text" inputmode="numeric"
+             pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
+
+      <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
+
+      <!-- ⭐ IMPOUNDMENT -->
       <div id="impoundmentGroup" class="impoundment-group hidden">
         <p class="impoundment-label">Is their vehicle getting impounded?</p>
 
@@ -152,24 +161,19 @@
         </div>
       </div>
 
-      <!-- ⭐ OPTIONAL FINE UI -->
+      <!-- ⭐ OPTIONAL FINE -->
       <div id="optionalFineGroup" class="modal-section hidden">
         <p class="modal-label">Do you plan to give the optional fine for:</p>
         <div id="optionalFineList"></div>
       </div>
 
-      <!-- ⭐ OPTIONAL JAILTIME UI -->
+      <!-- ⭐ OPTIONAL JAILTIME -->
       <div id="optionalJailGroup" class="modal-section hidden">
         <p class="modal-label">Do you plan to give the optional jailtime for:</p>
         <div id="optionalJailList"></div>
       </div>
 
-      <label class="user-id-label" for="userId">User ID</label>
-      <input id="userId" class="user-id-input" type="text" inputmode="numeric"
-             pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
-
-      <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
-
+      <!-- ⭐ OTHER LEO INVOLVEMENT -->
       <div class="other-leo-group">
         <h3 class="other-leo-title">Were any other LEO involved?</h3>
 
@@ -202,6 +206,7 @@
         </div>
       </div>
 
+      <!-- ⭐ COPY BUTTON -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
         <button id="modalCloseBtn" class="close-btn" type="button">Close</button>
