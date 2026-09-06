@@ -532,90 +532,105 @@ function updateImpoundmentUI() {
 
 function openModal() {
   if (!state.recentCharges.length) {
-  showTopAlert("You have to add a charge first.");
-  return;
-}
+    showTopAlert("You have to add a charge first.");
+    return;
+  }
 
+  // Update report type buttons + impoundment UI
   updateReportTypeButtons();
   updateImpoundmentUI();
 
-  // ⭐ Step 1 — Should impoundment UI appear?
-const showImpoundUI =
-  state.reportType === "arrest" &&
-  state.recentCharges.some(c =>
-    c.impoundment === "yes" ||
-    c.impoundment === "officer discretion"
-  );
+  /* ⭐ STEP 1–5 — Determine which UI sections should appear */
 
-// ⭐ Step 2 — Should optional fine UI appear?
-const showOptionalFineUI =
-  state.recentCharges.some(c => c.fineOptional === true);
+  // Step 1 — Should impoundment UI appear?
+  const showImpoundUI =
+    state.reportType === "arrest" &&
+    state.recentCharges.some(c =>
+      c.impoundment === "yes" ||
+      c.impoundment === "officer discretion"
+    );
 
-// ⭐ Step 3 — Should optional jailtime UI appear?
-const showOptionalJailUI =
-  state.recentCharges.some(c => c.jailOptional === true);
+  // Step 2 — Should optional fine UI appear?
+  const showOptionalFineUI =
+    state.recentCharges.some(c => c.fineOptional === true);
 
-// ⭐ Step 4 — Should fine appear in total?
-const hasAnyFine =
-  state.recentCharges.some(c =>
-    c.fine > 0 || c.fineOptional === true
-  );
+  // Step 3 — Should optional jailtime UI appear?
+  const showOptionalJailUI =
+    state.recentCharges.some(c => c.jailOptional === true);
 
-// ⭐ Step 5 — Should jailtime appear in total?
-const hasAnyJail =
-  state.recentCharges.some(c =>
-    c.jailTime > 0 || c.jailOptional === true
-  );
+  // Step 4 — Should fine appear in total?
+  const hasAnyFine =
+    state.recentCharges.some(c =>
+      c.fine > 0 || c.fineOptional === true
+    );
 
-document.getElementById("impoundmentGroup")
-  .classList.toggle("hidden", !showImpoundUI);
+  // Step 5 — Should jailtime appear in total?
+  const hasAnyJail =
+    state.recentCharges.some(c =>
+      c.jailTime > 0 || c.jailOptional === true
+    );
 
-document.getElementById("optionalFineGroup")
-  .classList.toggle("hidden", !showOptionalFineUI);
+  /* ⭐ Toggle visibility of UI groups */
 
-// ⭐ Populate Optional Fine List
-const fineList = document.getElementById("optionalFineList");
-fineList.innerHTML = "";
+  document.getElementById("impoundmentGroup")
+    .classList.toggle("hidden", !showImpoundUI);
 
-state.recentCharges
-  .filter(c => c.fineOptional)
-  .forEach(c => {
-    const row = document.createElement("div");
-    row.className = "optional-item";
-    row.innerHTML = `
-      <div>${c.code} - ${c.reference}</div>
-      <div class="optional-buttons">
-        <button class="optional-fine-type" data-code="${c.code}" data-choice="yes">Yes</button>
-        <button class="optional-fine-type" data-code="${c.code}" data-choice="no">No</button>
-      </div>
-    `;
-    fineList.appendChild(row);
-  });
+  document.getElementById("optionalFineGroup")
+    .classList.toggle("hidden", !showOptionalFineUI);
 
-// ⭐ Populate Optional Jail List
-const jailList = document.getElementById("optionalJailList");
-jailList.innerHTML = "";
+  document.getElementById("optionalJailGroup")
+    .classList.toggle("hidden", !showOptionalJailUI);
 
-state.recentCharges
-  .filter(c => c.jailOptional)
-  .forEach(c => {
-    const row = document.createElement("div");
-    row.className = "optional-item";
-    row.innerHTML = `
-      <div>${c.code} - ${c.reference}</div>
-      <div class="optional-buttons">
-        <button class="optional-jail-type" data-code="${c.code}" data-choice="yes">Yes</button>
-        <button class="optional-jail-type" data-code="${c.code}" data-choice="no">No</button>
-      </div>
-    `;
-    jailList.appendChild(row);
-  });
+  /* ⭐ Populate OPTIONAL FINE list (matching LEO UI style) */
 
-document.getElementById("optionalJailGroup")
-  .classList.toggle("hidden", !showOptionalJailUI);
+  const fineList = document.getElementById("optionalFineList");
+  fineList.innerHTML = "";
+
+  state.recentCharges
+    .filter(c => c.fineOptional)
+    .forEach(c => {
+      const row = document.createElement("div");
+      row.className = "optional-item";
+
+      row.innerHTML = `
+        <p class="optional-question">${c.code} - ${c.reference}</p>
+        <div class="optional-types" role="radiogroup">
+          <button class="optional-fine-type" data-code="${c.code}" data-choice="yes">Yes</button>
+          <button class="optional-fine-type" data-code="${c.code}" data-choice="no">No</button>
+        </div>
+      `;
+
+      fineList.appendChild(row);
+    });
+
+  /* ⭐ Populate OPTIONAL JAILTIME list (matching LEO UI style) */
+
+  const jailList = document.getElementById("optionalJailList");
+  jailList.innerHTML = "";
+
+  state.recentCharges
+    .filter(c => c.jailOptional)
+    .forEach(c => {
+      const row = document.createElement("div");
+      row.className = "optional-item";
+
+      row.innerHTML = `
+        <p class="optional-question">${c.code} - ${c.reference}</p>
+        <div class="optional-types" role="radiogroup">
+          <button class="optional-jail-type" data-code="${c.code}" data-choice="yes">Yes</button>
+          <button class="optional-jail-type" data-code="${c.code}" data-choice="no">No</button>
+        </div>
+      `;
+
+      jailList.appendChild(row);
+    });
+
+  /* ⭐ Reset user ID input + validation */
 
   els.userId.value = "";
   setInputValid();
+
+  /* ⭐ Open modal */
 
   if (els.modalBackdrop) {
     els.modalBackdrop.classList.remove("hidden");
