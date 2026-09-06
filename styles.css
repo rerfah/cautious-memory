@@ -550,6 +550,17 @@ html[data-theme="light"] .reset-btn {
   animation: modalFadeIn .2s ease-out;
 }
 
+/* Make modal scroll internally */
+.modal {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* Allow backdrop to scroll if modal exceeds viewport */
+.modal-backdrop {
+  overflow-y: auto;
+}
+
 html[data-theme="light"] .modal {
   background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
@@ -751,10 +762,6 @@ html[data-theme="light"] .other-leo-input {
   margin-bottom: 10px;
 }
 
-.optional-item {
-  margin-bottom: 16px;
-}
-
 /* Optional item card */
 .optional-item {
   background: var(--panel-2);
@@ -784,11 +791,6 @@ html[data-theme="light"] .optional-item {
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 10px;
-}
-
-.optional-question {
-  margin-bottom: 6px;
-  font-weight: 500;
 }
 
 .optional-types {
@@ -1028,15 +1030,4 @@ html[data-theme="light"] .watermark {
   .preview-head {
     align-items: flex-start;
   }
-}
-
-/* Make modal scroll internally */
-.modal {
-  max-height: 85vh;
-  overflow-y: auto;
-}
-
-/* Allow backdrop to scroll if modal exceeds viewport */
-.modal-backdrop {
-  overflow-y: auto;
 }
