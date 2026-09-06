@@ -554,6 +554,13 @@ html[data-theme="light"] .modal {
   box-shadow: 0 24px 70px rgba(15,23,42,.18);
 }
 
+/* Restore correct layout for Continue modal only */
+#modalBackdrop .modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* original modal had no gap */
+}
+
 /* Report types */
 .report-types {
   display: grid;
