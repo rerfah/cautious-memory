@@ -761,11 +761,13 @@ html[data-theme="light"] .other-leo-input {
 }
 
 .optional-types {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
 }
 
 .optional-types button {
+  width: 100%;
   background: #1a2029;
   border: 1px solid #303744;
   color: #cbd1da;
