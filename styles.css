@@ -694,18 +694,31 @@ html[data-theme="light"] .user-id-input {
 }
 
 .optional-types button {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
   cursor: pointer;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  transition: background 0.15s ease;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
 }
 
 .optional-types button.selected {
-  background: var(--btn-selected-bg);
-  color: var(--btn-selected-text);
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .optional-types button {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .optional-types button.selected {
+  background: #2563eb;
+  color: white;
 }
 
 .other-leo-title {
