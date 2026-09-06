@@ -3,6 +3,9 @@ const state = {
   recentCharges: [],
   reportType: "warning",
   impoundmentChoice: "no",
+  optionalFineChoice: {},   // keyed by penal code
+  optionalJailChoice: {},   // keyed by penal code
+
 
   // NEW: Other LEO involvement
   otherLeoInvolved: "no",
@@ -570,6 +573,44 @@ document.getElementById("impoundmentGroup")
 document.getElementById("optionalFineGroup")
   .classList.toggle("hidden", !showOptionalFineUI);
 
+// ⭐ Populate Optional Fine List
+const fineList = document.getElementById("optionalFineList");
+fineList.innerHTML = "";
+
+state.recentCharges
+  .filter(c => c.fineOptional)
+  .forEach(c => {
+    const row = document.createElement("div");
+    row.className = "optional-item";
+    row.innerHTML = `
+      <div>${c.code} - ${c.reference}</div>
+      <div class="optional-buttons">
+        <button class="optional-fine-type" data-code="${c.code}" data-choice="yes">Yes</button>
+        <button class="optional-fine-type" data-code="${c.code}" data-choice="no">No</button>
+      </div>
+    `;
+    fineList.appendChild(row);
+  });
+
+// ⭐ Populate Optional Jail List
+const jailList = document.getElementById("optionalJailList");
+jailList.innerHTML = "";
+
+state.recentCharges
+  .filter(c => c.jailOptional)
+  .forEach(c => {
+    const row = document.createElement("div");
+    row.className = "optional-item";
+    row.innerHTML = `
+      <div>${c.code} - ${c.reference}</div>
+      <div class="optional-buttons">
+        <button class="optional-jail-type" data-code="${c.code}" data-choice="yes">Yes</button>
+        <button class="optional-jail-type" data-code="${c.code}" data-choice="no">No</button>
+      </div>
+    `;
+    jailList.appendChild(row);
+  });
+
 document.getElementById("optionalJailGroup")
   .classList.toggle("hidden", !showOptionalJailUI);
 
@@ -646,22 +687,40 @@ function buildCopyText() {
       continue;
     }
 
-    if (state.reportType === "arrest") {
+   if (state.reportType === "arrest") {
   const jail = Number(item.jailTime || 0);
+  const imp = item.impoundment === "yes" || item.impoundment === "officer discretion";
 
-  // Build jailtime text
-  const jailText = jail > 0 ? ` + ${jail}s of jailtime` : "";
-
-  // Build impoundment text
-  const impText = imp ? " + Impoundment" : "";
-
-  // If fine is zero, hide the $0
-  if (Number(item.fine) === 0) {
-    lines.push(`${item.code}${jailText}${impText}`);
-  } else {
-    lines.push(`${item.code} - ${fine}${jailText}${impText}`);
+  // Optional fine
+  let fineText = "";
+  if (item.fineOptional) {
+    const choice = state.optionalFineChoice[item.code];
+    if (choice === "yes") fineText = ` - ${fine}`;
+    else fineText = ` - ~~${fine}~~`;
+  } else if (item.fine > 0) {
+    fineText = ` - ${fine}`;
   }
 
+  // Optional jail
+  let jailText = "";
+  if (item.jailOptional) {
+    const choice = state.optionalJailChoice[item.code];
+    if (choice === "yes") jailText = ` + ${jail}s of jailtime`;
+    else jailText = ` + ~~${jail}s of jailtime~~`;
+  } else if (jail > 0) {
+    jailText = ` + ${jail}s of jailtime`;
+  }
+
+  // Impoundment
+  let impText = "";
+  if (imp) {
+    impText =
+      state.impoundmentChoice === "yes"
+        ? " + Impoundment"
+        : " + ~~Impoundment~~";
+  }
+
+  lines.push(`${item.code}${fineText}${jailText}${impText}`);
   continue;
 }
 
@@ -683,32 +742,45 @@ function buildCopyText() {
   lines.push("");
   lines.push("**Total:**");
 
-  const totalFine = state.recentCharges.reduce(
-    (sum, item) => sum + Number(item.fine || 0),
-    0
-  );
-
-  const impoundInTotal =
-    state.reportType !== "warning" &&
-    state.impoundmentChoice === "yes" &&
-    state.recentCharges.some(
-      item => String(item.impoundment || "").toLowerCase() !== "no"
-    );
-
   if (state.reportType === "arrest") {
-    const totalJail = state.recentCharges
-      .filter(item => item.warrantsArrest)
-      .reduce((sum, item) => sum + Number(item.jailTime || 0), 0);
+  let totalFine = 0;
+  let totalJail = 0;
+  let impoundInTotal = false;
 
-    lines.push(
-      `${totalJail}s of Jailtime & ${money(totalFine)}${
-        impoundInTotal ? " + Impoundment" : ""
-      }`
-    );
-  } else {
-    const base = state.reportType === "warning" ? "$0.00" : money(totalFine);
-    lines.push(`${base}${impoundInTotal ? " + Impoundment" : ""}`);
+  for (const item of state.recentCharges) {
+    // Fine
+    if (item.fineOptional) {
+      if (state.optionalFineChoice[item.code] === "yes") {
+        totalFine += Number(item.fine || 0);
+      }
+    } else {
+      totalFine += Number(item.fine || 0);
+    }
+
+    // Jail
+    if (item.jailOptional) {
+      if (state.optionalJailChoice[item.code] === "yes") {
+        totalJail += Number(item.jailTime || 0);
+      }
+    } else if (item.warrantsArrest) {
+      totalJail += Number(item.jailTime || 0);
+    }
+
+    // Impound
+    if (
+      (item.impoundment === "yes" || item.impoundment === "officer discretion") &&
+      state.impoundmentChoice === "yes"
+    ) {
+      impoundInTotal = true;
+    }
   }
+
+  lines.push(
+    `${totalJail}s of Jailtime & ${money(totalFine)}${
+      impoundInTotal ? " + Impoundment" : ""
+    }`
+  );
+}
 
   return lines.join("\n");
 }
@@ -853,6 +925,36 @@ document.querySelectorAll(".impound-type").forEach(btn => {
     state.impoundmentChoice = btn.dataset.impound;
     updateImpoundmentUI();
   };
+});
+
+// ⭐ OPTIONAL FINE BUTTONS
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".optional-fine-type");
+  if (!btn) return;
+
+  const code = btn.dataset.code;
+  const choice = btn.dataset.choice;
+
+  state.optionalFineChoice[code] = choice;
+
+  // Toggle selected class
+  btn.parentElement.querySelectorAll(".optional-fine-type")
+    .forEach(b => b.classList.toggle("selected", b === btn));
+});
+
+// ⭐ OPTIONAL JAIL BUTTONS
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".optional-jail-type");
+  if (!btn) return;
+
+  const code = btn.dataset.code;
+  const choice = btn.dataset.choice;
+
+  state.optionalJailChoice[code] = choice;
+
+  // Toggle selected class
+  btn.parentElement.querySelectorAll(".optional-jail-type")
+    .forEach(b => b.classList.toggle("selected", b === btn));
 });
 
 // REPORT TYPE BUTTONS
