@@ -550,6 +550,40 @@ html[data-theme="light"] .reset-btn {
   animation: modalFadeIn .2s ease-out;
 }
 
+/* Login backdrop (full-screen overlay) */
+.login-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(0,0,0,.63);
+  backdrop-filter: blur(10px);
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .login-backdrop {
+    background: rgba(0,0,0,.75);
+  }
+}
+
+/* Login modal */
+.login-modal {
+  width: min(420px, 100%);
+  padding: 24px;
+  background: #11151c;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+}
+  
+html[data-theme="light"] .login-modal {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #d1d5db;
+  box-shadow: 0 20px 60px rgba(15,23,42,.18);
+}
+
 /* Make modal scroll internally */
 .modal {
   max-height: 85vh;
@@ -1030,4 +1064,15 @@ html[data-theme="light"] .watermark {
   .preview-head {
     align-items: flex-start;
   }
+}
+
+/* Make modal scroll internally */
+.modal {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* Allow ONLY the main continue modal backdrop to scroll */
+#modalBackdrop {
+  overflow-y: auto;
 }
