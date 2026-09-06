@@ -550,11 +550,11 @@ html[data-theme="light"] .reset-btn {
   animation: modalFadeIn .2s ease-out;
 }
 
-/* Login backdrop (full-screen overlay) */
+/* LOGIN BACKDROP — restore original modal behavior */
 .login-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 2000;
   display: grid;
   place-items: center;
   padding: 22px;
@@ -568,20 +568,75 @@ html[data-theme="light"] .reset-btn {
   }
 }
 
-/* Login modal */
+/* LOGIN MODAL — restore original size + spacing */
 .login-modal {
   width: min(420px, 100%);
-  padding: 24px;
+  padding: 26px 28px;
   background: #11151c;
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: 0 24px 70px rgba(0,0,0,.55);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-  
+
 html[data-theme="light"] .login-modal {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #d1d5db;
   box-shadow: 0 20px 60px rgba(15,23,42,.18);
+}
+
+/* LOGIN INPUTS — restore compact spacing */
+.login-input {
+  width: 100%;
+  padding: 12px 13px;
+  background: #0b0f14;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+html[data-theme="light"] .login-input {
+  background: #ffffff;
+}
+
+/* LOGIN BUTTONS — restore original look */
+.dept-option {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dept-option.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .dept-option {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .dept-option.selected {
+  background: #2563eb;
+  color: white;
+}
+
+/* LOGIN CONTINUE BUTTON */
+.login-continue {
+  background: var(--accent);
+  color: white;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* Make modal scroll internally */
