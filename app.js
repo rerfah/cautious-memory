@@ -536,6 +536,43 @@ function openModal() {
   updateReportTypeButtons();
   updateImpoundmentUI();
 
+  // ⭐ Step 1 — Should impoundment UI appear?
+const showImpoundUI =
+  state.reportType === "arrest" &&
+  state.recentCharges.some(c =>
+    c.impoundment === "yes" ||
+    c.impoundment === "officer discretion"
+  );
+
+// ⭐ Step 2 — Should optional fine UI appear?
+const showOptionalFineUI =
+  state.recentCharges.some(c => c.fineOptional === true);
+
+// ⭐ Step 3 — Should optional jailtime UI appear?
+const showOptionalJailUI =
+  state.recentCharges.some(c => c.jailOptional === true);
+
+// ⭐ Step 4 — Should fine appear in total?
+const hasAnyFine =
+  state.recentCharges.some(c =>
+    c.fine > 0 || c.fineOptional === true
+  );
+
+// ⭐ Step 5 — Should jailtime appear in total?
+const hasAnyJail =
+  state.recentCharges.some(c =>
+    c.jailTime > 0 || c.jailOptional === true
+  );
+
+document.getElementById("impoundmentGroup")
+  .classList.toggle("hidden", !showImpoundUI);
+
+document.getElementById("optionalFineGroup")
+  .classList.toggle("hidden", !showOptionalFineUI);
+
+document.getElementById("optionalJailGroup")
+  .classList.toggle("hidden", !showOptionalJailUI);
+
   els.userId.value = "";
   setInputValid();
 
