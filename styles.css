@@ -659,6 +659,47 @@ html[data-theme="light"] .user-id-input {
   margin-top: 22px;
 }
 
+/* ⭐ Match Optional Fine/Jail UI to LEO UI */
+
+.optional-group {
+  margin-top: 20px;
+}
+
+.optional-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.optional-item {
+  margin-bottom: 16px;
+}
+
+.optional-question {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.optional-types {
+  display: flex;
+  gap: 10px;
+}
+
+.optional-types button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background 0.15s ease;
+}
+
+.optional-types button.selected {
+  background: var(--btn-selected-bg);
+  color: var(--btn-selected-text);
+}
+
 .other-leo-title {
   margin: 0 0 10px;
   font-size: 15px;
