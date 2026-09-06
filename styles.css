@@ -1,57 +1,3 @@
-/* EMERGENCY: highest-priority isolation for modals */
-#modalBackdrop.modal-backdrop,
-#confirmBackdrop.modal-backdrop {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 1000 !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: 22px !important;
-  background: rgba(0,0,0,.63) !important;
-  backdrop-filter: blur(10px) !important;
-  overflow: hidden !important;
-}
-
-#modalBackdrop .modal,
-#confirmBackdrop .modal {
-  width: min(680px, 100%) !important;
-  padding: 24px !important;
-  background: #11151c !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 28px 90px rgba(0,0,0,.55) !important;
-  max-height: 85vh !important;
-  overflow-y: auto !important;
-  display: block !important;
-  gap: initial !important;
-  flex-direction: initial !important;
-}
-
-/* EMERGENCY: isolate login under its ID so it cannot leak */
-#loginBackdrop.login-backdrop {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 2000 !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: 22px !important;
-  background: rgba(0,0,0,.55) !important;
-  backdrop-filter: blur(14px) !important;
-  overflow: hidden !important;
-}
-
-#loginBackdrop .login-modal {
-  width: min(420px, 90%) !important;
-  padding: 26px 24px 24px !important;
-  background: var(--panel) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 22px 70px rgba(0,0,0,.55) !important;
-  display: block !important;
-  gap: initial !important;
-  flex-direction: initial !important;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -431,8 +377,152 @@ html[data-theme="light"] .preview-row {
   margin-top: 14px;
 }
 
+/* Buttons */
+.preview-actions button,
+.report-type,
+.impound-type,
+.modal-actions button,
+.actions button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, box-shadow .15s ease, transform .1s ease;
+}
+
+.preview-actions button:focus-visible,
+.report-type:focus-visible,
+.impound-type:focus-visible,
+.modal-actions button:focus-visible,
+.actions button:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.go-back {
+  background: var(--red);
+}
+
+.add-charge {
+  background: var(--green);
+}
+
+.empty-state {
+  color: var(--muted);
+  padding: 20px 18px;
+  text-align: center;
+}
+
+/* Recent charges */
+.recent-list {
+  padding: 0 12px;
+}
+
+.recent-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: #0e1218;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin-bottom: 8px;
+}
+
+html[data-theme="light"] .recent-item {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.recent-title {
+  font-weight: 650;
+}
+
+.recent-subtitle {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.remove-charge {
+  width: 29px;
+  height: 29px;
+  padding: 0 !important;
+  border: 1px solid #3a404a !important;
+  border-radius: 7px !important;
+  background: #1a1f27;
+  color: #b8bec8;
+  cursor: pointer;
+}
+
+html[data-theme="light"] .remove-charge {
+  background: #f9fafb;
+  border-color: #d1d5db !important;
+}
+
+.remove-charge:hover {
+  color: white;
+  border-color: #666e7a !important;
+}
+
+/* Summary */
+.summary-charges {
+  padding: 0 18px 10px;
+}
+
+.summary-charge {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+}
+
+html[data-theme="light"] .summary-total {
+  border-top-color: #e5e7eb;
+}
+
+.summary-total strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Actions */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 130px;
+  gap: 12px;
+}
+
+.continue-btn {
+  background: var(--green);
+  color: #04130a;
+}
+
+.reset-btn {
+  background: #171b22;
+  color: #c9ced7;
+  border: 1px solid var(--border) !important;
+}
+
+html[data-theme="light"] .reset-btn {
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
 /* CONTINUE MODAL BACKDROP */
-#modalBackdrop.modal-backdrop {
+.modal-backdrop {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -446,7 +536,7 @@ html[data-theme="light"] .preview-row {
 }
 
 /* CONTINUE MODAL */
-#modalBackdrop .modal {
+.modal {
   width: min(680px, 100%);
   padding: 24px;
   background: #11151c;
@@ -458,7 +548,7 @@ html[data-theme="light"] .preview-row {
   overflow-y: auto;
 }
 
-html[data-theme="light"] #modalBackdrop .modal {
+html[data-theme="light"] .modal {
   background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
   box-shadow: 0 24px 70px rgba(15,23,42,.18);
@@ -564,10 +654,81 @@ html[data-theme="light"] .user-id-input {
   box-shadow: 0 0 0 2px rgba(239,68,68,.13);
 }
 
-.number-error {
-  margin: 8px 0 0;
-  color: #ff7777;
+/* OPTIONAL FINE / OPTIONAL JAILTIME */
+.optional-group {
+  margin-top: 20px;
+}
+
+.optional-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Optional item card */
+.optional-item {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+html[data-theme="light"] .optional-item {
+  background: rgba(255,255,255,0.85);
+  border-color: #d1d5db;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.12);
+}
+
+/* Optional item title */
+.optional-question {
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+/* Optional item description */
+.optional-description {
   font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.optional-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.optional-types button {
+  width: 100%;
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.optional-types button.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .optional-types button {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .optional-types button.selected {
+  background: #2563eb;
+  color: white;
 }
 
 /* OTHER LEO INVOLVEMENT */
@@ -846,7 +1007,7 @@ html[data-theme="light"] .watermark {
 }
 
 /* CONTINUE MODAL SCROLL FIX */
-#modalBackdrop .modal {
+.modal {
   max-height: 85vh;
   overflow-y: auto;
 }
