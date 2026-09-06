@@ -139,9 +139,8 @@ button {
   transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-/* Darker watermark in light theme */
 html[data-theme="light"] .watermark {
-  color: #4b5563 !important; /* dark grey */
+  color: #4b5563 !important;
   opacity: 0.9;
 }
 
@@ -175,7 +174,7 @@ html[data-theme="light"] .watermark {
 }
 
 html[data-theme="light"] .panel {
-  background: rgba(255, 255, 255, 0.85); /* translucent */
+  background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 12px 30px rgba(15,23,42,.12);
 }
 
@@ -662,63 +661,20 @@ html[data-theme="light"] .user-id-input {
   background: #ffffff;
 }
 
+.user-id-input.invalid {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(239,68,68,.13);
+}
+
+.number-error {
+  margin: 8px 0 0;
+  color: #ff7777;
+  font-size: 13px;
+}
+
 /* OTHER LEO INVOLVEMENT */
 .other-leo-group {
   margin-top: 22px;
-}
-
-/* ⭐ Match Optional Fine/Jail UI to LEO UI */
-
-.optional-group {
-  margin-top: 20px;
-}
-
-.optional-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.optional-item {
-  margin-bottom: 16px;
-}
-
-.optional-question {
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-
-.optional-types {
-  display: flex;
-  gap: 10px;
-}
-
-.optional-types button {
-  background: #1a2029;
-  border: 1px solid #303744;
-  color: #cbd1da;
-  padding: 12px 14px;
-  border-radius: 9px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, transform .1s ease;
-}
-
-.optional-types button.selected {
-  background: #243a5c;
-  border-color: var(--accent);
-  color: white;
-}
-
-html[data-theme="light"] .optional-types button {
-  background: #f9fafb;
-  border-color: #d1d5db;
-  color: #111827;
-}
-
-html[data-theme="light"] .optional-types button.selected {
-  background: #2563eb;
-  color: white;
 }
 
 .other-leo-title {
@@ -790,15 +746,57 @@ html[data-theme="light"] .other-leo-input {
   background: rgba(255,255,255,0.85);
 }
 
-.user-id-input.invalid {
-  border-color: var(--red);
-  box-shadow: 0 0 0 2px rgba(239,68,68,.13);
+/* OPTIONAL FINE / OPTIONAL JAILTIME — MATCH LEO BUTTONS */
+.optional-group {
+  margin-top: 20px;
 }
 
-.number-error {
-  margin: 8px 0 0;
-  color: #ff7777;
-  font-size: 13px;
+.optional-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.optional-item {
+  margin-bottom: 16px;
+}
+
+.optional-question {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.optional-types {
+  display: flex;
+  gap: 10px;
+}
+
+.optional-types button {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.optional-types button.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .optional-types button {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .optional-types button.selected {
+  background: #2563eb;
+  color: white;
 }
 
 /* Modal actions */
@@ -834,6 +832,108 @@ html[data-theme="light"] .close-btn {
   width: 1px;
   height: 1px;
   opacity: 0;
+}
+
+/* Tooltip */
+.tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 14px;
+  background: rgba(18, 22, 29, 0.55);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 260px;
+  z-index: 999999;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  box-shadow:
+    0 0 18px rgba(59,130,246,0.45),
+    0 0 6px rgba(59,130,246,0.35),
+    0 4px 12px rgba(0,0,0,0.45);
+  will-change: opacity, transform, left, top;
+}
+
+.tooltip.hidden {
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+}
+
+.tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+html[data-theme="light"] .tooltip {
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #111827 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Background images */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  z-index: -2;
+  filter: blur(8px) brightness(0.75);
+  transform: translateY(calc(var(--scroll) * -0.08));
+  will-change: transform;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  z-index: -1;
+  filter: blur(8px) brightness(0.75);
+  transform: translateY(calc(var(--scroll) * -0.08));
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+html[data-theme="dark"] body::after {
+  opacity: 1;
+}
+
+html[data-theme="light"] body::after {
+  opacity: 0;
+}
+
+/* Topbar text overrides */
+.topbar-main p,
+.tip {
+  color: #ffffff !important;
+}
+
+.watermark {
+  color: var(--text);
+}
+
+html[data-theme="light"] .watermark {
+  color: var(--text) !important;
+}
+
+/* Validation */
+.invalid {
+  border-color: #ff4d4d !important;
 }
 
 /* Animations */
@@ -883,390 +983,3 @@ html[data-theme="light"] .close-btn {
     align-items: flex-start;
   }
 }
-
-/* TOP ALERT TOOLTIP (Animated) */
-.top-alert {
-  position: fixed;
-  top: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1a1f27;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 10px;
-  border: 2px solid var(--red);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-  font-size: 0.95rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 999999;
-  opacity: 0;
-  transition:
-    top 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.35s ease-out;
-}
-
-html[data-theme="light"] .top-alert {
-  background: #ffffff;
-  color: #111827;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
-}
-
-.top-alert.show {
-  top: 18px;
-  opacity: 1;
-}
-
-.alert-text {
-  flex: 1;
-}
-
-.alert-close {
-  background: transparent;
-  border: 0;
-  color: var(--red);
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0 6px;
-  line-height: 1;
-}
-
-.alert-close:hover {
-  color: #ff6b6b;
-}
-
-/* LOGIN SCREEN BACKDROP */
-.login-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1100;
-  display: grid;
-  place-items: center;
-  backdrop-filter: blur(14px);
-  background: rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.login-backdrop.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* LOGIN MODAL */
-.login-modal {
-  width: min(420px, 90%);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 26px 24px 24px;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
-  transition:
-    background-color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    color 0.35s ease;
-}
-
-html[data-theme="light"] .login-modal {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: #d1d5db;
-  box-shadow: 0 24px 70px rgba(15,23,42,0.18);
-}
-
-.login-modal h2 {
-  margin: 0 0 18px;
-  text-align: center;
-}
-
-/* LOGIN LABELS + INPUTS */
-.login-label {
-  display: block;
-  margin: 14px 0 6px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.login-input {
-  width: 100%;
-  padding: 11px 13px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--panel-2);
-  color: var(--text);
-}
-
-html[data-theme="light"] .login-input {
-  background: #f9fafb;
-}
-
-/* DEPARTMENT OPTIONS */
-.login-dept-group {
-  margin: 18px 0 6px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-}
-
-.dept-option {
-  padding: 11px 10px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--panel-2);
-  color: var(--text);
-  font-weight: 700;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-}
-
-.dept-option:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-}
-
-.dept-option.selected {
-  background: var(--accent);
-  color: #ffffff;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
-}
-
-html[data-theme="light"] .dept-option {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-  color: #111827;
-}
-
-html[data-theme="light"] .dept-option.selected {
-  background: #2563eb;
-  color: #ffffff;
-}
-
-/* REMEMBER LOGIN ROW */
-.remember-row {
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.remember-row input {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-/* LOGIN ACTION BUTTONS */
-.login-actions {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.login-continue,
-.login-close {
-  border: 0;
-  border-radius: 9px;
-  padding: 11px 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
-}
-
-.login-continue {
-  background: var(--green);
-  color: #04130a;
-}
-
-.login-close {
-  background: var(--panel-2);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-html[data-theme="light"] .login-close {
-  background: #f9fafb;
-  color: #111827;
-  border-color: #d1d5db;
-}
-
-.login-continue:hover,
-.login-close:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-/* SMALL SCREEN LOGIN LAYOUT */
-@media (max-width: 480px) {
-  .login-modal {
-    width: calc(100% - 40px);
-    padding: 22px 18px 18px;
-  }
-
-  .login-dept-group {
-    grid-template-columns: 1fr;
-  }
-
-  .login-actions {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.tooltip {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 10px 14px;
-  background: rgba(18, 22, 29, 0.55);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 14px;
-  max-width: 260px;
-  z-index: 999999;
-  pointer-events: none;
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 0.25s ease-out,
-    transform 0.25s ease-out;
-
-  box-shadow:
-    0 0 18px rgba(59,130,246,0.45),
-    0 0 6px rgba(59,130,246,0.35),
-    0 4px 12px rgba(0,0,0,0.45);
-
-  will-change: opacity, transform, left, top;
-}
-
-.tooltip.hidden {
-  opacity: 0;
-  transform: translateY(6px);
-  visibility: hidden;
-}
-
-.tooltip.show {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-}
-
-/* Pure white tooltip in light theme */
-html[data-theme="light"] .tooltip {
-  background: rgba(255, 255, 255, 0.85) !important;
-  color: #111827 !important;
-  border-color: #d1d5db !important;
-}
-
-/* DAY IMAGE (base layer) */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("images/7eac7d46ba38ef4bc569abb022e4fde2.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%; /* zoom level */
-  z-index: -2;
-
-  filter: blur(8px) brightness(0.75);
-  transform: translateY(calc(var(--scroll) * -0.08));
-  will-change: transform;
-}
-
-/* NIGHT IMAGE (fade layer) */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("images/d200a6c7acbe9d7163c9002f2f61f781.webp");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  z-index: -1;
-
-  filter: blur(8px) brightness(0.75);
-  transform: translateY(calc(var(--scroll) * -0.08));
-  will-change: transform;
-
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-/* NIGHT MODE → fade night image in */
-html[data-theme="dark"] body::after {
-  opacity: 1;
-}
-
-/* LIGHT MODE → fade night image out */
-html[data-theme="light"] body::after {
-  opacity: 0;
-}
-
-/* Make topbar text, tips, and watermark theme-aware */
-.topbar-main p,
-
-/* Keep tip text white always NEW ADDITION BTW*/
-.tip {
-  color: #ffffff !important;
-}
-
-.watermark {
-  color: var(--text);
-}
-
-/* Subtitle matches title */
-.topbar-main p {
-  color: var(--text) !important;
-}
-
-/* Watermark matches title in light theme */
-html[data-theme="light"] .watermark {
-  color: var(--text) !important;
-}
-
-.invalid {
-  border-color: #ff4d4d !important;
-}
-
-.modal-section {
-  margin-top: 16px;
-}
-
-.modal-label {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.optional-group {
-  margin-top: 20px;
-}
-
-.optional-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.optional-question {
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-
-.optional-types {
-  display: flex;
-  gap: 10px;
-}
-
