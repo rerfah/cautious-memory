@@ -998,6 +998,33 @@ document.querySelectorAll(".impound-type").forEach(btn => {
   };
 });
 
+// ⭐ OPTIONAL FINE BUTTONS
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".optional-fine-type");
+  if (!btn) return;
+
+  const code = btn.dataset.code;
+  const choice = btn.dataset.choice;
+
+  state.optionalFineChoice[code] = choice;
+
+  btn.parentElement.querySelectorAll(".optional-fine-type")
+    .forEach(b => b.classList.toggle("selected", b === btn));
+});
+
+// ⭐ OPTIONAL JAIL BUTTONS
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".optional-jail-type");
+  if (!btn) return;
+
+  const code = btn.dataset.code;
+  const choice = btn.dataset.choice;
+
+  state.optionalJailChoice[code] = choice;
+
+  btn.parentElement.querySelectorAll(".optional-jail-type")
+    .forEach(b => b.classList.toggle("selected", b === btn));
+});
 
 // ⭐ STEP 4 — OTHER LEO INVOLVEMENT BUTTONS
 document.querySelectorAll(".other-leo-type").forEach(btn => {
