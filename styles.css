@@ -1210,3 +1210,42 @@ html[data-theme="light"] .watermark {
   background: var(--btn-selected-bg);
   color: var(--btn-selected-text);
 }
+
+.optional-group {
+  margin-top: 20px;
+}
+
+.optional-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.optional-item {
+  margin-bottom: 16px;
+}
+
+.optional-question {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.optional-types {
+  display: flex;
+  gap: 10px;
+}
+
+.optional-types button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background 0.15s ease;
+}
+
+.optional-types button.selected {
+  background: var(--btn-selected-bg);
+  color: var(--btn-selected-text);
+}
