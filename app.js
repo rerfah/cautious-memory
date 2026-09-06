@@ -972,60 +972,6 @@ document.addEventListener("click", e => {
     .forEach(b => b.classList.toggle("selected", b === btn));
 });
 
-// REPORT TYPE BUTTONS
-document.querySelectorAll(".report-type").forEach(btn => {
-  btn.onclick = () => {
-    state.reportType = btn.dataset.report;
-
-    document.querySelectorAll(".report-type").forEach(b =>
-      b.classList.toggle("selected", b === btn)
-    );
-
-    // Show impoundment only for arrest reports
-    document.getElementById("impoundmentGroup")
-      .classList.toggle("hidden", state.reportType !== "arrest");
-  };
-});
-
-// IMPOUNDMENT BUTTONS
-document.querySelectorAll(".impound-type").forEach(btn => {
-  btn.onclick = () => {
-    state.impoundmentChoice = btn.dataset.impound;
-
-    document.querySelectorAll(".impound-type").forEach(b =>
-      b.classList.toggle("selected", b === btn)
-    );
-  };
-});
-
-// ⭐ OPTIONAL FINE BUTTONS
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".optional-fine-type");
-  if (!btn) return;
-
-  const code = btn.dataset.code;
-  const choice = btn.dataset.choice;
-
-  state.optionalFineChoice[code] = choice;
-
-  btn.parentElement.querySelectorAll(".optional-fine-type")
-    .forEach(b => b.classList.toggle("selected", b === btn));
-});
-
-// ⭐ OPTIONAL JAIL BUTTONS
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".optional-jail-type");
-  if (!btn) return;
-
-  const code = btn.dataset.code;
-  const choice = btn.dataset.choice;
-
-  state.optionalJailChoice[code] = choice;
-
-  btn.parentElement.querySelectorAll(".optional-jail-type")
-    .forEach(b => b.classList.toggle("selected", b === btn));
-});
-
 // ⭐ STEP 4 — OTHER LEO INVOLVEMENT BUTTONS
 document.querySelectorAll(".other-leo-type").forEach(btn => {
   btn.onclick = () => {
