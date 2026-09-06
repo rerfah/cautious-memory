@@ -17,29 +17,23 @@
       <h2 id="loginTitle">Login</h2>
 
       <label class="login-label" for="loginUsername">Username:</label>
-      <input id="loginUsername" class="login-input" type="text" autocomplete="off"
-             placeholder="Enter your username">
-      <p id="loginUsernameError" class="number-error hidden">
-        ⓘ Invalid input: Usernames can only be between 3 and 20 characters.
-      </p>
+      <input id="loginUsername" class="login-input" type="text" autocomplete="off" placeholder="Enter your username">
+      <p id="loginUsernameError" class="number-error hidden">ⓘ Invalid input: Usernames can only be between 3 and 20 characters.</p>
 
       <label class="login-label" for="loginRank">Rank:</label>
-      <input id="loginRank" class="login-input" type="text" autocomplete="off"
-             placeholder="Enter your rank">
+      <input id="loginRank" class="login-input" type="text" autocomplete="off" placeholder="Enter your rank">
 
       <div class="login-dept-group" role="radiogroup" aria-label="Department">
-        <button class="dept-option" data-dept="WSP" type="button" autocomplete="off">WSP</button>
-        <button class="dept-option" data-dept="OCSO" type="button" autocomplete="off">OCSO</button>
-        <button class="dept-option" data-dept="NPS" type="button" autocomplete="off">NPS</button>
+        <button class="dept-option" data-dept="WSP" type="button">WSP</button>
+        <button class="dept-option" data-dept="OCSO" type="button">OCSO</button>
+        <button class="dept-option" data-dept="NPS" type="button">NPS</button>
       </div>
 
-      <!-- Remember Login Toggle -->
       <label class="remember-row">
         <input id="rememberLogin" type="checkbox">
         Remember my login info
       </label>
 
-      <!-- Continue button (full width) -->
       <div class="login-actions">
         <button id="loginContinue" class="login-continue" type="button">Continue</button>
       </div>
@@ -77,9 +71,7 @@
           <span id="codeCount" class="muted"></span>
         </div>
 
-        <input id="searchInput" class="search" type="search"
-               placeholder="Search penal codes..." autocomplete="off">
-
+        <input id="searchInput" class="search" type="search" placeholder="Search penal codes..." autocomplete="off">
         <div id="codeList" class="code-list" aria-label="Penal codes"></div>
       </div>
 
@@ -132,48 +124,39 @@
     </section>
   </main>
 
-  <!-- ⭐ MAIN MODAL (REORDERED) -->
+  <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal" role="document">
       <h2 id="modalTitle">Continue</h2>
 
-      <!-- ⭐ REPORT TYPE -->
       <div class="report-types" role="radiogroup" aria-label="Report type">
         <button class="report-type" data-report="warning" type="button">Written Warning</button>
         <button class="report-type" data-report="citation" type="button">Citation</button>
         <button class="report-type" data-report="arrest" type="button">Arrest Report</button>
       </div>
 
-      <!-- ⭐ USER ID (moved up) -->
       <label class="user-id-label" for="userId">User ID</label>
-      <input id="userId" class="user-id-input" type="text" inputmode="numeric"
-             pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
-
+      <input id="userId" class="user-id-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Enter user ID">
       <p id="numberError" class="number-error hidden">ⓘ Only numbers may be inputted</p>
 
-      <!-- ⭐ IMPOUNDMENT -->
       <div id="impoundmentGroup" class="impoundment-group">
         <p class="impoundment-label">Is their vehicle getting impounded?</p>
-
         <div class="impoundment-types" role="radiogroup" aria-label="Impoundment">
           <button class="impound-type" data-impound="yes" type="button">Yes</button>
           <button class="impound-type" data-impound="no" type="button">No</button>
         </div>
       </div>
 
-      <!-- ⭐ OPTIONAL FINE -->
       <div id="optionalFineGroup" class="optional-group hidden">
         <h3 class="optional-title">Optional Fine</h3>
         <div id="optionalFineList"></div>
       </div>
 
-      <!-- ⭐ OPTIONAL JAILTIME -->
       <div id="optionalJailGroup" class="optional-group hidden">
         <h3 class="optional-title">Optional Jailtime</h3>
         <div id="optionalJailList"></div>
       </div>
 
-      <!-- ⭐ OTHER LEO INVOLVEMENT -->
       <div class="other-leo-group">
         <h3 class="other-leo-title">Were any other LEO involved?</h3>
 
@@ -185,28 +168,20 @@
         <div id="otherLeoFields" class="hidden">
           <label class="other-leo-label">Put the usernames of anyone else involved.</label>
           <small class="other-leo-tip">Use commas to separate usernames if more than one other person was/is involved.</small>
-          <input id="otherLeoNames" class="other-leo-input" type="text" autocomplete="off"
-                 placeholder="Username1, Username2">
-          <p id="otherLeoNameError" class="number-error hidden">
-            ⓘ Invalid input: Usernames can only be between 3 and 20 characters.
-          </p>
+          <input id="otherLeoNames" class="other-leo-input" type="text" autocomplete="off" placeholder="Username1, Username2">
+          <p id="otherLeoNameError" class="number-error hidden">ⓘ Invalid input: Usernames can only be between 3 and 20 characters.</p>
 
           <label class="other-leo-label">What is their current rank for the department they are online as?</label>
           <small class="other-leo-tip">Use commas to separate ranks if more than one other person was/is involved.</small>
-          <input id="otherLeoRanks" class="other-leo-input" type="text" autocomplete="off"
-                 placeholder="Sergeant, Corporal">
+          <input id="otherLeoRanks" class="other-leo-input" type="text" autocomplete="off" placeholder="Sergeant, Corporal">
 
           <label class="other-leo-label">What department are they online as?</label>
           <small class="other-leo-tip">Use commas to separate the departments if more than one other person was/is involved.</small>
-          <input id="otherLeoDepts" class="other-leo-input" type="text" autocomplete="off"
-                 placeholder="OCSO, WSP">
-          <p id="otherLeoDeptError" class="number-error hidden">
-            ⓘ Invalid input: Department does not exist.
-          </p>
+          <input id="otherLeoDepts" class="other-leo-input" type="text" autocomplete="off" placeholder="OCSO, WSP">
+          <p id="otherLeoDeptError" class="number-error hidden">ⓘ Invalid input: Department does not exist.</p>
         </div>
       </div>
 
-      <!-- ⭐ COPY BUTTON -->
       <div class="modal-actions">
         <button id="copyBtn" class="copy-btn" type="button">Copy information</button>
         <button id="modalCloseBtn" class="close-btn" type="button">Close</button>
