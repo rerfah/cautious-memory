@@ -1260,10 +1260,6 @@ html[data-theme="light"] .watermark {
   margin-bottom: 10px;
 }
 
-.optional-item {
-  margin-bottom: 16px;
-}
-
 .optional-question {
   margin-bottom: 6px;
   font-weight: 500;
@@ -1274,17 +1270,3 @@ html[data-theme="light"] .watermark {
   gap: 10px;
 }
 
-.optional-types button {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  transition: background 0.15s ease;
-}
-
-.optional-types button.selected {
-  background: var(--btn-selected-bg);
-  color: var(--btn-selected-text);
-}
