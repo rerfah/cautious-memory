@@ -44,8 +44,7 @@ html[data-theme="light"] {
 .theme-transition body,
 .theme-transition .panel,
 .theme-transition .modal,
-.theme-transition .login-modal,
-.theme-transition .topbar-main p {
+.theme-transition .login-modal {
   transition:
     background-color 0.35s ease,
     color 0.35s ease,
@@ -140,7 +139,7 @@ button {
 }
 
 html[data-theme="light"] .watermark {
-  color: #4b5563 !important;
+  color: #4b5563;
   opacity: 0.9;
 }
 
@@ -198,7 +197,7 @@ html[data-theme="light"] .panel {
 
 .tip {
   font-size: 0.85rem;
-  color: var(--muted);
+  color: #ffffff !important;
   margin-top: 6px;
 }
 
@@ -603,10 +602,6 @@ html[data-theme="light"] .report-type.selected {
   color: var(--text);
 }
 
-html[data-theme="light"] .impoundment-label {
-  color: var(--text);
-}
-
 .impoundment-types {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -629,7 +624,6 @@ html[data-theme="light"] .impound-type {
   background: #243a5c;
   border-color: var(--accent);
   color: white;
-  box-shadow: 0 0 0 1px rgba(59,130,246,.6);
 }
 
 html[data-theme="light"] .impound-type.selected {
@@ -746,7 +740,7 @@ html[data-theme="light"] .other-leo-input {
   background: rgba(255,255,255,0.85);
 }
 
-/* OPTIONAL FINE / OPTIONAL JAILTIME — MATCH LEO BUTTONS */
+/* OPTIONAL FINE / OPTIONAL JAILTIME */
 .optional-group {
   margin-top: 20px;
 }
@@ -857,7 +851,6 @@ html[data-theme="light"] .close-btn {
     0 0 18px rgba(59,130,246,0.45),
     0 0 6px rgba(59,130,246,0.35),
     0 4px 12px rgba(0,0,0,0.45);
-  will-change: opacity, transform, left, top;
 }
 
 .tooltip.hidden {
@@ -918,7 +911,10 @@ html[data-theme="light"] body::after {
 }
 
 /* Topbar text overrides */
-.topbar-main p,
+.topbar-main p {
+  color: var(--muted) !important;
+}
+
 .tip {
   color: #ffffff !important;
 }
@@ -928,7 +924,7 @@ html[data-theme="light"] body::after {
 }
 
 html[data-theme="light"] .watermark {
-  color: var(--text) !important;
+  color: #4b5563 !important;
 }
 
 /* Validation */
