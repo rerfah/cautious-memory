@@ -24,6 +24,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Criminal Threats is defined as; Someone who either verbally or by any written or printed communication maliciously threatens or commits injury to a person, property, or business."
 },
 {
@@ -35,6 +37,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Assault is defined as; Any person who attempts with unlawful force or violence to commit bodily harm to another person."
 },
 {
@@ -46,6 +50,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Assault with a Deadly Weapon is defined as; Any person who attempts with unlawful force or violence to commit bodily harm to another person using a dangerous weapon, in which the weapon could be used in ways to produce death or great bodily harm."
 },
 {
@@ -57,6 +63,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Battery is defined as; Whoever causes bodily harm to another by an act done with intent to cause bodily harm to that person or another without consent from the person."
 },
 {
@@ -68,6 +76,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Aggravated Battery is defined as; Whoever intentionally causes bodily harm to another by conduct that creates a substantial risk of great bodily harm."
 },
 {
@@ -79,6 +89,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Attempted Murder is defined as; A crime in which the perpetrator intends to kill someone, but the intended victim does not die."
 },
 {
@@ -90,6 +102,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Manslaughter is defined as; The unjustifiable and intentional killing of a human being without deliberation, premeditation, and malice."
 },
 {
@@ -101,6 +115,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Murder is defined as; Someone who unlawfully and with malice, either express or implied, causes the death of another human being."
 },
 {
@@ -112,6 +128,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "False Imprisonment is defined as; Intentionally confining or restraining a person without their consent."
 },
 {
@@ -123,6 +141,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Kidnapping is defined as; By force or threat seizes or confines someone without their consent and being held against their will."
 },
 {
@@ -134,6 +154,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Domestic Violence is defined as; An adult engaging in intentional infliction of physical pain or injury."
 },
 {
@@ -145,6 +167,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Domestic Violence (PTI) is defined as; An adult engaging in intentional infliction of physical pain or injury resulting in blunt force trauma or penetrating trauma."
 },
 {
@@ -156,6 +180,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Assault on a Public Servant is defined as; Any person who attempts with unlawful force or violence to commit bodily harm to the following; Government official, employee, or agent"
 },
 {
@@ -167,6 +193,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Attempted Assault is defined as; Any person who attempts with unlawful force or violence to commit bodily harm to the following, but is unsuccessful; Government official, employee, or agent"
 },
 {
@@ -178,6 +206,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Attempted Assault is defined as; Any person who attempts with unlawful force or violence to commit bodily harm to another person, but is unsuccessful."
 },
 {
@@ -189,6 +219,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(1) Crimes Against The Person",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Assault on a Peace Officer is defined as; Any person who attempts with unlawful force or violence to commit bodily harm against a peace officer, firefighter, emergency medical technician, etc."
 },
 {
@@ -200,6 +232,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Arson is defined as; Someone who knowingly sets fire or an explosive resulting in damage to person property."
 },
 {
@@ -211,6 +245,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Trespassing is defined as; Whoever intentionally enters the dwelling of another without the consent of some lawful person upon the premises."
 },
 {
@@ -222,6 +258,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Trespassing within a Restricted Facility is defined as; Whoever intentionally enters the dwelling of a restricted facility in which the facility is locked, restricted, or posted."
 },
 {
@@ -233,6 +271,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Burglary is defined as; Whoever intentionally enters a place without consent of the person with lawful ownership / possession with intent to steal or commit a felony."
 },
 {
@@ -244,6 +284,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Possession of Burglary Tools is defined as; A person who is in possession of any device or instrument intended or designed for use of breaking and entering into any building or room."
 },
 {
@@ -255,6 +297,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Robbery is defined as; Whoever intentionally steals or take property from the person of ownership through force and/or threatening."
 },
 {
@@ -266,6 +310,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Armed Robbery is defined as; Someone who uses a dangerous weapon to intentionally steal or take property from the person of ownership by using the dangerous weapon."
 },
 {
@@ -277,6 +323,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Petty Theft is defined as; Someone who intentionally takes and / or conceals property from another person without the other's consent with intent to deprive the owner permanently of possession of such property. Valued at LESS than $2,500."
 },
 {
@@ -288,6 +336,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Grand Theft is defined as; Someone who intentionally takes and / or conceals property from another person without the other's consent with intent to deprive the owner permanently of possession of such property. Valued at MORE than $2,500."
 },
 {
@@ -299,6 +349,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Grand Theft Auto is defined as; Stealing a vehicle with the intent to keep it permanently."
 },
 {
@@ -310,6 +362,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Receiving Stolen Property is defined as; Someone who knowingly or intentionally receives or conceals stolen property."
 },
 {
@@ -321,6 +375,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Extortion is defined as; Verbal or written communication that maliciously threatens to accuse another person of a crime or offense."
 },
 {
@@ -332,6 +388,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Forgery is defined as; When a person makes or alters writing with the intent to defraud. This is an offense when done to create an impression that it was done by another person or by an authority."
 },
 {
@@ -343,6 +401,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Vandalism is defined as; Someone who intentionally causes damage to any physical property of another without the person's consent."
 },
 {
@@ -354,6 +414,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Loitering is defined as; To hang around in a public place or business where no one has no particular or legal purpose."
 },
 {
@@ -365,6 +427,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Destruction to Civilian Property is defined as; Someone who intentionally causes damage to any physical property without the person's consent."
 },
 {
@@ -376,6 +440,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Someone who intentionally causes damage to any physical property in possession of the government."
 },
 {
@@ -387,6 +453,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(3) Crimes Against Public Decency",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -398,6 +466,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(3) Crimes Against Public Decency",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Stalking is defined as; A series of 2 or more acts carried out over time, short or long, that show a continuity of purpose. Examples include;\n\nMaintaining visual or physical proximity.\nApproaching or confronting the victim.\nAppearing the the victim's workplace or home.\nEntering property owned or occupied by the victim.\nContacting the victim via telephone, message, etc."
 },
 {
@@ -409,6 +479,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(3) Crimes Against Public Decency",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Public Urination is defined as; Someone who intentionally urinates in an area with bathrooms or areas in which a person does not have to empty their bladder in a public place."
 },
 {
@@ -420,6 +492,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(3) Crimes Against Public Decency",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Public Defecation is defined as; Defecating outside and in an open environment rather than in a toilet."
 },
 {
@@ -431,6 +505,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(3) Crimes Against Public Decency",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -442,6 +518,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Bribery is defined as; The offering, receiving, or soliciting of something of value for the purpose of influencing the action of an official in the discharge of his or her public or legal duties."
 },
 {
@@ -453,6 +531,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Dissuading a Victim is defined as; Knowingly and maliciously preventing or dissuading a victim or witness to a crime from acts such as, making a report, testifying, etc."
 },
 {
@@ -464,6 +544,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "False Information to a Peace Officer is defined as; Giving false information to a peace officer in connection to a warrant or citation if the person knowingly uses or gives a false name."
 },
 {
@@ -475,6 +557,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Filing a False Police Report is defined as; Calling the police or creating a police report for a fake crime against someone else."
 },
 {
@@ -486,6 +570,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Identify to a Peace Officer is defined as; Intentionally refuses to give his or her name."
 },
 {
@@ -497,6 +583,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -508,6 +596,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Obstruction of a Peace Officer is defined as; When a person uses threats or physical force to keep a peace officer from doing his or her job."
 },
 {
@@ -519,6 +609,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Resisting a Peace Officer is defined as; Intentionally prevents or attempts to prevent a peace officer from lawfully arresting him or her."
 },
 {
@@ -530,6 +622,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Escape from Custody is defined as; A voluntary departure from custody where the escapee knowingly leaves physical confinement without permission."
 },
 {
@@ -541,6 +635,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Prisoner Breakout is defined as; Escape by a (group) of prisoner(s)."
 },
 {
@@ -552,6 +648,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Misuse of Government Hotline is defined as; Someone who uses an emergency government hotline for any purpose other than an emergency situation."
 },
 {
@@ -563,6 +661,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Tampering with Evidence is defined as; A person alters, conceals, falsifies, or destorys evidence with the intent to interfere with an investigation."
 },
 {
@@ -574,6 +674,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -585,6 +687,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "False Arrest is defined as; The unlawful restraint of a person's freedom of movement."
 },
 {
@@ -596,6 +700,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Inform is defined as; Failure to inform any information."
 },
 {
@@ -607,6 +713,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Obstruction of Justice is defined as; Interference with law and justice."
 },
 {
@@ -618,6 +726,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Disorderly Conduct is defined as; Disturbing the morals, health, or safety of a community."
 },
 {
@@ -629,6 +739,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Comply with a Lawful Order is defined as; Failing or refusing an official order. This includes an official order from a peace officer."
 },
 {
@@ -640,6 +752,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(4) Crimes Against Public Justice",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Aiding and Abetting is defined as; Someone who knowingly, voluntarily, and with common intent unites with the principal offender in the commission of a crime."
 },
 {
@@ -651,6 +765,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(5) Crimes Against Public Peace",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Disturbing the Peace is defined as; Someone engages in some form of unruly public behavior or causing excessively loud noise."
 },
 {
@@ -662,6 +778,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(5) Crimes Against Public Peace",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unlawful Assembly is defined as; Assembling with a group of others for the purpose of engaging in unlawful conduct that threatens the public safety or peace."
 },
 {
@@ -673,6 +791,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(5) Crimes Against Public Peace",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -684,6 +804,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -695,6 +817,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -706,6 +830,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -717,6 +843,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -728,6 +856,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -739,6 +869,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -750,6 +882,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -761,6 +895,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -772,6 +908,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -783,6 +921,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(6) Crimes Against Public Health And Safety",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -794,6 +934,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(7) Crimes Against State Dependents",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -805,6 +947,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(7) Crimes Against State Dependents",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -816,6 +960,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(7) Crimes Against State Dependents",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -827,6 +973,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(7) Crimes Against State Dependents",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -838,6 +986,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Invalid / No Vehicle Registration / Insurance is applicable to someone who is driving a vehicle with an invalid vehicle registration or insurance OR driving a vehicle with no vehicle registration or insurance."
 },
 {
@@ -849,6 +999,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Driving Without a License is applicable to a driver who is driving with no license."
 },
 {
@@ -860,6 +1012,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Driving With a Suspended or Revoked License is applicable to a driver who is driving on a suspended or revoked license."
 },
 {
@@ -871,6 +1025,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "An accident in which someone's property is damaged."
 },
 {
@@ -882,6 +1038,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "An accident in which someone is seriously injured or killed."
 },
 {
@@ -893,6 +1051,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Applicable to any driver who fails to obey a traffic control device including but not limited to: Traffic Signs, Traffic Signals, Cones and uniformed police officers directing traffic."
 },
 {
@@ -904,6 +1064,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Driving Opposite Lanes is applicable to a driver who drives into oncoming lanes of traffic by crossing over the yellow line."
 },
 {
@@ -915,6 +1077,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Maintain Lane is applicable to a driver who fails to remain in their designated lane and crosses over or touches the lines that divides the lanes."
 },
 {
@@ -926,6 +1090,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unsafe Following Distance is applicable to a driver who is driving an unsafe distance to the vehicle in front of them."
 },
 {
@@ -937,6 +1103,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Yield to Civilian is applicable to a driver who fails to yield to a civilian vehicle, when the other party had right of way."
 },
 {
@@ -948,6 +1116,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Yield to Emergency Vehicle is applicable to a driver who fails to move to the right shoulder of the road, fails to get out of the way for a responding emergency vehicle, or does not come to a complete stop."
 },
 {
@@ -959,6 +1129,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unsafe Turn is applicable to a driver who fails to make a safe turn in which there is not enough clearance between the turning vehicle and oncoming traffic, making a turn from an undesignated lane, etc."
 },
 {
@@ -970,6 +1142,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unsafe Lane Change is applicable to a driver who lane changes without reasonable safety or care for other vehicles and/or without signaling."
 },
 {
@@ -981,6 +1155,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Illegal U-turn is applicable when a driver makes a U-turn at a posted \"No U-turn\" sign and / or performs a u-turn from a non-designated turn lane (when applicable)."
 },
 {
@@ -992,6 +1168,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Speeding (1-15 MPH over) is applicable to any driver who actively is going 1-15 MPH over the posted speed limit."
 },
 {
@@ -1003,6 +1181,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Speeding (16-25 MPH) is applicable to any driver who actively is going 16-25 MPH over the posted speed limit."
 },
 {
@@ -1014,6 +1194,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Speeding (26+ MPH) is applicable to any driver who actively is going 26+ MPH over the posted speed limit."
 },
 {
@@ -1025,6 +1207,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Speeding (95 MPH) is applicable to any driver who actively is going 95+ MPH."
 },
 {
@@ -1036,6 +1220,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unreasonably Slow / Stopped is applicable to any driver who is operating a motor vehicle at a unreasonably slow or stopped speed that could result in upset traffic patterns."
 },
 {
@@ -1047,6 +1233,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Speeding in a School Zone refers to exceeding the posted speed limit in areas designated for the safety of children near schools, especially during school hours, posing a significant risk to pedestrians and violating traffic laws."
 },
 {
@@ -1058,6 +1246,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Illegally Parked is applicable to a vehicle that is parked in a no parking zone or in an very unsafe manner that could upset traffic patterns."
 },
 {
@@ -1069,6 +1259,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Reckless driving is applicable to any driver with a willful or wanton disregard for safety or shows willful disregard of consequences when operating a motor vehicle."
 },
 {
@@ -1080,6 +1272,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Street Racing is applicable to driver(s) who illegally motor race which takes place on public roads."
 },
 {
@@ -1091,6 +1285,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Throwing Objects (out of a motor vehicle) such as a rock, brick, or bottle, or any substance capable of doing harm."
 },
 {
@@ -1102,6 +1298,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -1113,6 +1311,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -1124,6 +1324,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "This is a banned roleplay within Official Greenville Roleplay. Any user committing this violation should be reported to staff."
 },
 {
@@ -1135,6 +1337,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Evading a Peace Officer is defined as; Any person while operating a motor vehicle intentionally, knowingly, and willfully flees or otherwise attempts to elude a pursing peace officer's vehicle."
 },
 {
@@ -1146,6 +1350,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Felony Evading a Peace Officer is defined as; Whoever attempts to flee a peace officer who is acting in the lawful discharge of an official duty, and the perpetrator knows or should be reasonably know the same to be a peace officer."
 },
 {
@@ -1157,6 +1363,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Road Rage is defined as; A motorist's uncontrolled anger that is usually provoked by another motorist's irritating act and is expressed in aggressive or violent behavior."
 },
 {
@@ -1168,6 +1376,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Littering is applicable to any driver who throws an object out of their vehicle onto the roadway, objects include but are not limited to: any garbage, trash, refuse, debris, rubbish,"
 },
 {
@@ -1179,6 +1389,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unsafe Speed For Travel is applicable to a driver who is going excessively slow or fast and could possibly create a traffic hazard."
 },
 {
@@ -1190,6 +1402,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Public Endangerment is defined as; Crimes which place the public in some form of danger."
 },
 {
@@ -1201,6 +1415,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Impeding Traffic is defined as; When someone is not operating a motor vehicle reasonably, causing a block in normal traffic flow."
 },
 {
@@ -1212,6 +1428,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Jaywalking is defined as; Someone who crosses a roadway with traffic, with disregard for traffic, instead of going to a suitable crossing point."
 },
 {
@@ -1223,6 +1441,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unnecessary Use of Horn is defined as; A driver should not use their horn unless in situations that would deem necessary. This includes, to avoid an accident or alert another driver. You should not honk for more than 4-5 seconds."
 },
 {
@@ -1234,6 +1454,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Excessive Music/Sounds is defined as; Noise that becomes a nuisance to the public. This includes, revving your engine for long periods of time."
 },
 {
@@ -1245,6 +1467,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Sign Citation is applicable if a the person receiving the citation fails to sign the citation."
 },
 {
@@ -1256,6 +1480,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failure to Yield to Pedestrian is applicable to a driver who fails to yield to a pedestrian that is crossing the road or etc."
 },
 {
@@ -1267,6 +1493,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Distracted Driving is defined as; Any activity that diverts attention from driving including talking or texting on a cellphone, eating and drinking, etc."
 },
 {
@@ -1278,6 +1506,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Driving on Shoulder / Emergency Lane is applicable to any driver who drives on the shoulder for a long period time and same goes for the emergency center lane."
 },
 {
@@ -1289,6 +1519,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Move Over Law is applicable to a driver who fails to move over or slow down when an emergency vehicle / DOT vehicle is parked on the shoulder with their lights on. Drivers must move in the lane farthest away from the emergency vehicle or decrease their speed if they cannot safely lane change."
 },
 {
@@ -1300,6 +1532,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Driving Without Headlights is applicable to a driver that is not using their headlights at a time of night or in a situation when headlights are necessary and/or required."
 },
 {
@@ -1311,6 +1545,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Hit and Run is applicable to a driver who intentionally and knowingly leaves the scene of an accident while being involved in that accident. This driver would have not exchanged insurance."
 },
 {
@@ -1322,6 +1558,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Attempted Vehicle Manslaughter is defined as; Involves the attempted death of a person other than the driver, as a result of either negligent or intentionally malicious operation of a motor vehicle."
 },
 {
@@ -1333,6 +1571,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Vehicle Manslaughter is defined as; Involves the death of a person other than the driver, as a result of either negligent or intentionally malicious operation of a motor vehicle."
 },
 {
@@ -1344,6 +1584,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Reckless Evasion is defined as; Fleeing a peace officer in a vehicle while driving in a disregard for the safety of others."
 },
 {
@@ -1355,6 +1597,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Possession of a Stolen Vehicle is defined as; Someone who possess a stolen motor vehicle."
 },
 {
@@ -1366,6 +1610,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Reckless Endangerment is defined as; Creates a substantial risk of serious physical injury or death to another person."
 },
 {
@@ -1377,6 +1623,8 @@ const PENAL_CODES = [
   impoundment: "Yes",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unroadworthy vehicle is defined as; A vehicle which has a defect or defects that could result in a loss of control of the vehicle or jeopardize the health and safety of occupants of the vehicle."
 },
 {
@@ -1388,6 +1636,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Any user who passes a school bus when the bus is at a complete stop with their sign out and/or red lights flashing."
 },
 {
@@ -1399,6 +1649,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Any user who fails to display both front and back registration plates on their vehicle (Only applies to Wisconsin registration plates)."
 },
 {
@@ -1410,6 +1662,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Any user who registers more vehicles that permitted for this registration status\nCivilians may register up to 5 vehicles, Basic membership holders may register up to 10 vehicles, and Elite membership holders may register an unlimited amount of vehicle per month."
 },
 {
@@ -1421,6 +1675,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Invalid/No Trailer Registration is application to someone who is operating/towing a trailer with an invalid trailer registration."
 },
 {
@@ -1432,6 +1688,8 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "No person or persons shall occupy a vehicle or trailer while it is being towed on a roadway. No person shall tow a trailer on a roadway while it is occupied by a passenger or passengers."
 },
 {
@@ -1443,6 +1701,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Failing to Follow Rules at a Railroad Crossing refers to the act of disregarding safety regulations, such as ignoring warning signals, bypassing lowered gates, or failing to yield the right of way to trains, endangering public safety and violating transportation laws."
 },
 {
@@ -1454,6 +1714,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(8) Traffic Offences",
   warrantsArrest: false,
+  jailOptional: false,
+  fineOptional: false,
   description: "Applicable to any driver operating a vehicle while in self-driving mode that commits a traffic violation. Self-driving vehicle is defined as: “Any vehicle with the capability of autonomous or semi autonomous driving such as AutoPilot, adaptive cruise control or full autonomous driving.”"
 },
 {
@@ -1465,6 +1727,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Possession of an Illegal Weapon is defined as; Someone who is in unlawful possession of a weapon."
 },
 {
@@ -1476,6 +1740,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Brandishing a Firearm is defined as; Someone who means to display, show, wave, or exhibit the firearm in a manner which another person might find threatening."
 },
 {
@@ -1487,6 +1753,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Illegal Discharge of a Firearm is defined as; Any person who knowingly or recklessly discharges a firearm into any dwelling or any other building or occupied structure, or into any motor vehicle occupied by any person."
 },
 {
@@ -1498,6 +1766,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unlicensed Possession of a Firearm is defined as; Someone who is in possession of a firearm which is not licensed properly."
 },
 {
@@ -1509,6 +1779,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Possession of a Stolen Weapon is defined as; Someone who knowingly or intentionally receives or conceals a stolen weapon."
 },
 {
@@ -1520,6 +1792,8 @@ const PENAL_CODES = [
   impoundment: "No",
   section: "(9) Firearm Offences",
   warrantsArrest: true,
+  jailOptional: false,
+  fineOptional: false,
   description: "Unlawful Distribution of a Firearm is defined as; Someone who unlawfully sells or delivers any firearm or ammunition to any individual who the licensee knows or has reasonable cause to believe is less than 18."
 }
 ];
