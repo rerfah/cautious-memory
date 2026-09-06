@@ -1177,3 +1177,36 @@ html[data-theme="light"] .watermark {
 .invalid {
   border-color: #ff4d4d !important;
 }
+
+.modal-section {
+  margin-top: 16px;
+}
+
+.modal-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.optional-item {
+  margin-bottom: 10px;
+}
+
+.optional-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.optional-buttons button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.optional-buttons button.selected {
+  background: var(--btn-selected-bg);
+  color: var(--btn-selected-text);
+}
