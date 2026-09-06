@@ -518,11 +518,10 @@ function updateImpoundmentUI() {
       item.impoundment === "officer discretion"
   );
 
-  if (state.reportType === "arrest" && impoundPossible) {
-    group.classList.remove("hidden");
-  } else {
-    group.classList.add("hidden");
-  }
+  const shouldShow =
+    state.reportType === "arrest" && impoundPossible;
+
+  group.classList.toggle("hidden", !shouldShow);
 
   document.querySelectorAll(".impound-type").forEach(btn => {
     btn.classList.toggle(
