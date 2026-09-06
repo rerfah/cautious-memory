@@ -246,7 +246,7 @@ const PENAL_CODES = [
   section: "(2) Crimes Against Property",
   warrantsArrest: true,
   jailOptional: false,
-  fineOptional: false,
+  fineOptional: true,
   description: "Trespassing is defined as; Whoever intentionally enters the dwelling of another without the consent of some lawful person upon the premises."
 },
 {
@@ -1259,7 +1259,7 @@ const PENAL_CODES = [
   impoundment: "Officer Discretion",
   section: "(8) Traffic Offences",
   warrantsArrest: true,
-  jailOptional: false,
+  jailOptional: true,
   fineOptional: false,
   description: "Reckless driving is applicable to any driver with a willful or wanton disregard for safety or shows willful disregard of consequences when operating a motor vehicle."
 },
