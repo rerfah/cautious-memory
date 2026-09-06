@@ -1029,3 +1029,14 @@ html[data-theme="light"] .watermark {
     align-items: flex-start;
   }
 }
+
+/* Make modal scroll internally */
+.modal {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* Allow backdrop to scroll if modal exceeds viewport */
+.modal-backdrop {
+  overflow-y: auto;
+}
