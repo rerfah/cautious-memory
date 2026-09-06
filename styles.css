@@ -556,8 +556,8 @@ html[data-theme="light"] .reset-btn {
   overflow-y: auto;
 }
 
-/* Allow backdrop to scroll if modal exceeds viewport */
-.modal-backdrop {
+/* Allow ONLY the continue modal backdrop to scroll */
+#modalBackdrop {
   overflow-y: auto;
 }
 
