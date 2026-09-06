@@ -728,10 +728,10 @@ function buildCopyText() {
   let jailText = "";
   if (item.jailOptional) {
     const choice = state.optionalJailChoice[item.code];
-    if (choice === "yes") jailText = ` + ${jail}s of jailtime`;
-    else jailText = ` + ~~${jail}s of jailtime~~`;
+    if (choice === "yes") jailText = ` + ${jail} seconds of Jailtime`;
+    else jailText = ` + ~~${jail} seconds of Jailtime~~`;
   } else if (jail > 0) {
-    jailText = ` + ${jail}s of jailtime`;
+    jailText = ` + ${jail} seconds of Jailtime`;
   }
 
   // Impoundment
@@ -765,32 +765,36 @@ function buildCopyText() {
   lines.push("");
   lines.push("**Total:**");
 
-  if (state.reportType === "arrest") {
   let totalFine = 0;
   let totalJail = 0;
   let impoundInTotal = false;
 
   for (const item of state.recentCharges) {
-    // Fine
-    if (item.fineOptional) {
-      if (state.optionalFineChoice[item.code] === "yes") {
+    // Fine — waived entirely on a Written Warning, so it never counts toward the total
+    if (state.reportType !== "warning") {
+      if (item.fineOptional) {
+        if (state.optionalFineChoice[item.code] === "yes") {
+          totalFine += Number(item.fine || 0);
+        }
+      } else {
         totalFine += Number(item.fine || 0);
       }
-    } else {
-      totalFine += Number(item.fine || 0);
     }
 
-    // Jail
-    if (item.jailOptional) {
-      if (state.optionalJailChoice[item.code] === "yes") {
+    // Jailtime — only ever imposed on an Arrest Report
+    if (state.reportType === "arrest") {
+      if (item.jailOptional) {
+        if (state.optionalJailChoice[item.code] === "yes") {
+          totalJail += Number(item.jailTime || 0);
+        }
+      } else if (item.warrantsArrest) {
         totalJail += Number(item.jailTime || 0);
       }
-    } else if (item.warrantsArrest) {
-      totalJail += Number(item.jailTime || 0);
     }
 
-    // Impound
+    // Impound — also waived on a Written Warning
     if (
+      state.reportType !== "warning" &&
       canBeImpounded(item) &&
       state.impoundmentChoice === "yes"
     ) {
@@ -798,12 +802,13 @@ function buildCopyText() {
     }
   }
 
+  const totalParts = [];
+  if (totalJail > 0) totalParts.push(`${totalJail} seconds of Jailtime`);
+  totalParts.push(money(totalFine));
+
   lines.push(
-    `${totalJail}s of Jailtime & ${money(totalFine)}${
-      impoundInTotal ? " + Impoundment" : ""
-    }`
+    `${totalParts.join(" & ")}${impoundInTotal ? " + Impoundment" : ""}`
   );
-}
 
   return lines.join("\n");
 }
