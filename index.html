@@ -46,7 +46,7 @@
     </div>
   </div>
 
-    <!-- Top Alert Tooltip -->
+  <!-- Top Alert Tooltip -->
   <div id="topAlert" class="top-alert hidden" role="alert">
     <span class="alert-text">Add at least one charge before continuing.</span>
     <button class="alert-close" aria-label="Close alert">×</button>
@@ -132,7 +132,7 @@
     </section>
   </main>
 
-    <!-- Main Modal -->
+  <!-- Main Modal -->
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modal" role="document">
       <h2 id="modalTitle">Continue</h2>
@@ -150,6 +150,18 @@
           <button class="impound-type" data-impound="yes" type="button">Yes</button>
           <button class="impound-type" data-impound="no" type="button">No</button>
         </div>
+      </div>
+
+      <!-- ⭐ OPTIONAL FINE UI -->
+      <div id="optionalFineGroup" class="modal-section hidden">
+        <p class="modal-label">Do you plan to give the optional fine for:</p>
+        <div id="optionalFineList"></div>
+      </div>
+
+      <!-- ⭐ OPTIONAL JAILTIME UI -->
+      <div id="optionalJailGroup" class="modal-section hidden">
+        <p class="modal-label">Do you plan to give the optional jailtime for:</p>
+        <div id="optionalJailList"></div>
       </div>
 
       <label class="user-id-label" for="userId">User ID</label>
@@ -212,7 +224,7 @@
     </div>
   </div>
 
-    <!-- Tooltip UI -->
+  <!-- Tooltip UI -->
   <div id="tooltip" class="tooltip hidden" role="tooltip"></div>
 
   <script src="data/penalCodes.js"></script>
