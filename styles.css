@@ -521,7 +521,7 @@ html[data-theme="light"] .reset-btn {
   display: none !important;
 }
 
-/* Modal */
+/* CONTINUE MODAL BACKDROP */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -532,8 +532,10 @@ html[data-theme="light"] .reset-btn {
   background: rgba(0,0,0,.63);
   backdrop-filter: blur(10px);
   animation: backdropFadeIn .2s ease-out;
+  overflow: hidden;
 }
 
+/* CONTINUE MODAL */
 .modal {
   width: min(680px, 100%);
   padding: 24px;
@@ -542,210 +544,303 @@ html[data-theme="light"] .reset-btn {
   border-radius: 16px;
   box-shadow: 0 28px 90px rgba(0,0,0,.55);
   animation: modalFadeIn .2s ease-out;
-}
-
-/* Make modal scroll internally */
-.modal {
   max-height: 85vh;
   overflow-y: auto;
 }
 
-/* Allow ONLY the main continue modal backdrop to scroll */
-#modalBackdrop {
-  overflow-y: auto;
-}
-
-/* LOGIN BACKDROP — identical to old version */
-.login-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: grid;
-  place-items: center;
-  backdrop-filter: blur(14px);
-  background: rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.login-backdrop.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* LOGIN MODAL — identical to old version */
-.login-modal {
-  width: min(420px, 90%);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 26px 24px 24px;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
-  transition:
-    background-color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    color 0.35s ease;
-}
-
-/* Prevent login modal layout rules from affecting main modal */
-.modal {
-  display: block;
-  flex-direction: initial;
-  gap: initial;
-  width: min(680px, 100%);
-  padding: 24px;
-}
-
-html[data-theme="light"] .login-modal {
+html[data-theme="light"] .modal {
   background: rgba(255, 255, 255, 0.85);
   border-color: #d1d5db;
-  box-shadow: 0 24px 70px rgba(15,23,42,0.18);
+  box-shadow: 0 24px 70px rgba(15,23,42,.18);
 }
 
-.login-modal h2 {
-  margin: 0 0 18px;
-  text-align: center;
-}
-
-/* LOGIN LABELS + INPUTS — identical */
-.login-label {
-  display: block;
-  margin: 14px 0 6px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.login-input {
-  width: 100%;
-  padding: 11px 13px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--panel-2);
-  color: var(--text);
-}
-
-html[data-theme="light"] .login-input {
-  background: #f9fafb;
-}
-
-/* DEPARTMENT OPTIONS — identical */
-.login-dept-group {
-  margin: 18px 0 6px;
+/* Report types */
+.report-types {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 9px;
 }
 
-.dept-option {
-  padding: 11px 10px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--panel-2);
-  color: var(--text);
-  font-weight: 700;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+.report-type {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
 }
 
-.dept-option:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-}
-
-.dept-option.selected {
-  background: var(--accent);
-  color: #ffffff;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
-}
-
-html[data-theme="light"] .dept-option {
-  background: #f3f4f6;
+html[data-theme="light"] .report-type {
+  background: #f9fafb;
   border-color: #d1d5db;
   color: #111827;
 }
 
-html[data-theme="light"] .dept-option.selected {
-  background: #2563eb;
-  color: #ffffff;
+.report-type.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 0 0 1px rgba(59,130,246,.6);
 }
 
-/* REMEMBER LOGIN ROW — identical */
-.remember-row {
+html[data-theme="light"] .report-type.selected {
+  background: #2563eb;
+}
+
+/* Impoundment */
+.impoundment-group {
+  margin: 16px 0 8px;
+}
+
+.impoundment-label {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.impoundment-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.impound-type {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+}
+
+html[data-theme="light"] .impound-type {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.impound-type.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .impound-type.selected {
+  background: #2563eb;
+}
+
+/* User ID */
+.user-id-label {
+  display: block;
+  margin: 19px 0 7px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+html[data-theme="light"] .user-id-label {
+  color: #374151;
+}
+
+.user-id-input {
+  width: 100%;
+  padding: 12px 13px;
+  background: #0b0f14;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+html[data-theme="light"] .user-id-input {
+  background: #ffffff;
+}
+
+.user-id-input.invalid {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(239,68,68,.13);
+}
+
+/* OPTIONAL FINE / OPTIONAL JAILTIME */
+.optional-group {
+  margin-top: 20px;
+}
+
+.optional-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Optional item card */
+.optional-item {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+html[data-theme="light"] .optional-item {
+  background: rgba(255,255,255,0.85);
+  border-color: #d1d5db;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.12);
+}
+
+/* Optional item title */
+.optional-question {
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+/* Optional item description */
+.optional-description {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.optional-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.optional-types button {
+  width: 100%;
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.optional-types button.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .optional-types button {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .optional-types button.selected {
+  background: #2563eb;
+  color: white;
+}
+
+/* OTHER LEO INVOLVEMENT */
+.other-leo-group {
+  margin-top: 22px;
+}
+
+.other-leo-title {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.other-leo-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.other-leo-type {
+  background: #1a2029;
+  border: 1px solid #303744;
+  color: #cbd1da;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.other-leo-type.selected {
+  background: #243a5c;
+  border-color: var(--accent);
+  color: white;
+}
+
+html[data-theme="light"] .other-leo-type {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+html[data-theme="light"] .other-leo-type.selected {
+  background: #2563eb;
+  color: white;
+}
+
+.other-leo-label {
   margin-top: 12px;
   font-size: 14px;
   color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-.remember-row input {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
+.other-leo-tip {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--muted);
 }
 
-/* LOGIN ACTION BUTTONS — identical */
-.login-actions {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.login-continue,
-.login-close {
-  border: 0;
-  border-radius: 9px;
-  padding: 11px 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
-}
-
-.login-continue {
-  background: var(--green);
-  color: #04130a;
-}
-
-.login-close {
-  background: var(--panel-2);
+.other-leo-input {
+  width: 100%;
+  padding: 12px 13px;
+  background: #0b0f14;
   color: var(--text);
   border: 1px solid var(--border);
+  border-radius: 9px;
+  margin-bottom: 12px;
 }
 
-html[data-theme="light"] .login-close {
+html[data-theme="light"] .other-leo-input {
+  background: rgba(255,255,255,0.85);
+}
+
+/* Modal actions */
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 130px;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.copy-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.close-btn {
+  background: #080a0e;
+  color: #aeb4be;
+  border: 1px solid #30343c !important;
+}
+
+html[data-theme="light"] .close-btn {
   background: #f9fafb;
   color: #111827;
-  border-color: #d1d5db;
+  border-color: #d1d5db !important;
 }
 
-.login-continue:hover,
-.login-close:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+/* Copy buffer */
+.copy-buffer {
+  position: fixed;
+  left: -10000px;
+  top: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 
-/* SMALL SCREEN LOGIN LAYOUT — identical */
-@media (max-width: 480px) {
-  .login-modal {
-    width: calc(100% - 40px);
-    padding: 22px 18px 18px;
-  }
-
-  .login-dept-group {
-    grid-template-columns: 1fr;
-  }
-
-  .login-actions {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
+/* Tooltip */
 .tooltip {
   position: fixed;
   top: 0;
@@ -759,15 +854,22 @@ html[data-theme="light"] .login-close {
   max-width: 260px;
   z-index: 999999;
   pointer-events: none;
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+
   box-shadow:
     0 0 18px rgba(59,130,246,0.45),
     0 0 6px rgba(59,130,246,0.35),
     0 4px 12px rgba(0,0,0,0.45);
+
+  will-change: opacity, transform, left, top;
 }
 
 .tooltip.hidden {
@@ -782,13 +884,14 @@ html[data-theme="light"] .login-close {
   visibility: visible;
 }
 
+/* Pure white tooltip in light theme */
 html[data-theme="light"] .tooltip {
   background: rgba(255, 255, 255, 0.85) !important;
   color: #111827 !important;
   border-color: #d1d5db !important;
 }
 
-/* Background images */
+/* DAY IMAGE (base layer) */
 body::before {
   content: "";
   position: fixed;
@@ -798,11 +901,13 @@ body::before {
   background-repeat: no-repeat;
   background-size: 100%;
   z-index: -2;
+
   filter: blur(8px) brightness(0.75);
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
 }
 
+/* NIGHT IMAGE (fade layer) */
 body::after {
   content: "";
   position: fixed;
@@ -812,17 +917,21 @@ body::after {
   background-repeat: no-repeat;
   background-size: 100%;
   z-index: -1;
+
   filter: blur(8px) brightness(0.75);
   transform: translateY(calc(var(--scroll) * -0.08));
   will-change: transform;
+
   opacity: 0;
   transition: opacity 0.6s ease;
 }
 
+/* NIGHT MODE → fade night image in */
 html[data-theme="dark"] body::after {
   opacity: 1;
 }
 
+/* LIGHT MODE → fade night image out */
 html[data-theme="light"] body::after {
   opacity: 0;
 }
@@ -897,7 +1006,7 @@ html[data-theme="light"] .watermark {
   }
 }
 
-/* Make modal scroll internally */
+/* CONTINUE MODAL SCROLL FIX */
 .modal {
   max-height: 85vh;
   overflow-y: auto;
