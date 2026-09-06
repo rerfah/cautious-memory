@@ -755,6 +755,37 @@ html[data-theme="light"] .other-leo-input {
   margin-bottom: 16px;
 }
 
+/* Optional item card */
+.optional-item {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+html[data-theme="light"] .optional-item {
+  background: rgba(255,255,255,0.85);
+  border-color: #d1d5db;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.12);
+}
+
+/* Optional item title */
+.optional-question {
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+/* Optional item description */
+.optional-description {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
 .optional-question {
   margin-bottom: 6px;
   font-weight: 500;
