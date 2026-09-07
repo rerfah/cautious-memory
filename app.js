@@ -714,36 +714,37 @@ function buildCopyText() {
   const jail = Number(item.jailTime || 0);
   const imp = canBeImpounded(item);
 
-  // Optional fine
-  let fineText = "";
-  if (item.fineOptional) {
-    const choice = state.optionalFineChoice[item.code];
-    if (choice === "yes") fineText = ` - ${fine}`;
-    else fineText = ` - ~~${fine}~~`;
-  } else if (item.fine > 0) {
-    fineText = ` - ${fine}`;
+  // Jailtime
+  let jailPart = null;
+  if (item.jailOptional) {
+    const text = `${jail} seconds of Jailtime`;
+    jailPart = state.optionalJailChoice[item.code] === "yes" ? text : `~~${text}~~`;
+  } else if (jail > 0) {
+    jailPart = `${jail} seconds of Jailtime`;
   }
 
-  // Optional jail
-  let jailText = "";
-  if (item.jailOptional) {
-    const choice = state.optionalJailChoice[item.code];
-    if (choice === "yes") jailText = ` + ${jail} seconds of Jailtime`;
-    else jailText = ` + ~~${jail} seconds of Jailtime~~`;
-  } else if (jail > 0) {
-    jailText = ` + ${jail} seconds of Jailtime`;
+  // Fine
+  let finePart = null;
+  if (item.fineOptional) {
+    finePart = state.optionalFineChoice[item.code] === "yes" ? fine : `~~${fine}~~`;
+  } else if (item.fine > 0) {
+    finePart = fine;
   }
 
   // Impoundment
-  let impText = "";
+  let impPart = null;
   if (imp) {
-    impText =
-      state.impoundmentChoice === "yes"
-        ? " + Impoundment"
-        : " + ~~Impoundment~~";
+    impPart = state.impoundmentChoice === "yes" ? "Impoundment" : "~~Impoundment~~";
   }
 
-  lines.push(`${item.code}${fineText}${jailText}${impText}`);
+  let line = item.code;
+  [jailPart, finePart, impPart]
+    .filter(part => part !== null)
+    .forEach((part, idx) => {
+      line += idx === 0 ? ` - ${part}` : ` + ${part}`;
+    });
+
+  lines.push(line);
   continue;
 }
 
