@@ -718,31 +718,36 @@ function buildCopyText() {
   let jailPart = null;
   if (item.jailOptional) {
     const text = `${jail} seconds of Jailtime`;
-    jailPart = state.optionalJailChoice[item.code] === "yes" ? text : `~~${text}~~`;
+    const selected = state.optionalJailChoice[item.code] === "yes";
+    jailPart = { text: selected ? text : `~~${text}~~`, crossed: !selected };
   } else if (jail > 0) {
-    jailPart = `${jail} seconds of Jailtime`;
+    jailPart = { text: `${jail} seconds of Jailtime`, crossed: false };
   }
 
   // Fine
   let finePart = null;
   if (item.fineOptional) {
-    finePart = state.optionalFineChoice[item.code] === "yes" ? fine : `~~${fine}~~`;
+    const selected = state.optionalFineChoice[item.code] === "yes";
+    finePart = { text: selected ? fine : `~~${fine}~~`, crossed: !selected };
   } else if (item.fine > 0) {
-    finePart = fine;
+    finePart = { text: fine, crossed: false };
   }
 
   // Impoundment
   let impPart = null;
   if (imp) {
-    impPart = state.impoundmentChoice === "yes" ? "Impoundment" : "~~Impoundment~~";
+    const selected = state.impoundmentChoice === "yes";
+    impPart = { text: selected ? "Impoundment" : "~~Impoundment~~", crossed: !selected };
   }
 
-  let line = item.code;
-  [jailPart, finePart, impPart]
+  const parts = [jailPart, finePart, impPart]
     .filter(part => part !== null)
-    .forEach((part, idx) => {
-      line += idx === 0 ? ` - ${part}` : ` + ${part}`;
-    });
+    .sort((a, b) => Number(a.crossed) - Number(b.crossed));
+
+  let line = item.code;
+  parts.forEach((part, idx) => {
+    line += idx === 0 ? ` - ${part.text}` : ` + ${part.text}`;
+  });
 
   lines.push(line);
   continue;
