@@ -1118,6 +1118,21 @@ html[data-theme="light"] .login-input {
   box-shadow: 0 0 0 1px rgba(59, 130, 246, .6);
 }
 
+.dept-option[data-dept="OCSO"].selected {
+  background: #856c5c;
+  box-shadow: 0 0 0 1px rgba(133, 108, 92, .7);
+}
+
+.dept-option[data-dept="NPS"].selected {
+  background: #213b1b;
+  box-shadow: 0 0 0 1px rgba(33, 59, 27, .7);
+}
+
+.dept-option[data-dept="WSP"].selected {
+  background: #206694;
+  box-shadow: 0 0 0 1px rgba(32, 102, 148, .7);
+}
+
 .remember-row {
   display: flex;
   align-items: center;
