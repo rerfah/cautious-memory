@@ -941,6 +941,10 @@ html[data-theme="light"] body::after {
   color: var(--muted) !important;
 }
 
+html[data-theme="light"] .topbar-main p {
+  color: #f1f3f6 !important;
+}
+
 .tip {
   color: #ffffff !important;
 }
